@@ -1,30 +1,35 @@
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist_Mono, Inter, Manrope } from "next/font/google";
 
-import "@workspace/ui/globals.css"
-import { Providers } from "@/components/providers"
+import "@workspace/ui/globals.css";
+import { AppWrapper } from "@workspace/ui/provider/app-wrapper";
 
-const fontSans = Geist({
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
-  variable: "--font-sans",
-})
+});
 
-const fontMono = Geist_Mono({
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  variable: "--font-mono",
-})
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
+        className={`${manrope.variable} ${inter.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <AppWrapper>{children}</AppWrapper>
       </body>
     </html>
-  )
+  );
 }

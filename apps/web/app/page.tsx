@@ -1,12 +1,14 @@
-import { Button } from "@workspace/ui/components/button"
+import { Heading1, Paragraph } from "@workspace/ui/components/page-comps";
 
 export default function Page() {
   return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Hello World</h1>
-        <Button size="sm">Button</Button>
-      </div>
+    <div className="flex flex-col items-center justify-center py-48 text-center">
+      <Heading1>Cropper</Heading1>
+      <Paragraph>
+        A modern, intuitive image cropping component that brings the familiar
+        iOS photo editing experience to the web. Crop, rotate, and adjust your
+        images with smooth gestures and precise controls.
+      </Paragraph>
     </div>
-  )
+  );
 }
