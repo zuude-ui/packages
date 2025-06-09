@@ -25,8 +25,8 @@ import type { Crop } from "./types";
 
 interface CropperProps {
   src: string;
-  crop: Crop;
-  onCropChange: (crop: Crop) => void;
+  crop?: Crop;
+  onCropChange?: (crop: Crop) => void;
   className?: string;
   showGrid?: boolean;
   style?: React.CSSProperties;
@@ -42,7 +42,7 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
   (
     {
       src,
-      crop,
+      crop = { x: 0, y: 0, scale: 1 },
       onCropChange,
       className,
       showGrid = false,
@@ -80,7 +80,7 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
 
     useEffect(() => {
       const unsubscribe = scale.on("change", (latest) => {
-        onCropChange({ ...crop, scale: latest });
+        onCropChange?.({ ...crop, scale: latest });
       });
       return () => unsubscribe();
     }, [scale]);
@@ -228,15 +228,15 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
         duration: 0.4,
         ease: [0.25, 1, 0.5, 1],
       });
-      onCropChange(newCrop);
+      onCropChange?.(newCrop);
     }
 
     return (
-      <div className="w-full">
+      <div>
         <div
           ref={ref}
           className={cn(
-            "bg-loading relative aspect-3/4 shadow-[0px_0px_0px_3px_white] md:shadow-none",
+            "bg-loading relative aspect-square shadow-[0px_0px_0px_3px_white] md:shadow-none",
             className
           )}
           style={style}
@@ -275,7 +275,8 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
             <motion.div
               className={cn(
                 "pointer-events-none -z-10 mx-auto flex h-full max-h-none w-full max-w-none items-center justify-center transition-opacity duration-300",
-                isPinching || isDragging ? "opacity-15" : "opacity-0"
+                isPinching || isDragging ? "opacity-15" : "opacity-0",
+                showBehindImage.className
               )}
               style={{
                 x,
@@ -343,7 +344,7 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
                 duration: 0.4,
                 ease: [0.25, 1, 0.5, 1],
               });
-              onCropChange({ x: 0, y: 0, scale: 1 });
+              onCropChange?.({ x: 0, y: 0, scale: 1 });
             }}
           >
             Reset

@@ -14,11 +14,11 @@ export const resetCrop = () => {
   });
 };
 
-const exportImage = async ({
+export const exportImage = async ({
   imageSrc,
   cropWidth,
   cropHeight,
-  scaleTheImage,
+  scaleTheImage = 1,
   x,
   y,
   scale,
@@ -26,7 +26,7 @@ const exportImage = async ({
   imageSrc: string;
   cropWidth: number;
   cropHeight: number;
-  scaleTheImage: number;
+  scaleTheImage?: number;
   x: number;
   y: number;
   scale: number;
@@ -97,33 +97,4 @@ const exportImage = async ({
   } catch (error) {
     console.error("Error loading or processing image:", error);
   }
-};
-
-export const exportImageQuery = async ({
-  src,
-  x,
-  y,
-  scale,
-  cropWidth,
-  cropHeight,
-}: {
-  src: string;
-  x: number;
-  y: number;
-  scale: number;
-  cropWidth: number;
-  cropHeight: number;
-}) => {
-  const scaleTheImage = 4;
-  let imageSrc = src;
-
-  return await exportImage({
-    imageSrc,
-    cropWidth,
-    cropHeight,
-    scaleTheImage,
-    x,
-    y,
-    scale,
-  });
 };

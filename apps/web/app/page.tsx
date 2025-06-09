@@ -1,8 +1,9 @@
 "use client";
 
 import { PageComp } from "@workspace/ui/components/page-comps";
-import { Cropper } from "@workspace/cropper";
 import { CodeSyntax } from "@workspace/ui/components/syntax-highlighter";
+import { Default } from "@/components/examples/default";
+import { Demo } from "./demo";
 
 export default function Page() {
   return (
@@ -15,14 +16,7 @@ export default function Page() {
           images with smooth gestures and precise controls.
         </PageComp.Paragraph>
 
-        <Cropper
-          src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1hbnxlbnwwfHwwfHx8MA%3D%3D"
-          crop={{ x: 0, y: 0, scale: 1 }}
-          onCropChange={() => {}}
-          className="max-w-96 mt-12 aspect-square rounded-full overflow-hidden mx-auto bg-muted"
-          showGrid={true}
-          showBehindImage={{ position: "fixed" }}
-        />
+        <Demo />
       </PageComp.Presentation>
 
       <PageComp.Wrapper>
@@ -33,7 +27,12 @@ export default function Page() {
         <PageComp.Section>
           <PageComp.Heading2>Usage</PageComp.Heading2>
           <CodeSyntax code={usage} language="tsx" />
-          <PageComp.CustomArrow className="absolute top-0 right-0 translate-x-[80%] translate-y-1/2" />
+          <PageComp.CustomArrow className="absolute top-0 right-0 translate-x-[80%] translate-y-[70px]" />
+          <PageComp.ExampleWrapper>
+            <div className="max-w-sm">
+              <Default />
+            </div>
+          </PageComp.ExampleWrapper>
         </PageComp.Section>
 
         <PageComp.Section>
@@ -59,9 +58,4 @@ export default function Page() {
   );
 }
 
-const usage = `<Cropper
-  src=""
-  crop={{ x: 0, y: 0, scale: 1 }}
-  onCropChange={() => {}}
-/>
-`;
+const usage = `<Cropper src="" />`;

@@ -136,6 +136,25 @@ const Table = ({ columns }: TableProps) => {
   );
 };
 
+const ExampleWrapper = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        "mt-12 flex items-center justify-center border rounded-xl overflow-hidden px-4 py-8",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
 PageComp.Presentation = Presentation;
 PageComp.Wrapper = Wrapper;
 PageComp.Section = Section;
@@ -144,5 +163,6 @@ PageComp.Heading2 = Heading2;
 PageComp.Paragraph = Paragraph;
 PageComp.CustomArrow = CustomArrow;
 PageComp.Table = Table;
+PageComp.ExampleWrapper = ExampleWrapper;
 
 export { PageComp };
