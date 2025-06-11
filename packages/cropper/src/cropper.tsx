@@ -23,7 +23,7 @@ import { maybeAdjustImage } from "./maybe-adjust-image";
 
 import type { Crop } from "./types";
 
-interface CropperProps {
+interface CropperProps extends React.HTMLAttributes<HTMLDivElement> {
   src: string;
   crop?: Crop;
   onCropChange?: (crop: Crop) => void;
@@ -50,6 +50,7 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
       showBehindImage,
       showSlider,
       scaleMotion,
+      ...props
     },
     ref
   ) => {
@@ -240,6 +241,7 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
             className
           )}
           style={style}
+          {...props}
         >
           <div
             ref={containerRef}

@@ -1,5 +1,6 @@
 import "./styles.css";
 
 export { Cropper } from "./cropper";
-export { resetCrop, exportImage } from "./utils";
+export { resetCrop } from "./utils";
+export { useCropper } from "./hooks";
 export type { Crop } from "./types";

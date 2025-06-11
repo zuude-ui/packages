@@ -1,6 +1,6 @@
 import { Cropper } from "@workspace/cropper";
 import { testImage } from "@workspace/ui/lib/utils";
 
-export const Default = () => {
+export default function Default() {
   return <Cropper src={testImage} />;
-};
+}

@@ -7,7 +7,8 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "cropper:build": "pnpm --filter @workspace/cropper build"
+    "cropper:build": "pnpm --filter @workspace/cropper build",
+    "g": "tsx script.ts && prettier --write ./apps/web/__registry__/index.ts"
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",
@@ -19,5 +20,8 @@
   "packageManager": "pnpm@10.4.1",
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "tsx": "^4.19.4"
   }
 }

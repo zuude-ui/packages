@@ -2,8 +2,8 @@
 
 import { PageComp } from "@workspace/ui/components/page-comps";
 import { CodeSyntax } from "@workspace/ui/components/syntax-highlighter";
-import { Default } from "@/components/examples/default";
 import { Demo } from "./demo";
+import { variants } from "@/__registry__";
 
 export default function Page() {
   return (
@@ -29,9 +29,7 @@ export default function Page() {
           <CodeSyntax code={usage} language="tsx" />
           <PageComp.CustomArrow className="absolute top-0 right-0 translate-x-[80%] translate-y-[70px]" />
           <PageComp.ExampleWrapper>
-            <div className="max-w-sm">
-              <Default />
-            </div>
+            <div className="max-w-sm">{variants.default?.component()}</div>
           </PageComp.ExampleWrapper>
         </PageComp.Section>
 

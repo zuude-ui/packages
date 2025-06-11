@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { type Crop, Cropper, exportImage } from "@workspace/cropper";
+import { useState } from "react";
+import { type Crop, Cropper, useCropper } from "@workspace/cropper/index";
 
 import { Button } from "@workspace/ui/components/button";
 import { testImage } from "@workspace/ui/lib/utils";
@@ -8,25 +8,15 @@ export const Demo = () => {
   const [crop, setCrop] = useState<Crop>({ x: 0, y: 0, scale: 1 });
   const [image, setImage] = useState<string | null>(null);
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  const handleExport = async () => {
-    if (!ref.current) return;
-
-    const image = await exportImage({
-      imageSrc: testImage,
-      cropWidth: ref.current.getBoundingClientRect().width,
-      cropHeight: ref.current.getBoundingClientRect().height,
-      x: crop.x,
-      y: crop.y,
-      scale: crop.scale,
-      scaleTheImage: 3,
-    });
-
-    if (image) {
+  const [ref, { cropIt, reset }] = useCropper(testImage, crop, {
+    quality: 3,
+    onSuccess: (image) => {
       setImage(image);
-    }
-  };
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
   return (
     <>
@@ -49,9 +39,14 @@ export const Demo = () => {
           />
         )}
       </div>
-      <Button className="mt-4" onClick={handleExport}>
-        Export
-      </Button>
+      <div className="flex gap-4 mt-8">
+        <Button className="mt-4" variant={"outline"} onClick={reset}>
+          Reset
+        </Button>
+        <Button className="mt-4" onClick={cropIt}>
+          Export
+        </Button>
+      </div>
     </>
   );
 };
