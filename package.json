@@ -8,7 +8,8 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "cropper:build": "pnpm --filter @workspace/cropper build",
-    "g": "tsx script.ts && prettier --write ./apps/web/__registry__/index.ts"
+    "ios-mockups:build": "pnpm --filter @workspace/ios-mockups build",
+    "g": "tsx script.ts && prettier --write ./apps/ios-mockups/__registry__/index.ts"
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",

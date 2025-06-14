@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const PROJECT_PATH = "apps/web";
+const PROJECT_PATH = "apps/ios-mockups";
 const REGISTRY_PATH = path.join(
   process.cwd(),
   PROJECT_PATH,

@@ -19,15 +19,23 @@ const Heading2 = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const Paragraph = ({ children }: { children: React.ReactNode }) => {
+const Paragraph = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
-    <p className="text-lg text-muted-foreground mt-6 max-w-xl">{children}</p>
+    <p className={cn("text-lg text-muted-foreground mt-6 max-w-xl", className)}>
+      {children}
+    </p>
   );
 };
 
 const Presentation = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="w-full mx-auto min-h-dvh flex flex-col items-center justify-center">
+    <div className="w-full mx-auto min-h-dvh flex flex-col items-center pt-24 md:pt-40">
       {children}
     </div>
   );
