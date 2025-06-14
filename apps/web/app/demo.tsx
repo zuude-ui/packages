@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type Crop, Cropper, useCropper } from "@workspace/cropper/index";
+import { type Crop, Cropper, useCropper } from "@zuude-ui/cropper";
 
 import { Button } from "@workspace/ui/components/button";
 import { testImage } from "@workspace/ui/lib/utils";

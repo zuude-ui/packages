@@ -1,4 +1,4 @@
-import { Crop, Cropper, useCropper } from "@workspace/cropper";
+import { Crop, Cropper, useCropper } from "@zuude-ui/cropper";
 import { testImage } from "@workspace/ui/lib/utils";
 import { RefObject, useRef, useState } from "react";
 

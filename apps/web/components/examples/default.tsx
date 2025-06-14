@@ -1,4 +1,4 @@
-import { Cropper } from "@workspace/cropper";
+import { Cropper } from "@zuude-ui/cropper";
 import { testImage } from "@workspace/ui/lib/utils";
 
 export default function Default() {

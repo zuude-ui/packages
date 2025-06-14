@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@workspace/ios-mockups": "workspace:*",
+    "@zuude-ui/ios-mockups": "workspace:*",
     "@workspace/ui": "workspace:*",
     "lucide-react": "^0.475.0",
     "motion": "^12.15.0",

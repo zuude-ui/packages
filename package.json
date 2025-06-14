@@ -7,11 +7,13 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "release": "changeset publish",
     "cropper:build": "pnpm --filter @workspace/cropper build",
     "ios-mockups:build": "pnpm --filter @workspace/ios-mockups build",
     "g": "tsx script.ts && prettier --write ./apps/ios-mockups/__registry__/index.ts"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.4",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "prettier": "^3.5.1",
