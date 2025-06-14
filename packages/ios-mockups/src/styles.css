@@ -16,3 +16,7 @@
     }
   }
 }
+
+[data-zuude-ui-ios-mockup-content]::-webkit-scrollbar {
+  display: none;
+}

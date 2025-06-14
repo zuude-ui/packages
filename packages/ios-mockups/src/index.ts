@@ -1,3 +1,4 @@
 import "./styles.css";
 
-export { Iphone } from "./iphone";
+export { Iphone, colors } from "./iphone";
+export type { IphoneColor, IphoneSize, IphoneButtonsAction } from "./types";

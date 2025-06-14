@@ -9,14 +9,34 @@ export default function Page() {
     <PageComp>
       <PageComp.Presentation>
         <PageComp.Heading1>IOS Mockups</PageComp.Heading1>
-        <PageComp.Paragraph className="mb-12">
-          A modern, intuitive image cropping component that brings the familiar
-          iOS photo editing experience to the web. Crop, rotate, and adjust your
-          images with smooth gestures and precise controls.
-        </PageComp.Paragraph>
 
         <Demo />
       </PageComp.Presentation>
+
+      {/* <div className="grid md:grid-cols-2 gap-4">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis placeat
+          iure, totam inventore dolores, ut minus odit error sit unde nisi?
+          Perspiciatis, modi tenetur. Eligendi nisi tempore velit sunt totam?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis placeat
+          iure, totam inventore dolores, ut minus odit error sit unde nisi?
+          Perspiciatis, modi tenetur. Eligendi nisi tempore velit sunt totam?
+        </div>
+      </div>
+      <div className="grid md:grid-cols-2 gap-4">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis placeat
+          iure, totam inventore dolores, ut minus odit error sit unde nisi?
+          Perspiciatis, modi tenetur. Eligendi nisi tempore velit sunt totam?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis placeat
+          iure, totam inventore dolores, ut minus odit error sit unde nisi?
+          Perspiciatis, modi tenetur. Eligendi nisi tempore velit sunt totam?
+        </div>
+      </div> */}
 
       <PageComp.Wrapper>
         <PageComp.Section>

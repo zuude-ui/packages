@@ -59,7 +59,7 @@ export function Iphone({
     <div
       data-zuude-ui-ios-mockup
       className={cn(
-        "relative aspect-8/16",
+        "relative aspect-8/16 max-h-none text-start",
         "[--canvas-color:transparent] [--dynamic-island-color:black]",
         className
       )}
@@ -74,7 +74,7 @@ export function Iphone({
     >
       <Buttons buttonHandlers={buttonHandlers} />
       <div
-        className="relative h-full w-full p-[5.5px]"
+        className="relative aspect-8/16 overflow-hidden w-full p-[5.5px]"
         style={{
           background: `var(--${color})`,
           boxShadow:
@@ -110,7 +110,12 @@ export function Iphone({
                 }}
               ></div>
             </div>
-            <div className="no-scrollbar h-full overflow-auto">{children}</div>
+            <div
+              data-zuude-ui-ios-mockup-content
+              className="no-scrollbar h-full overflow-auto"
+            >
+              {children}
+            </div>
             <div
               data-bottom-safe-area
               className="absolute right-0 bottom-0 left-0 z-30 flex h-[var(--bottom-safe-area)] w-full items-center justify-center"
