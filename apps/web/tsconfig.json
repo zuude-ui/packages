@@ -7,7 +7,7 @@
     "paths": {
       "@/*": ["./*"],
       "@workspace/ui/*": ["../../packages/ui/src/*"],
-      "@workspace/cropper/*": ["../../packages/cropper/src/*"]
+      "@zuude-ui/cropper/*": ["../../packages/cropper/src/*"]
     },
     "plugins": [
       {

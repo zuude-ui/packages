@@ -7,9 +7,11 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "release": "changeset publish",
-    "cropper:build": "pnpm --filter @workspace/cropper build",
-    "ios-mockups:build": "pnpm --filter @workspace/ios-mockups build",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm build && changeset publish",
+    "cropper:build": "pnpm --filter @zuude-ui/cropper build",
+    "ios-mockups:build": "pnpm --filter @zuude-ui/ios-mockups build",
     "g": "tsx script.ts && prettier --write ./apps/ios-mockups/__registry__/index.ts"
   },
   "devDependencies": {

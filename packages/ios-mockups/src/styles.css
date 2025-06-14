@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@layer theme, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+/* @import "tailwindcss/preflight.css" layer(base); */
+@import "tailwindcss/utilities.css" layer(utilities);
 
 @theme {
   --animate-fade-in: fade-in 0.3s forwards;
