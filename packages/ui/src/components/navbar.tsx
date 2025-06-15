@@ -1,17 +1,40 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { Logo } from "../assets/logo";
 import { buttonVariants } from "./button";
 import { ThemeToggle } from "./theme-toggle";
+import { cn } from "../lib/utils";
 
 export function Navbar() {
+  const pathname = usePathname();
+
   return (
-    <nav className="fixed top-0 left-0 bg-background/90 backdrop-blur-sm px-4 right-0 z-50 h-16 border-b flex items-center justify-center">
-      <div className="flex max-w-7xl w-full items-center justify-between">
-        <a href="https://zuudeui.com">
+    <nav
+      className={cn(
+        "fixed top-0 left-0 bg-background/90 backdrop-blur-sm px-4 right-0 z-50 h-16 border-b flex items-center justify-center",
+        pathname.startsWith("/examples") &&
+          "bg-transparent backdrop-blur-none border-b-0"
+      )}
+    >
+      <div
+        className={cn(
+          "flex max-w-7xl w-full items-center justify-between",
+          pathname.startsWith("/examples") && "max-w-full"
+        )}
+      >
+        <a href={pathname !== "/" ? "/" : "https://zuudeui.com"}>
           <Logo className="size-9 rounded-sm" />
         </a>
         <div className="flex items-center">
+          <Link
+            href="/examples"
+            className={buttonVariants({ variant: "ghost", className: "mr-2" })}
+          >
+            Examples
+          </Link>
           <Link
             href="https://github.com/zuudeui/packages"
             target="_blank"

@@ -92,9 +92,10 @@ export function Iphone({
         >
           <div
             data-canvas
-            className="relative h-full w-full overflow-hidden bg-[var(--canvas-color)]"
+            className="relative h-full w-full overflow-hidden"
             style={{
               borderRadius: sizes[size].rounded - 16,
+              background: "var(--canvas-color)",
             }}
           >
             <div
@@ -104,9 +105,10 @@ export function Iphone({
               )}
             >
               <div
-                className="aspect-[6.7/2] rounded-full bg-[var(--dynamic-island-color)] transition-colors"
+                className="aspect-[6.7/2] rounded-full transition-colors"
                 style={{
                   width: sizes[size].islandWidth,
+                  background: "var(--dynamic-island-color)",
                 }}
               ></div>
             </div>
@@ -120,7 +122,12 @@ export function Iphone({
               data-bottom-safe-area
               className="absolute right-0 bottom-0 left-0 z-30 flex h-[var(--bottom-safe-area)] w-full items-center justify-center"
             >
-              <div className="h-1 w-2/6 rounded-full bg-[var(--dynamic-island-color)] transition-colors" />
+              <div
+                className="h-1 w-2/6 rounded-full transition-colors"
+                style={{
+                  background: "var(--dynamic-island-color)",
+                }}
+              />
             </div>
           </div>
         </div>

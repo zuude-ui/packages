@@ -29,17 +29,15 @@ export const generateComponents = async (project: string) => {
   const files = getFilesRecursive(REGISTRY_PATH);
 
   let index = `import dynamic from "next/dynamic";
+import type { GenericComponent } from "@workspace/ui/types";
  
-export const variants: Record<string, { name: string; component: any; code: string }> = {`;
+export const variants: Record<string, GenericComponent> = {`;
 
   // Previews
   for (const file of files) {
     const relativePath = path.relative(REGISTRY_PATH, file);
 
-    let componentName = relativePath
-      .replace(/\.tsx$/, "")
-      .replace(/\//g, "-")
-      .replace("-main", "");
+    let componentName = relativePath.replace(/\.tsx$/, "");
 
     const fileContent = fs
       .readFileSync(file, "utf8")
@@ -47,7 +45,7 @@ export const variants: Record<string, { name: string; component: any; code: stri
       .replace(/\$\{/g, "\\${");
 
     index += `"${componentName}": {
-      name: "${componentName.split("-").pop()}",
+      name: "${componentName}",
       component: dynamic(
         () =>
           import("@/components/examples/${relativePath.replace(".tsx", "")}"),

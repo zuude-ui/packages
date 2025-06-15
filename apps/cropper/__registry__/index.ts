@@ -1,9 +1,7 @@
 import dynamic from "next/dynamic";
+import type { GenericComponent } from "@workspace/ui/types";
 
-export const variants: Record<
-  string,
-  { name: string; component: any; code: string }
-> = {
+export const variants: Record<string, GenericComponent> = {
   default: {
     name: "default",
     component: dynamic(() => import("@/components/examples/default"), {
@@ -13,7 +11,7 @@ export const variants: Record<
 import { testImage } from "@workspace/ui/lib/utils";
 
 export default function Default() {
-  return <Cropper src={testImage} />;
+  return <Cropper src={testImage} className="max-w-sm" />;
 }
 `,
   },

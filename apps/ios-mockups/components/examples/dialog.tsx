@@ -1,13 +1,4 @@
-import dynamic from "next/dynamic";
-import type { GenericComponent } from "@workspace/ui/types";
-
-export const variants: Record<string, GenericComponent> = {
-  dialog: {
-    name: "dialog",
-    component: dynamic(() => import("@/components/examples/dialog"), {
-      ssr: false,
-    }),
-    code: `import { useState } from "react";
+import { useState } from "react";
 import { Button } from "@workspace/ui/components/button";
 import { Iphone } from "@zuude-ui/ios-mockups";
 import { AnimatePresence, motion } from "motion/react";
@@ -66,65 +57,3 @@ export default function Dialog() {
     </Iphone>
   );
 }
-`,
-  },
-  "gradient-canvas": {
-    name: "gradient-canvas",
-    component: dynamic(() => import("@/components/examples/gradient-canvas"), {
-      ssr: false,
-    }),
-    code: `import { Iphone } from "@zuude-ui/ios-mockups";
-
-export default function GradientCanvas() {
-  return (
-    <Iphone className="[--canvas-color:linear-gradient(orange,var(--secondary))]">
-      <div className="flex flex-col gap-4 text-black pt-[var(--top-safe-area)] px-4">
-        <h1 className="text-2xl font-bold">Hello World</h1>
-      </div>
-    </Iphone>
-  );
-}
-`,
-  },
-  image: {
-    name: "image",
-    component: dynamic(() => import("@/components/examples/image"), {
-      ssr: false,
-    }),
-    code: `import { testImage } from "@workspace/ui/lib/utils";
-import { Iphone } from "@zuude-ui/ios-mockups";
-
-export default function Image() {
-  return (
-    <Iphone>
-      <img src={testImage} className="h-full w-full object-cover" />
-    </Iphone>
-  );
-}
-`,
-  },
-  texts: {
-    name: "texts",
-    component: dynamic(() => import("@/components/examples/texts"), {
-      ssr: false,
-    }),
-    code: `import { Iphone } from "@zuude-ui/ios-mockups";
-
-export default function Texts() {
-  return (
-    <Iphone className="[--canvas-color:white]">
-      <div className="flex flex-col gap-4 text-black pt-[var(--top-safe-area)] px-4">
-        <h1 className="text-2xl font-bold">Hello World</h1>
-        <p className="text-sm">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illum
-          doloribus minus fuga. Iusto deleniti, eligendi non dolor minima
-          ratione nam maxime cumque libero perferendis odio possimus
-          exercitationem sed alias!
-        </p>
-      </div>
-    </Iphone>
-  );
-}
-`,
-  },
-};
