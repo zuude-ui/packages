@@ -35,7 +35,7 @@ const Paragraph = ({
 
 const Presentation = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="w-full mx-auto min-h-dvh flex flex-col items-center pt-24 md:pt-40">
+    <div className="w-full mb-40 mx-auto min-h-dvh flex flex-col items-center pt-24 md:pt-40">
       {children}
     </div>
   );
@@ -110,7 +110,7 @@ interface TableProps {
 
 const Table = ({ columns }: TableProps) => {
   return (
-    <div className="overflow-hidden rounded-md border">
+    <div className="overflow-auto rounded-md border">
       <table className="w-full">
         <thead className="bg-muted">
           {columns.map((column, index) => (
@@ -131,7 +131,10 @@ const Table = ({ columns }: TableProps) => {
             column.values.map((row, i) => (
               <tr key={`${index}-${i}`}>
                 {row.map((cell, j) => (
-                  <td key={j} className="border-b py-3 px-4 text-sm">
+                  <td
+                    key={j}
+                    className="border-b text-muted-foreground py-3 whitespace-nowrap px-4 text-sm"
+                  >
                     {cell}
                   </td>
                 ))}

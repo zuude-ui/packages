@@ -1,0 +1,99 @@
+---
+title: "Introduction"
+description: "Introduction to the project"
+date: 2025-06-14
+---
+
+## Introduction
+
+```bash
+npm install @zuude-ui/ios-mockups
+```
+
+## Usage
+
+```tsx
+import { IphoneMockup } from "@/components/device-mockups";
+
+export default function MyComponent() {
+  return (
+    <IphoneMockup size="md" color="natural-titanium">
+      {/* Your content here */}
+    </IphoneMockup>
+  );
+}
+```
+
+## Props
+
+| Prop             | Type                                                                                                                                  | Default              | Description                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------- |
+| `size`           | `"sm" \| "md" \| "lg"`                                                                                                                | `"md"`               | Controls the size of the iPhone mockup                  |
+| `color`          | `"natural-titanium" \| "blue-titanium" \| "white-titanium" \| "black-titanium" \| "blue" \| "pink" \| "yellow" \| "green" \| "black"` | `"natural-titanium"` | Sets the color scheme of the iPhone mockup              |
+| `className`      | `string`                                                                                                                              | `""`                 | Additional CSS classes to apply to the mockup container |
+| `buttonHandlers` | `IphoneMockupButtonsAction`                                                                                                           | -                    | Callback functions for the iPhone buttons               |
+| `buttonHandlers` | `IphoneMockupButtonsAction`                                                                                                           | -                    | Callback functions for the iPhone buttons               |
+
+## CSS Variables
+
+The component uses several CSS variables that you can customize:
+
+| Variable                 | Default          | Description                                                      | Example                                                              |
+| ------------------------ | ---------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `--canvas-color`         | `transparent`    | Sets the background color of the content area                    | `[--canvas-color:white]` or `[--canvas-color:var(--background)]`     |
+| `--dynamic-island-color` | `black`          | Sets the color of the dynamic island and home indicator          | `[--dynamic-island-color:white]`                                     |
+| `--top-safe-area`        | _varies by size_ | Height of the top safe area (automatically set based on size)    | `46px` for small size, `60px` for medium size, `70px` for large size |
+| `--bottom-safe-area`     | _varies by size_ | Height of the bottom safe area (automatically set based on size) | `15px` for all sizes                                                 |
+
+## Examples
+
+### Different Sizes
+
+```tsx
+<IphoneMockup size="sm">Small iPhone</IphoneMockup>
+<IphoneMockup size="md">Medium iPhone</IphoneMockup>
+<IphoneMockup size="lg">Large iPhone</IphoneMockup>
+```
+
+### Different Colors
+
+```tsx
+<IphoneMockup color="blue-titanium">Blue Titanium</IphoneMockup>
+<IphoneMockup color="pink">Pink</IphoneMockup>
+<IphoneMockup color="green">Green</IphoneMockup>
+```
+
+### With Button Handlers
+
+```tsx
+<IphoneMockup
+  buttonHandlers={{
+    action: () => console.log("Action button pressed"),
+    volumeUp: () => console.log("Volume up"),
+    volumeDown: () => console.log("Volume down"),
+    power: () => console.log("Power button pressed"),
+  }}
+>
+  Interactive iPhone
+</IphoneMockup>
+```
+
+### Customizing CSS Variables
+
+```tsx
+// White background with white dynamic island
+<IphoneMockup className="[--canvas-color:white] [--dynamic-island-color:white]">
+  Content
+</IphoneMockup>
+
+// Using theme variables
+<IphoneMockup className="[--canvas-color:var(--background)] [--dynamic-island-color:var(--foreground)]">
+  Content
+</IphoneMockup>
+```
+
+## Notes
+
+- The component includes a dynamic island at the top and a home indicator at the bottom
+- Content is scrollable within the mockup
+- The mockup includes realistic shadows and gradients for a premium look
