@@ -1,7 +1,11 @@
 interface CompPreviewProps {
-  name: string;
+  children: React.ReactNode;
 }
 
-export const CompPreview = ({ name }: CompPreviewProps) => {
-  return <div className="border rounded-md p-4 my-20 min-h-96"></div>;
+export const CompPreview = ({ children }: CompPreviewProps) => {
+  return (
+    <div className="border rounded-md p-4 my-14 min-h-96 flex justify-center-safe [&+h2]:mt-0">
+      {children}
+    </div>
+  );
 };

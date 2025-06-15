@@ -8,7 +8,7 @@ import { generateComponents } from "./script";
 const projects = path.join(process.cwd(), "apps");
 const readDir = fs.readdirSync(projects);
 
-const actions = ["build", "contentlayer", "generate-components"];
+const actions = ["contentlayer", "build", "generate-components"];
 
 const getAction = async () => {
   const action = await select({
@@ -22,7 +22,10 @@ const getAction = async () => {
 const getProject = async () => {
   const project = await select({
     message: "What project do you want to do?",
-    choices: readDir.map((project) => ({ name: project, value: project })),
+    choices: [
+      { name: "all", value: "all" },
+      ...readDir.map((project) => ({ name: project, value: project })),
+    ],
   });
 
   return project;
@@ -32,8 +35,18 @@ getAction()
   .then(async (action) => {
     const project = await getProject();
 
-    // run the action
-    if (action === "build") {
+    if (project === "all") {
+      for (const project of readDir) {
+        if (action === "build") {
+          exec(`pnpm --filter ${project} build`);
+        } else if (action === "contentlayer") {
+          exec(`cd apps/${project} && pnpm contentlayer2 build`);
+        } else if (action === "generate-components") {
+          await generateComponents(project);
+          exec(`prettier --write ./apps/${project}/__registry__/index.ts`);
+        }
+      }
+    } else if (action === "build") {
       exec(`pnpm --filter ${project} build`);
     } else if (action === "contentlayer") {
       exec(`cd apps/${project} && pnpm contentlayer2 build`);

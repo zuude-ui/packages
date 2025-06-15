@@ -2,8 +2,8 @@
 
 import { PageComp } from "@workspace/ui/components/page-comps";
 import { Demo } from "./demo";
-import { Mdx } from "@workspace/ui/components/mdx";
 import { allDocs } from "@/.contentlayer/generated";
+import { Mdx } from "@/components/mdx";
 
 export default function Page() {
   const homeDocs = allDocs.find((doc) => doc.slug === "/");

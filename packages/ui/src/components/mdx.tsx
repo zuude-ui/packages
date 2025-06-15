@@ -5,9 +5,8 @@ import Link from "next/link";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import Image from "next/image";
 import { cn } from "../lib/utils";
-import { CompPreview } from "./comp-preview";
 
-const components = {
+export const componentsConfig = {
   h1: ({
     className,
     children,
@@ -332,14 +331,14 @@ const components = {
       {...props}
     />
   ),
-  CompPreview,
 };
 
 interface MdxProps {
   code: string;
+  components: typeof componentsConfig;
 }
 
-export function Mdx({ code }: MdxProps) {
+export function MdxUI({ code, components }: MdxProps) {
   const Component = useMDXComponent(code);
 
   return (
