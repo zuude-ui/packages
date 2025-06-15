@@ -1,5 +1,11 @@
 # @zuude-ui/ios-mockups
 
+## 0.0.6
+
+### Patch Changes
+
+- added use client for the index.ts
+
 ## 0.0.5
 
 ### Patch Changes
