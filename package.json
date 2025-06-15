@@ -10,10 +10,8 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "pnpm build && changeset publish",
-    "cropper:build": "pnpm --filter @zuude-ui/cropper build",
-    "ios-mockups:build": "pnpm --filter @zuude-ui/ios-mockups build",
-    "ios-mockups:build:contentlayer": "cd apps/ios-mockups && pnpm contentlayer2 build",
-    "g": "tsx script.ts && prettier --write ./apps/ios-mockups/__registry__/index.ts"
+    "g": "tsx script.ts && prettier --write ./apps/ios-mockups/__registry__/index.ts",
+    "p:script": "tsx package-script.ts"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.4",
@@ -28,6 +26,7 @@
     "node": ">=20"
   },
   "dependencies": {
+    "@inquirer/prompts": "^7.5.3",
     "tsx": "^4.19.4"
   }
 }
