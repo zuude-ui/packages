@@ -56,83 +56,85 @@ export function Iphone({
   buttonHandlers,
 }: IphoneProps) {
   return (
-    <div
-      data-zuude-ui-ios-mockup
-      className={cn(
-        "relative aspect-8/16 max-h-none text-start",
-        "[--canvas-color:transparent] [--dynamic-island-color:black]",
-        className
-      )}
-      style={
-        {
-          width: sizes[size].width,
-          "--top-safe-area": `${sizes[size].topSafeArea}px`,
-          "--bottom-safe-area": `${sizes[size].bottomSafeArea}px`,
-          ...colors,
-        } as React.CSSProperties
-      }
-    >
-      <Buttons buttonHandlers={buttonHandlers} />
+    <>
       <div
-        className="relative aspect-8/16 overflow-hidden w-full p-[5.5px]"
-        style={{
-          background: `var(--${color})`,
-          boxShadow:
-            "0px 0px 2px 2px rgba(0, 0, 0, 0.20) inset, 0px 0px 3px 2px rgba(0, 0, 0, 0.40) inset",
-          borderRadius: sizes[size].rounded,
-        }}
+        data-zuude-ui-ios-mockup
+        className={cn(
+          "relative aspect-8/16 max-h-none text-start",
+          "[--canvas-color:transparent] [--dynamic-island-color:black]",
+          className
+        )}
+        style={
+          {
+            width: sizes[size].width,
+            "--top-safe-area": `${sizes[size].topSafeArea}px`,
+            "--bottom-safe-area": `${sizes[size].bottomSafeArea}px`,
+            ...colors,
+          } as React.CSSProperties
+        }
       >
+        <Buttons buttonHandlers={buttonHandlers} />
         <div
-          className="h-full w-full rounded-[67px] border-2 border-black bg-black p-2.5"
+          className="relative aspect-8/16 overflow-hidden w-full p-[5.5px]"
           style={{
+            background: `var(--${color})`,
             boxShadow:
-              "0px 0px 3px 1px rgba(255, 255, 255, 0.25), 0px 0px 0.5px 2px #3C3C3C inset",
-            borderRadius: sizes[size].rounded - 5,
+              "0px 0px 2px 2px rgba(0, 0, 0, 0.20) inset, 0px 0px 3px 2px rgba(0, 0, 0, 0.40) inset",
+            borderRadius: sizes[size].rounded,
           }}
         >
           <div
-            data-canvas
-            className="relative h-full w-full overflow-hidden"
+            className="h-full w-full rounded-[67px] border-2 border-black bg-black p-2.5"
             style={{
-              borderRadius: sizes[size].rounded - 16,
-              background: "var(--canvas-color)",
+              boxShadow:
+                "0px 0px 3px 1px rgba(255, 255, 255, 0.25), 0px 0px 0.5px 2px #3C3C3C inset",
+              borderRadius: sizes[size].rounded - 5,
             }}
           >
             <div
-              data-top-safe-area
-              className={cn(
-                "absolute top-0 right-0 left-0 z-30 flex h-[var(--top-safe-area)] items-center justify-center"
-              )}
+              data-canvas
+              className="relative h-full w-full overflow-hidden"
+              style={{
+                borderRadius: sizes[size].rounded - 16,
+                background: "var(--canvas-color)",
+              }}
             >
               <div
-                className="aspect-[6.7/2] rounded-full transition-colors"
-                style={{
-                  width: sizes[size].islandWidth,
-                  background: "var(--dynamic-island-color)",
-                }}
-              ></div>
-            </div>
-            <div
-              data-zuude-ui-ios-mockup-content
-              className="no-scrollbar h-full overflow-auto"
-            >
-              {children}
-            </div>
-            <div
-              data-bottom-safe-area
-              className="absolute right-0 bottom-0 left-0 z-30 flex h-[var(--bottom-safe-area)] w-full items-center justify-center"
-            >
+                data-top-safe-area
+                className={cn(
+                  "absolute top-0 right-0 left-0 z-30 flex h-[var(--top-safe-area)] items-center justify-center"
+                )}
+              >
+                <div
+                  className="aspect-[6.7/2] rounded-full transition-colors"
+                  style={{
+                    width: sizes[size].islandWidth,
+                    background: "var(--dynamic-island-color)",
+                  }}
+                ></div>
+              </div>
               <div
-                className="h-1 w-2/6 rounded-full transition-colors"
-                style={{
-                  background: "var(--dynamic-island-color)",
-                }}
-              />
+                data-zuude-ui-ios-mockup-content
+                className="no-scrollbar h-full overflow-auto"
+              >
+                {children}
+              </div>
+              <div
+                data-bottom-safe-area
+                className="absolute right-0 bottom-0 left-0 z-30 flex h-[var(--bottom-safe-area)] w-full items-center justify-center"
+              >
+                <div
+                  className="h-1 w-2/6 rounded-full transition-colors"
+                  style={{
+                    background: "var(--dynamic-island-color)",
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

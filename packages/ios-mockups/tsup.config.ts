@@ -9,7 +9,4 @@ export default defineConfig({
   dts: true,
   format: ["esm", "cjs"],
   injectStyle: true,
-  loader: {
-    ".css": "css",
-  },
 });

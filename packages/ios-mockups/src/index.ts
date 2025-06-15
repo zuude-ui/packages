@@ -1,3 +1,5 @@
+"use client";
+
 import "./styles.css";
 
 export { Iphone, colors } from "./iphone";

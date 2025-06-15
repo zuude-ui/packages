@@ -44,7 +44,7 @@ export const componentsConfig = {
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className="text-3xl mb-8 mt-20 first-of-type:mt-0 font-black [&>a]:font-black tracking-tighter"
+      className="text-3xl mb-8 mt-20 first-of-type:mt-0 font-black [&>a]:text-foreground [&>a]:no-underline tracking-tighter"
       {...props}
     >
       {children}
@@ -79,7 +79,7 @@ export const componentsConfig = {
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
-      className="text-xl mb-8 mt-10 first-of-type:mt-0 font-medium"
+      className="text-xl mb-8 mt-10 first-of-type:mt-0 font-medium [&>a]:text-foreground [&>a]:no-underline"
       {...props}
     >
       {children}
@@ -318,7 +318,7 @@ export const componentsConfig = {
           ? "_blank"
           : undefined
       }
-      className={cn("", className)}
+      className={cn("text-blue-500 underline", className)}
       {...props}
     />
   ),
@@ -330,6 +330,9 @@ export const componentsConfig = {
       alt={alt}
       {...props}
     />
+  ),
+  Space: ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+    <div className={cn("my-4", className)} {...props} />
   ),
 };
 
