@@ -42,6 +42,9 @@ importers:
       '@zuude-ui/cropper':
         specifier: workspace:*
         version: link:../../packages/cropper
+      contentlayer2:
+        specifier: ^0.5.8
+        version: 0.5.8(acorn@8.14.0)(esbuild@0.25.5)
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@19.0.0)
@@ -60,6 +63,18 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      rehype-autolink-headings:
+        specifier: ^7.1.0
+        version: 7.1.0
+      rehype-pretty-code:
+        specifier: ^0.14.1
+        version: 0.14.1(shiki@3.4.2)
+      rehype-slug:
+        specifier: ^6.0.0
+        version: 6.0.0
+      remark-gfm:
+        specifier: ^4.0.1
+        version: 4.0.1
     devDependencies:
       '@types/node':
         specifier: ^20

@@ -1,11 +1,13 @@
 "use client";
 
 import { PageComp } from "@workspace/ui/components/page-comps";
-import { CodeSyntax } from "@workspace/ui/components/syntax-highlighter";
 import { Demo } from "./demo";
-import { variants } from "@/__registry__";
+import { Mdx } from "@workspace/ui/components/mdx";
+import { allDocs } from "@/.contentlayer/generated";
 
 export default function Page() {
+  const homeDocs = allDocs.find((doc) => doc.slug === "/");
+
   return (
     <PageComp>
       <PageComp.Presentation>
@@ -19,41 +21,7 @@ export default function Page() {
         <Demo />
       </PageComp.Presentation>
 
-      <PageComp.Wrapper>
-        <PageComp.Section>
-          <PageComp.Heading2>Installation</PageComp.Heading2>
-          <CodeSyntax code="npm install @zuude-ui/cropper" language="bash" />
-        </PageComp.Section>
-        <PageComp.Section>
-          <PageComp.Heading2>Usage</PageComp.Heading2>
-          <CodeSyntax code={usage} language="tsx" />
-          <PageComp.CustomArrow className="absolute top-0 right-0 translate-x-[80%] translate-y-[70px]" />
-          <PageComp.ExampleWrapper>
-            <div className="max-w-sm">{variants.default?.component()}</div>
-          </PageComp.ExampleWrapper>
-        </PageComp.Section>
-
-        <PageComp.Section>
-          <PageComp.Heading2>Props</PageComp.Heading2>
-          <PageComp.Table
-            columns={[
-              {
-                body: ["Prop", "Type"],
-                values: [
-                  ["size", `"sm" | "md" | "lg"`],
-                  ["crop", "object"],
-                  ["onCropChange", "function"],
-                  ["className", "string"],
-                  ["showGrid", "boolean"],
-                  ["showBehindImage", "object"],
-                ],
-              },
-            ]}
-          />
-        </PageComp.Section>
-      </PageComp.Wrapper>
+      <Mdx code={homeDocs?.body.code ?? ""} />
     </PageComp>
   );
 }
-
-const usage = `<Cropper src="" />`;

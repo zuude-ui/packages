@@ -3,11 +3,12 @@ import path from "path";
 
 import { select } from "@inquirer/prompts";
 import { exec } from "child_process";
+import { generateComponents } from "./script";
 
 const projects = path.join(process.cwd(), "apps");
 const readDir = fs.readdirSync(projects);
 
-const actions = ["build", "contentlayer"];
+const actions = ["build", "contentlayer", "generate-components"];
 
 const getAction = async () => {
   const action = await select({
@@ -33,9 +34,12 @@ getAction()
 
     // run the action
     if (action === "build") {
-      await exec(`pnpm --filter ${project} build`);
+      exec(`pnpm --filter ${project} build`);
     } else if (action === "contentlayer") {
-      await exec(`cd apps/${project} && pnpm contentlayer2 build`);
+      exec(`cd apps/${project} && pnpm contentlayer2 build`);
+    } else if (action === "generate-components") {
+      await generateComponents(project);
+      exec(`prettier --write ./apps/${project}/__registry__/index.ts`);
     }
   })
   .catch((err) => {

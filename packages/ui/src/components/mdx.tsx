@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import Image from "next/image";
 import { cn } from "../lib/utils";
+import { CompPreview } from "./comp-preview";
 
 const components = {
   h1: ({
@@ -331,6 +332,7 @@ const components = {
       {...props}
     />
   ),
+  CompPreview,
 };
 
 interface MdxProps {
