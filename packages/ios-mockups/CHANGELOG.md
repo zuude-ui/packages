@@ -1,5 +1,11 @@
 # @zuude-ui/ios-mockups
 
+## 0.0.9
+
+### Patch Changes
+
+- Having full width, using max width
+
 ## 0.0.8
 
 ### Patch Changes

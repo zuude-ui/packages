@@ -7,7 +7,7 @@
     "paths": {
       "@/*": ["./*"],
       "@workspace/ui/*": ["../../packages/ui/src/*"],
-      "@workspace/ios-mockups/*": ["../../packages/ios-mockups/src/*"]
+      "@zuude-ui/ios-mockups/*": ["../../packages/ios-mockups/src/*"]
     },
     "plugins": [
       {

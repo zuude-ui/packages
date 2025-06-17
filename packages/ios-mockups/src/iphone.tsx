@@ -69,7 +69,8 @@ const Iphone = React.forwardRef<HTMLDivElement, IphoneProps>(
         className={cn("reset-styles", className)}
         style={
           {
-            width: sizes[size].width,
+            width: "100%",
+            maxWidth: sizes[size].width,
             "--top-safe-area": `${sizes[size].topSafeArea}px`,
             "--bottom-safe-area": `${sizes[size].bottomSafeArea}px`,
             "--dynamic-island-color": "black",

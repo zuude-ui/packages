@@ -4,7 +4,7 @@ import {
   Iphone,
   type IphoneColor,
   colors as colorsList,
-} from "@zuude-ui/ios-mockups";
+} from "@zuude-ui/ios-mockups/index";
 
 import { Button } from "@workspace/ui/components/button";
 import { cn, testImage } from "@workspace/ui/lib/utils";
@@ -95,7 +95,7 @@ export const Demo = () => {
               activate.bottomPadding && "pb-[var(--bottom-safe-area)]"
             )}
           >
-            <img src={testImage} alt="iOS Mockups" />
+            <img src={testImage} alt="iOS Mockups" className="w-full" />
             <div className="p-4">
               <h1 className="text-2xl font-bold">Iphone Mockup</h1>
               <p className="text-sm text-muted-foreground">
