@@ -1,5 +1,12 @@
 # ios-mockups
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @zuude-ui/ios-mockups@0.0.10
+
 ## 0.0.8
 
 ### Patch Changes

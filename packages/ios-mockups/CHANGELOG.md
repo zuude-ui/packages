@@ -1,5 +1,11 @@
 # @zuude-ui/ios-mockups
 
+## 0.0.10
+
+### Patch Changes
+
+- Added all the necessary colors
+
 ## 0.0.9
 
 ### Patch Changes

@@ -17,6 +17,29 @@ export const colors = {
   "--black": "linear-gradient(180deg, #515558 0%, #3A3F42 100%)",
 };
 
+const buttonColors = {
+  // Titanium colors
+  "--natural-titanium-button":
+    "linear-gradient(180deg, #E0DFDB 1.2%, #FFFFFB 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E6E4DF 17.38%, #D1CECA 50.59%, #B5B2AD 89.25%, #83817D 92.68%, #A3A19D 95.31%, #D8D5D2 96.5%, #D1CEC9 97.65%, #878580 98.84%)",
+  "--blue-titanium-button":
+    "linear-gradient(180deg, #A2A2A2 1.2%, #BFC1CB 3.2%, #BBC1C9 8.71%, #8A9199 12.35%, #6D737D 17.38%, #535C6B 50.59%, #545A6B 89.25%, #232B3A 92.68%, #424851 95.31%, #6C727A 96.5%, #7B8188 97.65%, #3E4348 98.84%)",
+  "--white-titanium-button":
+    "linear-gradient(180deg, #D3D4CF 1.2%, #F9FAF5 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E3E4DF 17.38%, #E4E3DF 50.59%, #B1AEAB 89.25%, #878582 92.68%, #A6A4A1 95.31%, #D6D3D0 96.5%, #C6C3BF 97.65%, #898784 98.84%)",
+  "--black-titanium-button":
+    "linear-gradient(180deg, #A2A2A2 1.2%, #D2D2D2 3.2%, #D4D4D4 8.71%, #B7B7B7 12.35%, #868686 17.38%, #6F706B 50.59%, #6C6C6C 54.22%, #424242 89.25%, #1F1F1F 92.68%, #494949 95.31%, #8A8A8A 96.5%, #757575 97.65%, #444 98.84%)",
+  // Custom colors
+  "--blue-button":
+    "linear-gradient(0deg, rgba(165, 178, 186, 0.50) 0%, rgba(165, 178, 186, 0.50) 100%), linear-gradient(180deg, #B7BEC0 1.2%, #F2F9FD 10.34%, #D6DEE1 48.18%, #CDD7DB 87.13%, #B4BFC6 89.84%, #7B8388 92.7%, #7B8588 94.56%, #B7BCBF 98.84%)",
+  "--pink-button":
+    "linear-gradient(180deg, #C4AEB1 1.2%, #F7DBDE 10.34%, #F7DBDE 48.18%, #F7DBDE 87.13%, #C1ACAE 89.84%, #8A7273 92.7%, #937679 94.56%, #C9B5B8 96.72%, #C1AAAD 98.84%)",
+  "--yellow-button":
+    "linear-gradient(0deg, rgba(227, 220, 191, 0.25) 0%, rgba(227, 220, 191, 0.25) 100%), linear-gradient(180deg, #C1BBA3 0.71%, #FCF5D8 5.06%, #D6CDB0 50.59%, #D2C9AC 80.21%, #D3CAAD 87.2%, #B3AA8D 89.92%, #958A6C 92.38%, #928769 94.85%, #D8D2BC 97.12%, #BCB392 99.28%)",
+  "--green-button":
+    "linear-gradient(180deg, #A9B5A5 1.2%, #D4DECF 10.34%, #D4E0CF 48.18%, #D4DECF 87.13%, #A9B7A6 89.84%, #8D998B 92.7%, #8D998B 94.56%, #9AA596 98.84%)",
+  "--black-button":
+    "linear-gradient(180deg, #333436 0.5%, #A2A6A7 6.47%, #42474A 14.76%, #373B3C 50.59%, #444547 83.69%, #353638 87.63%, #17181A 91.4%, #1D1E20 95.34%, #3F3F41 99.22%)",
+};
+
 interface IphoneProps extends React.ComponentProps<"div"> {
   children?: React.ReactNode;
   className?: string;
@@ -76,12 +99,16 @@ const Iphone = React.forwardRef<HTMLDivElement, IphoneProps>(
             "--dynamic-island-color": "black",
             "--screen-color": "transparent",
             ...colors,
+            ...buttonColors,
             ...style,
           } as React.CSSProperties
         }
         {...props}
       >
-        <Buttons buttonHandlers={buttonHandlers} />
+        {Array.from({ length: 4 }).map((_, index) => (
+          <SmallParticles key={index} index={index} color={color} />
+        ))}
+        <Buttons color={color} buttonHandlers={buttonHandlers} />
         <div
           data-iphone-mockup-body
           className="reset-styles"
@@ -137,10 +164,11 @@ const Iphone = React.forwardRef<HTMLDivElement, IphoneProps>(
 );
 
 interface ButtonsProps {
+  color: IphoneColor;
   buttonHandlers?: IphoneButtonsAction;
 }
 
-function Buttons({ buttonHandlers }: ButtonsProps) {
+function Buttons({ color, buttonHandlers }: ButtonsProps) {
   return (
     <div data-iphone-mockup-buttons>
       <div data-iphone-mockup-buttons-left>
@@ -156,8 +184,7 @@ function Buttons({ buttonHandlers }: ButtonsProps) {
               borderRadius: "1.5px 0 0 1.5px",
               border: "1px solid #00000025",
               borderRight: "none",
-              background:
-                "linear-gradient(180deg, #E0DFDB 1.2%, #FFFFFB 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E6E4DF 17.38%, #D1CECA 50.59%, #B5B2AD 89.25%, #83817D 92.68%, #A3A19D 95.31%, #D8D5D2 96.5%, #D1CEC9 97.65%, #878580 98.84%)",
+              background: `var(--${color}-button)`,
               boxShadow:
                 "-0.5px 0px 0.5px 0px rgba(0, 0, 0, 0.20) inset, -1px 0px 1px 0px rgba(0, 0, 0, 0.50) inset, 1px 0px 1px 0px rgba(255, 255, 255, 0.50) inset",
             }}
@@ -175,8 +202,7 @@ function Buttons({ buttonHandlers }: ButtonsProps) {
               borderRadius: "1.5px 0 0 1.5px",
               border: "1px solid #00000025",
               borderRight: "none",
-              background:
-                "linear-gradient(180deg, #E0DFDB 1.2%, #FFFFFB 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E6E4DF 17.38%, #D1CECA 50.59%, #B5B2AD 89.25%, #83817D 92.68%, #A3A19D 95.31%, #D8D5D2 96.5%, #D1CEC9 97.65%, #878580 98.84%)",
+              background: `var(--${color}-button)`,
               boxShadow:
                 "-0.5px 0px 0.5px 0px rgba(0, 0, 0, 0.20) inset, -1px 0px 1px 0px rgba(0, 0, 0, 0.50) inset, 1px 0px 1px 0px rgba(255, 255, 255, 0.50) inset",
             }}
@@ -194,8 +220,7 @@ function Buttons({ buttonHandlers }: ButtonsProps) {
               borderRadius: "1.5px 0 0 1.5px",
               border: "1px solid #00000025",
               borderRight: "none",
-              background:
-                "linear-gradient(180deg, #E0DFDB 1.2%, #FFFFFB 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E6E4DF 17.38%, #D1CECA 50.59%, #B5B2AD 89.25%, #83817D 92.68%, #A3A19D 95.31%, #D8D5D2 96.5%, #D1CEC9 97.65%, #878580 98.84%)",
+              background: `var(--${color}-button)`,
               boxShadow:
                 "-0.5px 0px 0.5px 0px rgba(0, 0, 0, 0.20) inset, -1px 0px 1px 0px rgba(0, 0, 0, 0.50) inset, 1px 0px 1px 0px rgba(255, 255, 255, 0.50) inset",
             }}
@@ -215,8 +240,7 @@ function Buttons({ buttonHandlers }: ButtonsProps) {
               borderRadius: "0 1.5px 1.5px 0",
               border: "1px solid #00000025",
               borderLeft: "none",
-              background:
-                "linear-gradient(180deg, #E0DFDB 1.2%, #FFFFFB 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E6E4DF 17.38%, #D1CECA 50.59%, #B5B2AD 89.25%, #83817D 92.68%, #A3A19D 95.31%, #D8D5D2 96.5%, #D1CEC9 97.65%, #878580 98.84%)",
+              background: `var(--${color}-button)`,
               boxShadow:
                 "-0.5px 0px 0.5px 0px rgba(0, 0, 0, 0.20) inset, -1px 0px 1px 0px rgba(0, 0, 0, 0.50) inset, 1px 0px 1px 0px rgba(255, 255, 255, 0.50) inset",
             }}
@@ -226,6 +250,30 @@ function Buttons({ buttonHandlers }: ButtonsProps) {
     </div>
   );
 }
+
+export const SmallParticles = ({
+  index,
+  color,
+}: {
+  index: number;
+  color: IphoneColor;
+}) => {
+  return (
+    <div
+      data-iphone-mockup-small-particles
+      style={{
+        background:
+          color === "blue-titanium" || color === "black-titanium"
+            ? "rgba(0, 0, 0, 0.1)"
+            : "rgba(255, 255, 255, 0.1)",
+        top: index === 0 || index === 1 ? "10%" : "auto",
+        bottom: index === 2 || index === 3 ? "10%" : "auto",
+        left: index === 0 || index === 2 ? 0 : "auto",
+        right: index === 1 || index === 3 ? 0 : "auto",
+      }}
+    ></div>
+  );
+};
 
 Iphone.displayName = "Iphone";
 
