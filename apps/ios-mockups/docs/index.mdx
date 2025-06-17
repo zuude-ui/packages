@@ -10,14 +10,6 @@ date: 2025-06-14
 npm install @zuude-ui/ios-mockups
 ```
 
-<Space />
-
-It is recommended to use in a [tailwindcss](https://tailwindcss.com/) project, otherwise you need to import the styles.css file:
-
-```tsx
-import "@zuude-ui/ios-mockups/dist/styles.css";
-```
-
 ## Usage
 
 ```tsx
@@ -48,7 +40,7 @@ The component uses several CSS variables that you can customize:
 
 | Variable                 | Default          | Description                                                      | Example                                                              |
 | ------------------------ | ---------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `--canvas-color`         | `transparent`    | Sets the background color of the content area                    | `[--canvas-color:white]` or `[--canvas-color:var(--background)]`     |
+| `--screen-color`         | `transparent`    | Sets the background color of the content area                    | `[--screen-color:white]` or `[--screen-color:var(--background)]`     |
 | `--dynamic-island-color` | `black`          | Sets the color of the dynamic island and home indicator          | `[--dynamic-island-color:white]`                                     |
 | `--top-safe-area`        | _varies by size_ | Height of the top safe area (automatically set based on size)    | `46px` for small size, `60px` for medium size, `70px` for large size |
 | `--bottom-safe-area`     | _varies by size_ | Height of the bottom safe area (automatically set based on size) | `15px` for all sizes                                                 |
@@ -90,12 +82,12 @@ The component uses several CSS variables that you can customize:
 
 ```tsx
 // White background with white dynamic island
-<IphoneMockup className="[--canvas-color:white] [--dynamic-island-color:white]">
+<IphoneMockup className="[--screen-color:white] [--dynamic-island-color:white]">
   Content
 </IphoneMockup>
 
 // Using theme variables
-<IphoneMockup className="[--canvas-color:var(--background)] [--dynamic-island-color:var(--foreground)]">
+<IphoneMockup className="[--screen-color:var(--background)] [--dynamic-island-color:var(--foreground)]">
   Content
 </IphoneMockup>
 ```

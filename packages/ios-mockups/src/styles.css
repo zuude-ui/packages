@@ -1,22 +1,187 @@
-@layer theme, utilities;
+/* [data-iphone-mockup] * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+} */
 
-@import "tailwindcss/theme.css" layer(theme);
-/* @import "tailwindcss/preflight.css" layer(base); */
-@import "tailwindcss/utilities.css" layer(utilities);
+.reset-styles {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
-@theme {
-  --animate-fade-in: fade-in 0.3s forwards;
+[data-iphone-mockup] {
+  position: relative;
+  aspect-ratio: 8/16;
+  max-height: none;
+  text-align: start;
+}
 
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+[data-iphone-mockup] [data-iphone-mockup-body] {
+  position: relative;
+  aspect-ratio: 8/16;
+  width: 100%;
+  padding: 5.5px;
+  overflow: hidden;
+}
+
+[data-iphone-mockup] [data-iphone-mockup-body] [data-iphone-mockup-body-inner] {
+  width: 100%;
+  height: 100%;
+  border-radius: 67px;
+  border: 2px solid #000000;
+  background: #000000;
+  box-shadow:
+    0px 0px 3px 1px rgba(255, 255, 255, 0.25),
+    0px 0px 0.5px 2px #3c3c3c inset;
+  padding: 10px;
+}
+
+[data-iphone-mockup]
+  [data-iphone-mockup-body]
+  [data-iphone-mockup-body-inner]
+  [data-iphone-mockup-screen] {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+[data-iphone-mockup] [data-iphone-mockup-top-safe-area] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 30;
+  display: flex;
+  height: var(--top-safe-area);
+  align-items: center;
+  justify-content: center;
+}
+
+[data-iphone-mockup]
+  [data-iphone-mockup-top-safe-area]
+  [data-iphone-mockup-dynamic-island] {
+  aspect-ratio: 6.7/2;
+  border-radius: 9999px;
+  background: var(--dynamic-island-color);
+  transition: background 0.25s;
+}
+
+[data-iphone-mockup] [data-iphone-mockup-content] {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
-[data-zuude-ui-ios-mockup-content]::-webkit-scrollbar {
-  display: none;
+[data-iphone-mockup] [data-iphone-mockup-bottom-safe-area] {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 30;
+  display: flex;
+  height: var(--bottom-safe-area);
+  align-items: center;
+  justify-content: center;
+}
+
+[data-iphone-mockup]
+  [data-iphone-mockup-bottom-safe-area]
+  [data-iphone-mockup-home-button] {
+  width: 34%;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--dynamic-island-color);
+  transition: background 0.25s;
+}
+
+[data-iphone-mockup] [data-iphone-mockup-buttons] button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition: transform 0.3s;
+}
+[data-iphone-mockup] [data-iphone-mockup-buttons] button:disabled {
+  pointer-events: none;
+}
+[data-iphone-mockup] [data-iphone-mockup-buttons] button:hover {
+  transform: scaleX(1.5);
+}
+[data-iphone-mockup] [data-iphone-mockup-buttons] button:active {
+  transform: scaleX(0.8);
+  transition: transform 0.1s;
+}
+
+[data-iphone-mockup]
+  [data-iphone-mockup-buttons]
+  [data-iphone-mockup-buttons-left] {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  z-index: 20;
+  transform: translateX(-11.8px);
+}
+
+[data-iphone-mockup]
+  [data-iphone-mockup-buttons]
+  [data-iphone-mockup-buttons-right] {
+  position: absolute;
+  top: 25%;
+  right: 0;
+  z-index: 20;
+  transform: translateX(16px);
+}
+
+/* Buttons */
+[data-iphone-mockup]
+  [data-iphone-mockup-buttons]
+  [data-iphone-mockup-action-button] {
+  width: 12px;
+  position: relative;
+  margin-bottom: 36px;
+  display: flex;
+  justify-content: end;
+  transform-origin: right;
+  will-change: transform;
+}
+
+[data-iphone-mockup]
+  [data-iphone-mockup-buttons]
+  [data-iphone-mockup-volume-up-button] {
+  width: 12px;
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: end;
+  transform-origin: right;
+  will-change: transform;
+}
+
+[data-iphone-mockup]
+  [data-iphone-mockup-buttons]
+  [data-iphone-mockup-volume-down-button] {
+  width: 12px;
+  position: relative;
+  display: flex;
+  justify-content: end;
+  transform-origin: right;
+  will-change: transform;
+}
+
+[data-iphone-mockup]
+  [data-iphone-mockup-buttons]
+  [data-iphone-mockup-power-button] {
+  display: block;
+  width: 16px;
+  transform-origin: left;
+  will-change: transform;
 }

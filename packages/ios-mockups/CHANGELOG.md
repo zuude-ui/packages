@@ -1,5 +1,20 @@
 # @zuude-ui/ios-mockups
 
+## 0.0.8
+
+### Patch Changes
+
+- Completely removed the Tailwind CSS from the project
+- Added ref to the Iphone component
+- Added ...props to the Iphone component
+- Added classes to support the component if the user have not written any styles
+
+## 0.0.7
+
+### Patch Changes
+
+- Not using tailwind anymore for this package
+
 ## 0.0.6
 
 ### Patch Changes

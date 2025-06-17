@@ -19,41 +19,51 @@ const getAction = async () => {
   return action;
 };
 
-const getProject = async () => {
-  const project = await select({
-    message: "What project do you want to do?",
-    choices: [
-      { name: "all", value: "all" },
-      ...readDir.map((project) => ({ name: project, value: project })),
-    ],
-  });
+// const getProject = async () => {
+//   const project = await select({
+//     message: "What project do you want to do?",
+//     choices: [
+//       { name: "all", value: "all" },
+//       ...readDir.map((project) => ({ name: project, value: project })),
+//     ],
+//   });
 
-  return project;
-};
+//   return project;
+// };
 
 getAction()
   .then(async (action) => {
-    const project = await getProject();
-
-    if (project === "all") {
-      for (const project of readDir) {
-        if (action === "build") {
-          exec(`pnpm --filter ${project} build`);
-        } else if (action === "contentlayer") {
-          exec(`cd apps/${project} && pnpm contentlayer2 build`);
-        } else if (action === "generate-components") {
-          await generateComponents(project);
-          exec(`prettier --write ./apps/${project}/__registry__/index.ts`);
-        }
+    for (const project of readDir) {
+      if (action === "build") {
+        exec(`pnpm --filter ${project} build`);
+      } else if (action === "contentlayer") {
+        exec(`cd apps/${project} && pnpm contentlayer2 build`);
+      } else if (action === "generate-components") {
+        await generateComponents(project);
+        exec(`prettier --write ./apps/${project}/__registry__/index.ts`);
       }
-    } else if (action === "build") {
-      exec(`pnpm --filter ${project} build`);
-    } else if (action === "contentlayer") {
-      exec(`cd apps/${project} && pnpm contentlayer2 build`);
-    } else if (action === "generate-components") {
-      await generateComponents(project);
-      exec(`prettier --write ./apps/${project}/__registry__/index.ts`);
     }
+    // const project = await getProject();
+
+    // if (project === "all") {
+    //   for (const project of readDir) {
+    //     if (action === "build") {
+    //       exec(`pnpm --filter ${project} build`);
+    //     } else if (action === "contentlayer") {
+    //       exec(`cd apps/${project} && pnpm contentlayer2 build`);
+    //     } else if (action === "generate-components") {
+    //       await generateComponents(project);
+    //       exec(`prettier --write ./apps/${project}/__registry__/index.ts`);
+    //     }
+    //   }
+    // } else if (action === "build") {
+    //   exec(`pnpm --filter ${project} build`);
+    // } else if (action === "contentlayer") {
+    //   exec(`cd apps/${project} && pnpm contentlayer2 build`);
+    // } else if (action === "generate-components") {
+    //   await generateComponents(project);
+    //   exec(`prettier --write ./apps/${project}/__registry__/index.ts`);
+    // }
   })
   .catch((err) => {
     console.error(err);

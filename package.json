@@ -10,6 +10,7 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "pnpm build && changeset publish",
+    "ios-mockup:build": "cd packages/ios-mockups && pnpm build",
     "g": "tsx script.ts && prettier --write ./apps/ios-mockups/__registry__/index.ts",
     "p:script": "tsx package-script.ts"
   },

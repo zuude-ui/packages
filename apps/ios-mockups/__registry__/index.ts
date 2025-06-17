@@ -16,7 +16,7 @@ export default function Dialog() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Iphone className="shrink-0 [--canvas-color:var(--background)]">
+    <Iphone className="shrink-0 [--screen-color:var(--background)]">
       <div className="flex h-full items-center justify-center">
         <Button onClick={() => setIsOpen(true)} variant={"destructive"}>
           Delete profile
@@ -77,7 +77,7 @@ export default function Dialog() {
 
 export default function GradientCanvas() {
   return (
-    <Iphone className="[--canvas-color:linear-gradient(orange,var(--secondary))]">
+    <Iphone className="[--screen-color:linear-gradient(orange,var(--secondary))]">
       <div className="flex flex-col gap-4 text-black pt-[var(--top-safe-area)] px-4">
         <h1 className="text-2xl font-bold">Hello World</h1>
       </div>
@@ -112,7 +112,7 @@ export default function Image() {
 
 export default function Texts() {
   return (
-    <Iphone className="[--canvas-color:white]">
+    <Iphone className="[--screen-color:white]">
       <div className="flex flex-col gap-4 text-black pt-[var(--top-safe-area)] px-4">
         <h1 className="text-2xl font-bold">Hello World</h1>
         <p className="text-sm">

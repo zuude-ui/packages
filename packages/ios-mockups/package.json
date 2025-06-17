@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.6",
+  "version": "0.0.8",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,8 +13,7 @@
   "type": "module",
   "scripts": {
     "build": "tsup",
-    "lint": "tsc",
-    "dev": "npx @tailwindcss/cli -i ./src/styles.css -o ./dist/styles.css --watch"
+    "lint": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -34,7 +33,6 @@
     "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
     "postcss": "^8.5.4",
-    "tailwind-merge": "^3.0.1",
-    "tailwindcss": "^4.0.8"
+    "tailwind-merge": "^3.0.1"
   }
 }

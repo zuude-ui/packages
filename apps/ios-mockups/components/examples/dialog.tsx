@@ -7,7 +7,7 @@ export default function Dialog() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Iphone className="shrink-0 [--canvas-color:var(--background)]">
+    <Iphone className="shrink-0 [--screen-color:var(--background)]">
       <div className="flex h-full items-center justify-center">
         <Button onClick={() => setIsOpen(true)} variant={"destructive"}>
           Delete profile

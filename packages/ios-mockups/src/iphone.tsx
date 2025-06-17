@@ -1,3 +1,4 @@
+import React from "react";
 import { cn } from "./utils";
 
 import type { IphoneSize, IphoneColor, IphoneButtonsAction } from "./types";
@@ -16,7 +17,7 @@ export const colors = {
   "--black": "linear-gradient(180deg, #515558 0%, #3A3F42 100%)",
 };
 
-interface IphoneProps {
+interface IphoneProps extends React.ComponentProps<"div"> {
   children?: React.ReactNode;
   className?: string;
   size?: IphoneSize;
@@ -48,34 +49,41 @@ const sizes = {
   },
 };
 
-export function Iphone({
-  children,
-  className = "",
-  size = "md",
-  color = "natural-titanium",
-  buttonHandlers,
-}: IphoneProps) {
-  return (
-    <>
+const Iphone = React.forwardRef<HTMLDivElement, IphoneProps>(
+  (
+    {
+      children,
+      className = "",
+      size = "md",
+      color = "natural-titanium",
+      buttonHandlers,
+      style,
+      ...props
+    },
+    ref
+  ) => {
+    return (
       <div
-        data-zuude-ui-ios-mockup
-        className={cn(
-          "relative aspect-8/16 max-h-none text-start",
-          "[--canvas-color:transparent] [--dynamic-island-color:black]",
-          className
-        )}
+        ref={ref}
+        data-iphone-mockup
+        className={cn("reset-styles", className)}
         style={
           {
             width: sizes[size].width,
             "--top-safe-area": `${sizes[size].topSafeArea}px`,
             "--bottom-safe-area": `${sizes[size].bottomSafeArea}px`,
+            "--dynamic-island-color": "black",
+            "--screen-color": "transparent",
             ...colors,
+            ...style,
           } as React.CSSProperties
         }
+        {...props}
       >
         <Buttons buttonHandlers={buttonHandlers} />
         <div
-          className="relative aspect-8/16 overflow-hidden w-full p-[5.5px]"
+          data-iphone-mockup-body
+          className="reset-styles"
           style={{
             background: `var(--${color})`,
             boxShadow:
@@ -84,7 +92,8 @@ export function Iphone({
           }}
         >
           <div
-            className="h-full w-full rounded-[67px] border-2 border-black bg-black p-2.5"
+            data-iphone-mockup-body-inner
+            className="reset-styles"
             style={{
               boxShadow:
                 "0px 0px 3px 1px rgba(255, 255, 255, 0.25), 0px 0px 0.5px 2px #3C3C3C inset",
@@ -92,39 +101,27 @@ export function Iphone({
             }}
           >
             <div
-              data-canvas
-              className="relative h-full w-full overflow-hidden"
+              data-screen
+              data-iphone-mockup-screen
+              className="reset-styles"
               style={{
                 borderRadius: sizes[size].rounded - 16,
-                background: "var(--canvas-color)",
+                background: "var(--screen-color)",
               }}
             >
-              <div
-                data-top-safe-area
-                className={cn(
-                  "absolute top-0 right-0 left-0 z-30 flex h-[var(--top-safe-area)] items-center justify-center"
-                )}
-              >
+              <div data-iphone-mockup-top-safe-area>
                 <div
-                  className="aspect-[6.7/2] rounded-full transition-colors"
+                  data-iphone-mockup-dynamic-island
                   style={{
                     width: sizes[size].islandWidth,
                     background: "var(--dynamic-island-color)",
                   }}
                 ></div>
               </div>
-              <div
-                data-zuude-ui-ios-mockup-content
-                className="no-scrollbar h-full overflow-auto"
-              >
-                {children}
-              </div>
-              <div
-                data-bottom-safe-area
-                className="absolute right-0 bottom-0 left-0 z-30 flex h-[var(--bottom-safe-area)] w-full items-center justify-center"
-              >
+              <div data-iphone-mockup-content>{children}</div>
+              <div data-iphone-mockup-bottom-safe-area>
                 <div
-                  className="h-1 w-2/6 rounded-full transition-colors"
+                  data-iphone-mockup-home-button
                   style={{
                     background: "var(--dynamic-island-color)",
                   }}
@@ -134,9 +131,9 @@ export function Iphone({
           </div>
         </div>
       </div>
-    </>
-  );
-}
+    );
+  }
+);
 
 interface ButtonsProps {
   buttonHandlers?: IphoneButtonsAction;
@@ -144,22 +141,20 @@ interface ButtonsProps {
 
 function Buttons({ buttonHandlers }: ButtonsProps) {
   return (
-    <div
-      className={cn(
-        "[&_button]:transition-transform [&_button]:duration-300 [&_button]:hover:scale-x-150 [&_button]:active:scale-x-80 [&_button]:active:duration-100",
-        "[&_button]:disabled:pointer-events-none"
-      )}
-    >
-      <div className="absolute top-[15%] left-0 z-20 -translate-x-[11.8px]">
+    <div data-iphone-mockup-buttons>
+      <div data-iphone-mockup-buttons-left>
         <button
-          data-action-button
-          className="relative mb-9 flex w-3 origin-right justify-end will-change-transform"
+          data-iphone-mockup-action-button
           onClick={buttonHandlers?.action}
           disabled={!buttonHandlers?.action}
         >
           <div
-            className="h-9 w-1 rounded-l-[1.5px] border border-r-0 border-black/25"
             style={{
+              height: 36,
+              width: 4,
+              borderRadius: "1.5px 0 0 1.5px",
+              border: "1px solid #00000025",
+              borderRight: "none",
               background:
                 "linear-gradient(180deg, #E0DFDB 1.2%, #FFFFFB 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E6E4DF 17.38%, #D1CECA 50.59%, #B5B2AD 89.25%, #83817D 92.68%, #A3A19D 95.31%, #D8D5D2 96.5%, #D1CEC9 97.65%, #878580 98.84%)",
               boxShadow:
@@ -168,14 +163,17 @@ function Buttons({ buttonHandlers }: ButtonsProps) {
           />
         </button>
         <button
-          data-volume-up-button
-          className="mb-5 flex w-3 origin-right justify-end will-change-transform"
+          data-iphone-mockup-volume-up-button
           onClick={buttonHandlers?.volumeUp}
           disabled={!buttonHandlers?.volumeUp}
         >
           <div
-            className="h-17 w-1 rounded-l-[1.5px] border border-r-0 border-black/25"
             style={{
+              height: 68,
+              width: 4,
+              borderRadius: "1.5px 0 0 1.5px",
+              border: "1px solid #00000025",
+              borderRight: "none",
               background:
                 "linear-gradient(180deg, #E0DFDB 1.2%, #FFFFFB 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E6E4DF 17.38%, #D1CECA 50.59%, #B5B2AD 89.25%, #83817D 92.68%, #A3A19D 95.31%, #D8D5D2 96.5%, #D1CEC9 97.65%, #878580 98.84%)",
               boxShadow:
@@ -184,14 +182,17 @@ function Buttons({ buttonHandlers }: ButtonsProps) {
           />
         </button>
         <button
-          data-volume-down-button
-          className="flex w-3 origin-right justify-end will-change-transform"
+          data-iphone-mockup-volume-down-button
           onClick={buttonHandlers?.volumeDown}
           disabled={!buttonHandlers?.volumeDown}
         >
           <div
-            className="h-17 w-1 rounded-l-[1.5px] border border-r-0 border-black/25"
             style={{
+              height: 68,
+              width: 4,
+              borderRadius: "1.5px 0 0 1.5px",
+              border: "1px solid #00000025",
+              borderRight: "none",
               background:
                 "linear-gradient(180deg, #E0DFDB 1.2%, #FFFFFB 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E6E4DF 17.38%, #D1CECA 50.59%, #B5B2AD 89.25%, #83817D 92.68%, #A3A19D 95.31%, #D8D5D2 96.5%, #D1CEC9 97.65%, #878580 98.84%)",
               boxShadow:
@@ -200,16 +201,19 @@ function Buttons({ buttonHandlers }: ButtonsProps) {
           />
         </button>
       </div>
-      <div className="absolute top-[25%] right-0 z-20 translate-x-[16px]">
+      <div data-iphone-mockup-buttons-right>
         <button
-          data-power-button
-          className="block w-4 origin-left will-change-transform"
+          data-iphone-mockup-power-button
           onClick={buttonHandlers?.power}
           disabled={!buttonHandlers?.power}
         >
           <div
-            className="h-26 w-1 rounded-r-[1.5px] border border-l-0 border-black/25"
             style={{
+              height: 104,
+              width: 4,
+              borderRadius: "0 1.5px 1.5px 0",
+              border: "1px solid #00000025",
+              borderLeft: "none",
               background:
                 "linear-gradient(180deg, #E0DFDB 1.2%, #FFFFFB 3.2%, #FFFEFA 8.71%, #FCF9F5 12.35%, #E6E4DF 17.38%, #D1CECA 50.59%, #B5B2AD 89.25%, #83817D 92.68%, #A3A19D 95.31%, #D8D5D2 96.5%, #D1CEC9 97.65%, #878580 98.84%)",
               boxShadow:
@@ -221,3 +225,7 @@ function Buttons({ buttonHandlers }: ButtonsProps) {
     </div>
   );
 }
+
+Iphone.displayName = "Iphone";
+
+export { Iphone };
