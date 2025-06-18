@@ -26,7 +26,7 @@ export const Demo = () => {
           src={testImage}
           crop={crop}
           onCropChange={setCrop}
-          className="aspect-square w-full max-w-96 overflow-hidden bg-muted"
+          className="aspect-square w-full !max-w-96 overflow-hidden bg-muted"
           showGrid={true}
           showBehindImage={{ position: "fixed" }}
         />

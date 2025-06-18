@@ -95,21 +95,6 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
 
-  apps/delete:
-    dependencies:
-      '@zuude-ui/ios-mockups':
-        specifier: workspace:*
-        version: link:../../packages/ios-mockups
-      next:
-        specifier: 15.3.3
-        version: 15.3.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      react:
-        specifier: ^19.0.0
-        version: 19.0.0
-      react-dom:
-        specifier: ^19.0.0
-        version: 19.0.0(react@19.0.0)
-
   apps/ios-mockups:
     dependencies:
       '@workspace/ui':
@@ -174,6 +159,27 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
 
+  apps/test:
+    dependencies:
+      '@workspace/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@zuude-ui/cropper':
+        specifier: workspace:*
+        version: link:../../packages/cropper
+      '@zuude-ui/ios-mockups':
+        specifier: workspace:*
+        version: link:../../packages/ios-mockups
+      next:
+        specifier: 15.3.3
+        version: 15.3.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.0.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.0.0(react@19.0.0)
+
   packages/cropper:
     dependencies:
       react:
@@ -192,24 +198,9 @@ importers:
       '@use-gesture/react':
         specifier: ^10.3.1
         version: 10.3.1(react@19.0.0)
-      autoprefixer:
-        specifier: ^10.4.21
-        version: 10.4.21(postcss@8.5.4)
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       motion:
         specifier: ^12.15.0
         version: 12.15.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      postcss:
-        specifier: ^8.5.4
-        version: 8.5.4
-      tailwind-merge:
-        specifier: ^3.0.1
-        version: 3.0.1
-      tailwindcss:
-        specifier: ^4.0.8
-        version: 4.0.8
 
   packages/eslint-config:
     devDependencies:
@@ -4772,9 +4763,6 @@ packages:
     resolution: {integrity: sha512-0lK6rA4+367ffJdi1TtB72GlMCxJi2TP/xRiHc6An5pZSlU6WfIHhSvLxpcGilGZfBrOqc2q4woH1DEP/lCNbQ==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
-
-  tailwindcss@4.0.8:
-    resolution: {integrity: sha512-Me7N5CKR+D2A1xdWA5t5+kjjT7bwnxZOE6/yDI/ixJdJokszsn2n++mdU5yJwrsTpqFX2B9ZNMBJDwcqk9C9lw==}
 
   tailwindcss@4.1.10:
     resolution: {integrity: sha512-P3nr6WkvKV/ONsTzj6Gb57sWPMX29EPNPopo7+FcpkQaNsrNpZ1pv8QmrYI2RqEKD7mlGqLnGovlcYnBK0IqUA==}
@@ -10390,8 +10378,6 @@ snapshots:
   tailwindcss-motion@1.1.0(tailwindcss@4.1.10):
     dependencies:
       tailwindcss: 4.1.10
-
-  tailwindcss@4.0.8: {}
 
   tailwindcss@4.1.10: {}
 

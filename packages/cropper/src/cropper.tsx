@@ -15,7 +15,6 @@ import {
   type MotionValue,
 } from "motion/react";
 
-import { cn } from "./utils";
 import { dampen } from "./dampen";
 import { Grid } from "./grid";
 import { useDetectImage } from "./use-detect-image";
@@ -27,9 +26,7 @@ interface CropperProps extends React.HTMLAttributes<HTMLDivElement> {
   src: string;
   crop?: Crop;
   onCropChange?: (crop: Crop) => void;
-  className?: string;
   showGrid?: boolean;
-  style?: React.CSSProperties;
   showBehindImage?: {
     className?: string;
     position: "absolute" | "fixed";
@@ -44,9 +41,7 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
       src,
       crop = { x: 0, y: 0, scale: 1 },
       onCropChange,
-      className,
       showGrid = false,
-      style,
       showBehindImage,
       showSlider,
       scaleMotion,
@@ -152,6 +147,13 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
           origin: [pinchOriginX, pinchOriginY],
           offset: [d],
         }) => {
+          currentCropPositionRef.current = {
+            top: containerRef.current?.getBoundingClientRect().top || 0,
+            left: containerRef.current?.getBoundingClientRect().left || 0,
+            width: containerRef.current?.getBoundingClientRect().width || 0,
+            height: containerRef.current?.getBoundingClientRect().height || 0,
+          };
+
           y.stop();
           x.stop();
 
@@ -233,36 +235,22 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
     }
 
     return (
-      <div>
-        <div
-          ref={ref}
-          className={cn(
-            "bg-loading relative aspect-square shadow-[0px_0px_0px_3px_white] md:shadow-none",
-            className
-          )}
-          style={style}
-          {...props}
-        >
-          <div
-            ref={containerRef}
-            className="relative flex h-full w-full items-center justify-center overflow-hidden"
-          >
+      <div data-zuude-ui-cropper>
+        <div ref={ref} data-zuude-cropper-container {...props}>
+          <div ref={containerRef} data-zuude-cropper-inner>
             <motion.img
+              data-zuude-cropper-image
               ref={imageRef}
               src={src}
               alt="crop"
-              className={cn(
-                "relative mx-auto max-h-none max-w-none",
-                isHeightLarger ? "h-auto w-full" : "h-full w-auto",
-
-                // When the image is not loaded, we want to hide it
-                "transition-opacity duration-200",
-                isHeightLarger === null && "opacity-0"
-              )}
+              className="animate-fade-in"
               style={{
                 x,
                 y,
                 scale,
+                height: isHeightLarger ? undefined : "100%",
+                width: isHeightLarger ? "100%" : undefined,
+                opacity: isHeightLarger === null ? 0 : 1,
                 touchAction: "none",
                 userSelect: "none",
                 MozUserSelect: "none",
@@ -275,15 +263,12 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
           </div>
           {showBehindImage && (
             <motion.div
-              className={cn(
-                "pointer-events-none -z-10 mx-auto flex h-full max-h-none w-full max-w-none items-center justify-center transition-opacity duration-300",
-                isPinching || isDragging ? "opacity-15" : "opacity-0",
-                showBehindImage.className
-              )}
+              data-zuude-cropper-behind-image
               style={{
                 x,
                 y,
                 scale,
+                opacity: isPinching || isDragging ? 0.15 : 0,
                 top:
                   showBehindImage.position === "fixed"
                     ? currentCropPositionRef.current.top
@@ -310,16 +295,14 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
               }}
             >
               <motion.img
+                data-zuude-cropper-image
                 src={src}
                 alt="crop"
-                className={cn(
-                  "relative mx-auto max-h-none max-w-none",
-                  isHeightLarger ? "h-auto w-full" : "h-full w-auto",
-
-                  // When the image is not loaded, we want to hide it
-                  "transition-opacity duration-200",
-                  isHeightLarger === null && "opacity-0"
-                )}
+                style={{
+                  height: isHeightLarger ? undefined : "100%",
+                  width: isHeightLarger ? "100%" : undefined,
+                  opacity: isHeightLarger === null ? 0 : 1,
+                }}
               />
             </motion.div>
           )}
@@ -327,9 +310,6 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
           <button
             data-reset-crop-button
             className="sr-only"
-            style={{
-              color: "red",
-            }}
             onClick={() => {
               animate(x, 0, {
                 type: "tween",

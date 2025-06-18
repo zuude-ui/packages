@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "version": "0.1.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 8080",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": "15.3.3",
+    "@zuude-ui/ios-mockups": "workspace:*",
+    "@zuude-ui/cropper": "workspace:*",
+    "@workspace/ui": "workspace:*"
+  }
+}
