@@ -30,6 +30,12 @@ export function Navbar() {
         </a>
         <div className="flex items-center">
           <Link
+            href="/changelogs"
+            className={buttonVariants({ variant: "ghost" })}
+          >
+            Changelogs
+          </Link>
+          <Link
             href="/examples"
             className={buttonVariants({ variant: "ghost", className: "mr-2" })}
           >
