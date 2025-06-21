@@ -2,6 +2,7 @@
   position: relative;
   aspect-ratio: 1/1;
   box-shadow: 0px 0px 0px 3px white;
+  isolation: isolate;
 }
 
 [data-zuude-cropper-container] .sr-only {

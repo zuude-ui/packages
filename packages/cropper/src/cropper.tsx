@@ -8,12 +8,7 @@ import React, {
   type RefObject,
 } from "react";
 import { useGesture } from "@use-gesture/react";
-import {
-  motion,
-  useMotionValue,
-  animate,
-  type MotionValue,
-} from "motion/react";
+import { motion, useMotionValue, animate } from "motion/react";
 
 import { dampen } from "./dampen";
 import { Grid } from "./grid";
@@ -25,30 +20,38 @@ import type { Crop } from "./types";
 interface CropperProps extends React.HTMLAttributes<HTMLDivElement> {
   src: string;
   crop?: Crop;
+  disabled?: boolean;
   onCropChange?: (crop: Crop) => void;
-  showGrid?: boolean;
-  showBehindImage?: {
-    className?: string;
-    position: "absolute" | "fixed";
+  config?: {
+    showGrid?: boolean;
+    showBehindImage?: {
+      position: "absolute" | "fixed";
+      style?: React.CSSProperties;
+      opacity?: number;
+      className?: string;
+    };
   };
-  showSlider?: boolean;
-  scaleMotion?: MotionValue<number>;
 }
 
 const Cropper = forwardRef<HTMLDivElement, CropperProps>(
   (
     {
       src,
-      crop = { x: 0, y: 0, scale: 1 },
+      crop,
+      disabled = false,
       onCropChange,
-      showGrid = false,
-      showBehindImage,
-      showSlider,
-      scaleMotion,
+      config = {
+        showGrid: false,
+        showBehindImage: undefined,
+      },
       ...props
     },
     ref
   ) => {
+    const [cropValue, setCropValue] = useState(
+      crop || { x: 0, y: 0, scale: 1 }
+    );
+
     const [isPinching, setIsPinching] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -70,13 +73,33 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
     }>({ top: 0, left: 0, width: 0, height: 0 });
 
     // State
-    const x = useMotionValue(crop.x);
-    const y = useMotionValue(crop.y);
-    const scale = scaleMotion || useMotionValue(crop.scale);
+    const x = useMotionValue(crop?.x || cropValue.x);
+    const y = useMotionValue(crop?.y || cropValue.y);
+    const scale = useMotionValue(crop?.scale || cropValue.scale);
+
+    useEffect(() => {
+      if (!isPinching) {
+        scale.set(crop?.scale || 1);
+      }
+    }, [crop?.scale]);
+    useEffect(() => {
+      if (!isPinching) {
+        x.set(crop?.x || 0);
+      }
+    }, [crop?.x]);
+    useEffect(() => {
+      if (!isPinching) {
+        y.set(crop?.y || 0);
+      }
+    }, [crop?.y]);
 
     useEffect(() => {
       const unsubscribe = scale.on("change", (latest) => {
-        onCropChange?.({ ...crop, scale: latest });
+        if (crop) {
+          onCropChange?.({ ...crop, scale: latest });
+        } else {
+          setCropValue({ ...cropValue, scale: latest });
+        }
       });
       return () => unsubscribe();
     }, [scale]);
@@ -86,7 +109,7 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
         utilsEnd();
       }, 200);
       return () => clearTimeout(timeout);
-    }, [crop.scale]);
+    }, [crop?.scale]);
 
     useGesture(
       {
@@ -201,6 +224,7 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
           passive: false,
         },
         target: imageRef,
+        enabled: !disabled && (!!onCropChange || !crop),
       }
     );
 
@@ -232,11 +256,20 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
         ease: [0.25, 1, 0.5, 1],
       });
       onCropChange?.(newCrop);
+      setCropValue(newCrop);
     }
 
     return (
       <div data-zuude-ui-cropper>
-        <div ref={ref} data-zuude-cropper-container {...props}>
+        <div
+          ref={ref}
+          data-zuude-cropper-container
+          data-cropper-x={crop?.x || cropValue.x}
+          data-cropper-y={crop?.y || cropValue.y}
+          data-cropper-scale={crop?.scale || cropValue.scale}
+          data-cropper-src={src}
+          {...props}
+        >
           <div ref={containerRef} data-zuude-cropper-inner>
             <motion.img
               data-zuude-cropper-image
@@ -259,36 +292,41 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
                 WebkitUserDrag: "none",
               }}
             />
-            {showGrid && <Grid active={isPinching || isDragging} />}
+            {config.showGrid && <Grid active={isPinching || isDragging} />}
           </div>
-          {showBehindImage && (
+          {config.showBehindImage && (
             <motion.div
               data-zuude-cropper-behind-image
+              className={config.showBehindImage?.className}
               style={{
                 x,
                 y,
                 scale,
-                opacity: isPinching || isDragging ? 0.15 : 0,
+                opacity:
+                  isPinching || isDragging
+                    ? config.showBehindImage.opacity || 0.2
+                    : 0,
                 top:
-                  showBehindImage.position === "fixed"
+                  config.showBehindImage.position === "fixed"
                     ? currentCropPositionRef.current.top
                     : 0,
                 left:
-                  showBehindImage.position === "fixed"
+                  config.showBehindImage.position === "fixed"
                     ? currentCropPositionRef.current.left
                     : 0,
                 width:
-                  showBehindImage.position === "fixed"
+                  config.showBehindImage.position === "fixed"
                     ? currentCropPositionRef.current.width
                     : undefined,
                 height:
-                  showBehindImage.position === "fixed"
+                  config.showBehindImage.position === "fixed"
                     ? currentCropPositionRef.current.height
                     : undefined,
+                ...config.showBehindImage?.style,
+                position: config.showBehindImage?.position,
                 touchAction: "none",
                 userSelect: "none",
                 MozUserSelect: "none",
-                position: showBehindImage?.position,
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 WebkitUserDrag: "none",
@@ -332,10 +370,6 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
             Reset
           </button>
         </div>
-
-        {showSlider && (
-          <div className="mx-auto mt-[26px] hidden max-w-[280px] items-center gap-2 md:flex"></div>
-        )}
       </div>
     );
   }

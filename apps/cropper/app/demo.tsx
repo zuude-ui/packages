@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type Crop, Cropper, useCropper } from "@zuude-ui/cropper";
+import { type Crop, Cropper, useCropper } from "@zuude-ui/cropper/index";
 
 import { Button } from "@workspace/ui/components/button";
 import { testImage } from "@workspace/ui/lib/utils";
@@ -8,15 +8,17 @@ export const Demo = () => {
   const [crop, setCrop] = useState<Crop>({ x: 0, y: 0, scale: 1 });
   const [image, setImage] = useState<string | null>(null);
 
-  const [ref, { cropIt, reset }] = useCropper(testImage, crop, {
+  const [ref, { cropIt, reset }] = useCropper({
     quality: 3,
     onSuccess: (image) => {
       setImage(image);
     },
     onError: (error) => {
-      console.error(error);
+      window.alert(error.message);
     },
   });
+
+  console.log(crop);
 
   return (
     <>
@@ -27,8 +29,12 @@ export const Demo = () => {
           crop={crop}
           onCropChange={setCrop}
           className="aspect-square w-full !max-w-96 overflow-hidden bg-muted"
-          showGrid={true}
-          showBehindImage={{ position: "fixed" }}
+          config={{
+            showGrid: true,
+            showBehindImage: {
+              position: "fixed",
+            },
+          }}
         />
         {image && (
           <img
@@ -39,6 +45,7 @@ export const Demo = () => {
           />
         )}
       </div>
+
       <div className="flex gap-4 mt-8">
         <Button className="mt-4" variant={"outline"} onClick={reset}>
           Reset
