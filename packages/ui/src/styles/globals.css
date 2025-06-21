@@ -303,3 +303,18 @@ html.dark {
     background-color: var(--shiki-dark-bg);
   }
 }
+
+.add-plus-animation {
+  animation: add-plus-animation 1s ease-in-out infinite;
+}
+
+@keyframes add-plus-animation {
+  0%,
+  40% {
+    scale: 1;
+  }
+  100% {
+    scale: 1.6;
+    opacity: 0;
+  }
+}

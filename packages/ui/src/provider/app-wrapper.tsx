@@ -14,7 +14,7 @@ export function AppWrapper({ children }: Props) {
       <Navbar />
       {children}
       <Toaster />
-      <ReactScan />
+      {/* <ReactScan /> */}
     </Providers>
   );
 }

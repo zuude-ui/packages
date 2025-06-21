@@ -29,12 +29,12 @@ export function Navbar() {
           <Logo className="size-9 rounded-sm" />
         </a>
         <div className="flex items-center">
-          <Link
+          {/* <Link
             href="/changelogs"
             className={buttonVariants({ variant: "ghost" })}
           >
             Changelogs
-          </Link>
+          </Link> */}
           <Link
             href="/examples"
             className={buttonVariants({ variant: "ghost", className: "mr-2" })}
