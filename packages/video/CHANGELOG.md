@@ -1,5 +1,11 @@
 # @zuude-ui/ios-mockups
 
+## 0.0.4
+
+### Patch Changes
+
+- Removed red background
+
 ## 0.0.3
 
 ### Patch Changes

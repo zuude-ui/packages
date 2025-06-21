@@ -17,7 +17,6 @@ export const PlayPauseOnVideo = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgba(255, 0, 0, 0.2)",
       }}
       onClick={togglePlay}
     ></div>
