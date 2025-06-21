@@ -10,6 +10,9 @@ export const generateComponents = async (project: string) => {
   );
 
   function getFilesRecursive(directory: string): string[] {
+    if (!fs.existsSync(directory)) {
+      return [];
+    }
     const files = [];
     const items = fs.readdirSync(directory);
 
@@ -62,6 +65,9 @@ export const variants: Record<string, GenericComponent> = {`;
 };
 
 `;
+  fs.mkdirSync(path.join(process.cwd(), `${PROJECT_PATH}/__registry__`), {
+    recursive: true,
+  });
   fs.writeFileSync(
     path.join(process.cwd(), `${PROJECT_PATH}/__registry__/index.ts`),
     index

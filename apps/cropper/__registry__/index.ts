@@ -40,7 +40,7 @@ export default function DrawerExample() {
     scale: 1,
   });
 
-  const [ref, { cropIt }] = useCropper(image, crop, {
+  const [ref, { cropIt }] = useCropper({
     onSuccess: (image) => {
       console.log("onSuccess", image);
       setImage(image);
@@ -63,8 +63,10 @@ export default function DrawerExample() {
             crop={crop}
             onCropChange={setCrop}
             className="max-w-sm rounded-full mx-auto"
-            showGrid={true}
-            showBehindImage={{ position: "absolute" }}
+            config={{
+              showGrid: true,
+              showBehindImage: { position: "absolute" },
+            }}
           />
           <Button onClick={cropIt}>Crop</Button>
         </DrawerContent>
