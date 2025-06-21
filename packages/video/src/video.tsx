@@ -121,6 +121,23 @@ const VideoComponent = React.forwardRef<
             onLoadedMetadata={(e) => {
               setDuration((e.target as HTMLVideoElement).duration);
             }}
+            onTimeUpdate={(e) => {
+              /**
+               * If the current time is less than the start time, set the current time to the start time
+               * If the current time is greater than the end time, set the current time to the start time
+               */
+              if (config?.range) {
+                const [start, end] = config.range;
+
+                if (videoRef.current.currentTime < start) {
+                  videoRef.current.currentTime = start;
+                }
+
+                if (videoRef.current.currentTime > end) {
+                  videoRef.current.currentTime = start;
+                }
+              }
+            }}
             {...props}
           />
           {typeof children === "function" ? (

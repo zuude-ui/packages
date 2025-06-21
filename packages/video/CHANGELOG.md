@@ -1,5 +1,17 @@
 # @zuude-ui/ios-mockups
 
+## 0.0.3
+
+### Patch Changes
+
+- Added range functinality
+
+## 0.0.2
+
+### Patch Changes
+
+- Small tweeks
+
 ## 0.0.2
 
 ### Patch Changes
