@@ -25,7 +25,7 @@ export const ExamplePage = ({ children, variants, packageName }: Props) => {
     return (
       <div className="min-h-dvh flex flex-col justify-center-safe items-center-safe isolate gap-4">
         <a
-          href={`https://github.com/zuudeui/packages/tree/main/apps/${packageName}/components/examples`}
+          href={`https://github.com/zuude-ui/packages/tree/main/apps/${packageName}/components/examples`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center relative space-y-4 bg-muted rounded-full size-20 shadow-sm justify-center"

@@ -25,7 +25,7 @@ export function Navbar() {
           pathname.startsWith("/examples") && "max-w-full"
         )}
       >
-        <a href={pathname !== "/" ? "/" : "https://zuudeui.com"}>
+        <a href={pathname !== "/" ? "/" : "https://zuude-ui.com"}>
           <Logo className="size-9 rounded-sm" />
         </a>
         <div className="flex items-center">
@@ -42,7 +42,7 @@ export function Navbar() {
             Examples
           </Link>
           <Link
-            href="https://github.com/zuudeui/packages"
+            href="https://github.com/zuude-ui/packages"
             target="_blank"
             rel="noopener noreferrer"
             className={buttonVariants({ variant: "ghost", size: "icon" })}

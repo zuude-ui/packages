@@ -1,4 +1,4 @@
 # Packages
 
-- [@zuude-ui/cropper](https://cropper.zuudeui.com)
-- [@zuude-ui/ios-mockups](https://ios-mockups.zuudeui.com)
+- [@zuude-ui/cropper](https://cropper.zuude-ui.com)
+- [@zuude-ui/ios-mockups](https://ios-mockups.zuude-ui.com)
