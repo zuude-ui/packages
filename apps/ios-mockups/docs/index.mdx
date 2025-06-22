@@ -13,13 +13,13 @@ npm install @zuude-ui/ios-mockups
 ## Usage
 
 ```tsx
-import { IphoneMockup } from "@/components/device-mockups";
+import { Iphone } from "@zuude-ui/ios-mockups";
 
 export default function MyComponent() {
   return (
-    <IphoneMockup size="md" color="natural-titanium">
+    <Iphone size="md" color="natural-titanium">
       {/* Your content here */}
-    </IphoneMockup>
+    </Iphone>
   );
 }
 ```
@@ -31,8 +31,7 @@ export default function MyComponent() {
 | `size`           | `"sm" \| "md" \| "lg"`                                                                                                                | `"md"`               | Controls the size of the iPhone mockup                  |
 | `color`          | `"natural-titanium" \| "blue-titanium" \| "white-titanium" \| "black-titanium" \| "blue" \| "pink" \| "yellow" \| "green" \| "black"` | `"natural-titanium"` | Sets the color scheme of the iPhone mockup              |
 | `className`      | `string`                                                                                                                              | `""`                 | Additional CSS classes to apply to the mockup container |
-| `buttonHandlers` | `IphoneMockupButtonsAction`                                                                                                           | -                    | Callback functions for the iPhone buttons               |
-| `buttonHandlers` | `IphoneMockupButtonsAction`                                                                                                           | -                    | Callback functions for the iPhone buttons               |
+| `buttonHandlers` | `IphoneButtonsAction`                                                                                                                 | -                    | Callback functions for the iPhone buttons               |
 
 ## CSS Variables
 
@@ -50,23 +49,23 @@ The component uses several CSS variables that you can customize:
 ### Different Sizes
 
 ```tsx
-<IphoneMockup size="sm">Small iPhone</IphoneMockup>
-<IphoneMockup size="md">Medium iPhone</IphoneMockup>
-<IphoneMockup size="lg">Large iPhone</IphoneMockup>
+<Iphone size="sm">Small iPhone</Iphone>
+<Iphone size="md">Medium iPhone</Iphone>
+<Iphone size="lg">Large iPhone</Iphone>
 ```
 
 ### Different Colors
 
 ```tsx
-<IphoneMockup color="blue-titanium">Blue Titanium</IphoneMockup>
-<IphoneMockup color="pink">Pink</IphoneMockup>
-<IphoneMockup color="green">Green</IphoneMockup>
+<Iphone color="blue-titanium">Blue Titanium</Iphone>
+<Iphone color="pink">Pink</Iphone>
+<Iphone color="green">Green</Iphone>
 ```
 
 ### With Button Handlers
 
 ```tsx
-<IphoneMockup
+<Iphone
   buttonHandlers={{
     action: () => console.log("Action button pressed"),
     volumeUp: () => console.log("Volume up"),
@@ -75,25 +74,19 @@ The component uses several CSS variables that you can customize:
   }}
 >
   Interactive iPhone
-</IphoneMockup>
+</Iphone>
 ```
 
 ### Customizing CSS Variables
 
 ```tsx
 // White background with white dynamic island
-<IphoneMockup className="[--screen-color:white] [--dynamic-island-color:white]">
+<Iphone style={{ "--screen-color": "white", "--dynamic-island-color": "black" }}>
   Content
-</IphoneMockup>
+</Iphone>
 
-// Using theme variables
-<IphoneMockup className="[--screen-color:var(--background)] [--dynamic-island-color:var(--foreground)]">
+// Using Tailwind CSS variables
+<Iphone className="![--screen-color:white] ![--dynamic-island-color:black]">
   Content
-</IphoneMockup>
+</Iphone>
 ```
-
-## Notes
-
-- The component includes a dynamic island at the top and a home indicator at the bottom
-- Content is scrollable within the mockup
-- The mockup includes realistic shadows and gradients for a premium look

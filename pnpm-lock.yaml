@@ -54,6 +54,9 @@ importers:
       next:
         specifier: ^15.2.3
         version: 15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next-contentlayer2:
+        specifier: ^0.5.8
+        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -115,6 +118,9 @@ importers:
       next:
         specifier: ^15.2.3
         version: 15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next-contentlayer2:
+        specifier: ^0.5.8
+        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -173,6 +179,9 @@ importers:
       next:
         specifier: 15.3.3
         version: 15.3.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next-contentlayer2:
+        specifier: ^0.5.8
+        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.3.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -200,6 +209,9 @@ importers:
       next:
         specifier: ^15.2.3
         version: 15.3.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next-contentlayer2:
+        specifier: ^0.5.8
+        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.3.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -6441,7 +6453,7 @@ snapshots:
       '@opentelemetry/propagator-b3': 1.30.1(@opentelemetry/api@1.9.0)
       '@opentelemetry/propagator-jaeger': 1.30.1(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-trace-base': 1.30.1(@opentelemetry/api@1.9.0)
-      semver: 7.7.1
+      semver: 7.7.2
 
   '@opentelemetry/semantic-conventions@1.28.0': {}
 
@@ -9439,6 +9451,21 @@ snapshots:
       - markdown-wasm
       - supports-color
 
+  next-contentlayer2@0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.3.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      '@contentlayer2/core': 0.5.8(acorn@8.14.0)(esbuild@0.25.5)
+      '@contentlayer2/utils': 0.5.8
+      contentlayer2: 0.5.8(acorn@8.14.0)(esbuild@0.25.5)
+      next: 15.3.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+    transitivePeerDependencies:
+      - '@effect-ts/otel-node'
+      - acorn
+      - esbuild
+      - markdown-wasm
+      - supports-color
+
   next-themes@0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       react: 19.0.0
@@ -10211,8 +10238,7 @@ snapshots:
 
   semver@7.7.1: {}
 
-  semver@7.7.2:
-    optional: true
+  semver@7.7.2: {}
 
   sentence-case@2.1.1:
     dependencies:

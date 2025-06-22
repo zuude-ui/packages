@@ -8,7 +8,7 @@ import { generateComponents } from "./script";
 const projects = path.join(process.cwd(), "apps");
 const readDir = fs.readdirSync(projects);
 
-const actions = ["contentlayer", "build", "generate-components"];
+const actions = ["generate-components"];
 
 const getAction = async () => {
   const action = await select({
