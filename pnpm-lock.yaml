@@ -368,8 +368,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(@types/react@19.0.10)(react@19.0.0)
       '@zuude-ui/video':
-        specifier: ^0.0.4
-        version: 0.0.4(postcss@8.5.4)(react@19.0.0)(tsx@4.19.4)
+        specifier: ^0.0.6
+        version: 0.0.6(postcss@8.5.4)(react@19.0.0)(tsx@4.19.4)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -2290,8 +2290,8 @@ packages:
     peerDependencies:
       react: '>= 16.8.0'
 
-  '@zuude-ui/video@0.0.4':
-    resolution: {integrity: sha512-Pf04TwcwozVU0ffexIL7MaGA7ih0WLRn31SF7GU6F1uE+do36ESHI0/Z3OGyfTA3FkUUt7ltwOGewvyKOCNptg==}
+  '@zuude-ui/video@0.0.6':
+    resolution: {integrity: sha512-ZJ2h2cnxEj3SPzzB/0F/tUdGvDgYTwrfBKg7gli7CnXtIr5aOrXptDjkozIJRhlsdNVNuAc1QJpXziV+FAWXXA==}
     peerDependencies:
       react: ^19.0.0
 
@@ -7177,7 +7177,7 @@ snapshots:
       '@use-gesture/core': 10.3.1
       react: 19.0.0
 
-  '@zuude-ui/video@0.0.4(postcss@8.5.4)(react@19.0.0)(tsx@4.19.4)':
+  '@zuude-ui/video@0.0.6(postcss@8.5.4)(react@19.0.0)(tsx@4.19.4)':
     dependencies:
       react: 19.0.0
       tsup: 8.5.0(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.8.0)

@@ -1,7 +1,6 @@
 "use client";
 
 import { PageComp } from "@workspace/ui/components/page-comps";
-import { CodeSyntax } from "@workspace/ui/components/syntax-highlighter";
 import { Demo } from "./demo";
 import { allDocs } from "@/.contentlayer/generated";
 import { Mdx } from "../components/mdx";

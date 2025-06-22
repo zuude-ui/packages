@@ -42,10 +42,10 @@ export const PackageVideoPresentation = ({
           loop
           onClick={() => setExpanded(!expanded)}
         >
-          {({ isMuted, toggleMute }) => (
+          {({ isMuted, toggleMute, duration }) => (
             <>
               {!expanded ? (
-                <div className="bg-muted-foreground/10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-sm rounded-full p-2">
+                <div className="bg-muted-foreground/10 text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-sm rounded-full p-2">
                   <Play className="size-4" />
                 </div>
               ) : (

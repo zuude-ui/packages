@@ -1,7 +1,11 @@
 import React from "react";
 import { VideoRef } from "../types.js";
 
-export const useAutoplayByForce = (ref: VideoRef, enabled: boolean) => {
+export const useAutoplayByForce = (
+  ref: VideoRef,
+  enabled: boolean,
+  setError?: (error: string | null) => void
+) => {
   React.useEffect(() => {
     if (!ref.current || !enabled) return;
 
@@ -11,6 +15,7 @@ export const useAutoplayByForce = (ref: VideoRef, enabled: boolean) => {
       } catch (error) {
         // If autoplay fails, try muting and playing again
         if (error instanceof Error && error.name === "NotAllowedError") {
+          setError?.("NotAllowedError");
           console.error("NotAllowedError");
           if (ref.current) {
             ref.current.muted = true;

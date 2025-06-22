@@ -10,6 +10,7 @@ import {
 } from "@zuude-ui/video";
 import { useShowVideoPaused } from "@zuude-ui/video/plugins";
 import { Slider } from "@workspace/ui/components/slider";
+import { VolumeOff } from "lucide-react";
 
 export const Demo = () => {
   const [reset, setReset] = useState(0);
@@ -29,12 +30,22 @@ export const Demo = () => {
       {/* <Button onClick={() => setReset(reset + 1)}>Reset</Button> */}
       <Video
         key={reset}
-        ref={ref}
+        // ref={ref}
         src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         className="w-full object-cover max-w-3xl"
         poster="https://images.unsplash.com/photo-1484291470158-b8f8d608850d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8b2NlYW58ZW58MHx8MHx8fDA%3D"
         ratio="16/9"
-        // autoPlay="force"
+        autoPlay="force"
+        config={{
+          muteFallback: (toggleMute) => (
+            <div
+              className="absolute inset-0 bg-black/50 flex items-center justify-center"
+              onClick={toggleMute}
+            >
+              <VolumeOff className="size-4" />
+            </div>
+          ),
+        }}
       >
         {({
           isPlaying,

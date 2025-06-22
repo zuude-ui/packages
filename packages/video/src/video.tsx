@@ -30,6 +30,7 @@ const VideoComponent = React.forwardRef<
     ref
   ) => {
     const [duration, setDuration] = React.useState<number | null>(null);
+    const [error, setError] = React.useState<string | null>(null);
 
     const videoRef =
       (ref as React.RefObject<HTMLVideoElement>) ||
@@ -79,7 +80,8 @@ const VideoComponent = React.forwardRef<
       videoRef,
       autoPlay === "force" &&
         props.muted === undefined &&
-        !config?.autoplayOnVisible
+        !config?.autoplayOnVisible,
+      setError
     );
     useStartAt(videoRef, config?.startAt);
     useAutoplayOnVisible(
@@ -119,6 +121,7 @@ const VideoComponent = React.forwardRef<
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
             onLoadedMetadata={(e) => {
+              console.log("loaded metadata");
               setDuration((e.target as HTMLVideoElement).duration);
             }}
             onTimeUpdate={(e) => {
@@ -145,6 +148,14 @@ const VideoComponent = React.forwardRef<
           ) : (
             children
           )}
+          {error === "NotAllowedError" &&
+            typeof config?.muteFallback === "function" &&
+            config.muteFallback(() => {
+              if (videoRef.current) {
+                videoRef.current.muted = !videoRef.current.muted;
+              }
+              setError(null);
+            })}
         </div>
       </VideoProvider>
     );

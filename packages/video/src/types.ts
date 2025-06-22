@@ -39,6 +39,7 @@ export type VideoConfig = {
   startAt?: number;
   range?: [number, number];
   autoplayOnVisible?: boolean | number;
+  muteFallback?: (toggleMute: () => void) => ReactNode;
 };
 
 interface VideoProps
