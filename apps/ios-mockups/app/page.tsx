@@ -5,6 +5,7 @@ import { CodeSyntax } from "@workspace/ui/components/syntax-highlighter";
 import { Demo } from "./demo";
 import { allDocs } from "@/.contentlayer/generated";
 import { Mdx } from "../components/mdx";
+import { PackageVideoPresentation } from "@workspace/ui/components/package-video-presentation";
 
 export default function Page() {
   const homeDocs = allDocs.find((doc) => doc.slug === "/");
@@ -18,6 +19,8 @@ export default function Page() {
       </PageComp.Presentation>
 
       <Mdx code={homeDocs?.body.code ?? ""} />
+
+      <PackageVideoPresentation videoUrl="https://vztpjn0djt.ufs.sh/f/RAHCy45jEyblVabyXQzjU8tdNXCo2MJWkyADsLcS0RvTq6mf" />
     </PageComp>
   );
 }
