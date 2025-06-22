@@ -1,5 +1,5 @@
 import { Button } from "@workspace/ui/components/button";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
   Video,
@@ -7,15 +7,20 @@ import {
   useTimeline,
   useVideo,
   formatTime,
-} from "@zuude-ui/video/index";
+} from "@zuude-ui/video";
 import { useShowVideoPaused } from "@zuude-ui/video/plugins";
 import { Slider } from "@workspace/ui/components/slider";
 
 export const Demo = () => {
   const [reset, setReset] = useState(0);
+  const [isSafari, setIsSafari] = useState(false);
   const ref = useRef<HTMLVideoElement>(null);
 
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
+    }
+  }, []);
 
   useShowVideoPaused(ref, isSafari);
 
