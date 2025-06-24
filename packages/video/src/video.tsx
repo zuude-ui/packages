@@ -1,7 +1,7 @@
 import React from "react";
 
 // 📦 Types
-import type { VideoProps } from "./types";
+import type { VideoProps, VideoRef } from "./types";
 
 // 🔍 Context
 import { VideoProvider } from "./context";
@@ -32,9 +32,7 @@ const VideoComponent = React.forwardRef<
     const [duration, setDuration] = React.useState<number | null>(null);
     const [error, setError] = React.useState<string | null>(null);
 
-    const videoRef =
-      (ref as React.RefObject<HTMLVideoElement>) ||
-      React.useRef<HTMLVideoElement>(null);
+    const videoRef = (ref as VideoRef) || React.useRef<VideoRef>(null);
 
     const [showHidingElement, setShowHidingElement] = React.useState(false);
     const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>(null);
@@ -94,7 +92,7 @@ const VideoComponent = React.forwardRef<
 
     return (
       <VideoProvider
-        ref={videoRef}
+        videoRef={videoRef}
         duration={duration}
         showHidingElement={showHidingElement}
         setShowHidingElement={setShowHidingElement}
@@ -108,6 +106,7 @@ const VideoComponent = React.forwardRef<
         >
           <video
             data-zuude-video
+            // @ts-ignore
             ref={videoRef}
             autoPlay={
               config?.autoplayOnVisible
@@ -132,7 +131,9 @@ const VideoComponent = React.forwardRef<
               if (config?.range) {
                 const [start, end] = config.range;
 
-                if (videoRef.current.currentTime < start) {
+                if (!videoRef?.current) return;
+
+                if (videoRef?.current?.currentTime < start) {
                   videoRef.current.currentTime = start;
                 }
 

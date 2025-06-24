@@ -55,7 +55,7 @@ interface VideoProps
 }
 
 interface VideoContextType {
-  ref: RefObject<HTMLVideoElement | null>;
+  videoRef: VideoRef;
   duration: number | null;
   isFullscreen?: boolean;
   setIsFullscreen?: (isFullscreen: boolean) => void;

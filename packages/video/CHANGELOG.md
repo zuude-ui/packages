@@ -1,5 +1,12 @@
 # @zuude-ui/ios-mockups
 
+## 0.0.7
+
+### Patch Changes
+
+- Capable with next 14
+  Taking volume and speed from the video element
+
 ## 0.0.6
 
 ### Patch Changes

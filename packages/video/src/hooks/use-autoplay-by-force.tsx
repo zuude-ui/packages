@@ -7,7 +7,7 @@ export const useAutoplayByForce = (
   setError?: (error: string | null) => void
 ) => {
   React.useEffect(() => {
-    if (!ref.current || !enabled) return;
+    if (!ref?.current || !enabled) return;
 
     const playVideo = async () => {
       try {
@@ -17,7 +17,7 @@ export const useAutoplayByForce = (
         if (error instanceof Error && error.name === "NotAllowedError") {
           setError?.("NotAllowedError");
           console.error("NotAllowedError");
-          if (ref.current) {
+          if (ref?.current) {
             ref.current.muted = true;
             try {
               await ref.current.play();
@@ -32,5 +32,5 @@ export const useAutoplayByForce = (
     };
 
     playVideo();
-  }, [enabled, ref.current]);
+  }, [enabled, ref?.current]);
 };

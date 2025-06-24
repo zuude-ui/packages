@@ -2,7 +2,7 @@ import React from "react";
 import { useVideo } from "../context";
 
 export const useFullscreen = () => {
-  const { ref, isFullscreen, setIsFullscreen } = useVideo();
+  const { videoRef, isFullscreen, setIsFullscreen } = useVideo();
 
   React.useEffect(() => {
     const handleFullscreenChange = () => {
@@ -16,7 +16,7 @@ export const useFullscreen = () => {
 
   const toggleFullscreen = () => {
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    const video = ref.current;
+    const video = videoRef?.current;
 
     if (video && isSafari) {
       if ((video as any).webkitEnterFullscreen) {
@@ -28,7 +28,7 @@ export const useFullscreen = () => {
       }
     }
 
-    const videoContainer = ref.current?.closest(
+    const videoContainer = videoRef?.current?.closest(
       "[data-zuude-video-wrapper]"
     ) as HTMLElement;
 

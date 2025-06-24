@@ -12,8 +12,8 @@ export const HidingElement = React.forwardRef<
   HTMLDivElement,
   HidingElementProps
 >(({ children, className, ...props }: HidingElementProps) => {
-  const { ref } = useVideo();
-  const { isPlaying } = usePlayPause(ref, true);
+  const { videoRef } = useVideo();
+  const { isPlaying } = usePlayPause(videoRef, true);
   const { showHidingElement, setShowHidingElement } = useVideo();
 
   return (

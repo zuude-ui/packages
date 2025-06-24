@@ -7,12 +7,12 @@ export const useAutoplayOnVisible = (
   enabled: boolean | number | null | undefined
 ) => {
   React.useEffect(() => {
-    if (!enabled || !ref.current) return;
+    if (!enabled || !ref?.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!ref.current) return;
+          if (!ref?.current) return;
 
           if (entry.isIntersecting) {
             ref.current.play().catch((error) => {
@@ -31,10 +31,10 @@ export const useAutoplayOnVisible = (
       { threshold: threshold ?? 0.5 }
     );
 
-    observer.observe(ref.current);
+    observer.observe(ref?.current);
 
     return () => {
       observer.disconnect();
     };
-  }, [enabled, ref.current]);
+  }, [enabled, ref?.current]);
 };

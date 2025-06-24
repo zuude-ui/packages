@@ -6,33 +6,33 @@ export const useTimeline = () => {
   const [currentTime, setCurrentTime] = React.useState(0);
   const [buffered, setBuffered] = React.useState(0);
 
-  const { ref, duration } = useVideo();
+  const { videoRef, duration } = useVideo();
 
   React.useEffect(() => {
-    if (ref.current && isPlaying) {
+    if (videoRef?.current && isPlaying) {
       const intervalId = setInterval(() => {
-        setCurrentTime(ref.current?.currentTime || 0);
+        setCurrentTime(videoRef.current?.currentTime || 0);
 
-        if (ref.current?.buffered.length) {
+        if (videoRef.current?.buffered.length) {
           setBuffered(
-            ref.current.buffered.end(ref.current.buffered.length - 1)
+            videoRef.current.buffered.end(videoRef.current.buffered.length - 1)
           );
         }
       }, 10);
 
       return () => clearInterval(intervalId);
     }
-  }, [ref.current, isPlaying]);
+  }, [videoRef?.current, isPlaying]);
 
   React.useEffect(() => {
-    if (!ref.current) return;
+    if (!videoRef?.current) return;
 
-    ref.current.addEventListener("play", () => setIsPlaying(true));
-    ref.current.addEventListener("pause", () => setIsPlaying(false));
+    videoRef.current.addEventListener("play", () => setIsPlaying(true));
+    videoRef.current.addEventListener("pause", () => setIsPlaying(false));
 
     return () => {
-      ref.current?.removeEventListener("play", () => setIsPlaying(true));
-      ref.current?.removeEventListener("pause", () => setIsPlaying(false));
+      videoRef.current?.removeEventListener("play", () => setIsPlaying(true));
+      videoRef.current?.removeEventListener("pause", () => setIsPlaying(false));
     };
   }, []);
 

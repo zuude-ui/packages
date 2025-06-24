@@ -19,7 +19,7 @@ interface VideoProviderProps extends VideoContextType {
 
 const VideoProvider = ({
   children,
-  ref,
+  videoRef,
   duration,
   showHidingElement,
   setShowHidingElement,
@@ -29,7 +29,7 @@ const VideoProvider = ({
   return (
     <VideoContext.Provider
       value={{
-        ref,
+        videoRef,
         duration,
         isFullscreen: fullscreen,
         setIsFullscreen: setFullscreen,

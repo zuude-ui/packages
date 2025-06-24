@@ -1,6 +1,6 @@
 {
   "name": "video",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "private": true,
   "scripts": {
@@ -17,7 +17,7 @@
     "contentlayer2": "^0.5.8",
     "lucide-react": "^0.475.0",
     "motion": "^12.15.0",
-    "next": "^15.2.3",
+    "next": "14.2.30",
     "next-contentlayer2": "^0.5.8",
     "next-themes": "^0.4.4",
     "react": "^19.0.0",

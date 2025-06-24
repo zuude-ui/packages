@@ -1,5 +1,11 @@
 # ios-mockups
 
+## 0.0.12
+
+### Patch Changes
+
+- @workspace/ui@0.0.3
+
 ## 0.0.11
 
 ### Patch Changes

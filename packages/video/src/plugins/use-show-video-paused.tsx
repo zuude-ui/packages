@@ -5,7 +5,7 @@ export const useShowVideoPaused = (ref: VideoRef, enabled: boolean) => {
   const playCountRef = React.useRef(0);
 
   React.useEffect(() => {
-    const video = ref.current;
+    const video = ref?.current;
 
     if (!enabled || !video || video.autoplay !== false) return;
 
@@ -17,5 +17,5 @@ export const useShowVideoPaused = (ref: VideoRef, enabled: boolean) => {
         video.pause();
       }, 200);
     }
-  }, [playCountRef, ref.current, enabled]);
+  }, [playCountRef, ref?.current, enabled]);
 };

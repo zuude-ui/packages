@@ -1,5 +1,11 @@
 # test
 
+## 0.1.6
+
+### Patch Changes
+
+- @workspace/ui@0.0.3
+
 ## 0.1.5
 
 ### Patch Changes

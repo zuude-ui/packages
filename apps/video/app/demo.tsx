@@ -7,10 +7,11 @@ import {
   useTimeline,
   useVideo,
   formatTime,
-} from "@zuude-ui/video";
+} from "@zuude-ui/video/index";
 import { useShowVideoPaused } from "@zuude-ui/video/plugins";
 import { Slider } from "@workspace/ui/components/slider";
 import { VolumeOff } from "lucide-react";
+import { cn } from "@workspace/ui/lib/utils";
 
 export const Demo = () => {
   const [reset, setReset] = useState(0);
@@ -25,17 +26,25 @@ export const Demo = () => {
 
   useShowVideoPaused(ref, isSafari);
 
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.volume = 0.1;
+      ref.current.playbackRate = 5;
+    }
+  }, []);
+
   return (
     <div className="flex flex-col gap-4 items-center justify-center">
       {/* <Button onClick={() => setReset(reset + 1)}>Reset</Button> */}
       <Video
         key={reset}
-        // ref={ref}
+        ref={ref}
         src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         className="w-full object-cover max-w-3xl"
         poster="https://images.unsplash.com/photo-1484291470158-b8f8d608850d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8b2NlYW58ZW58MHx8MHx8fDA%3D"
         ratio="16/9"
-        autoPlay="force"
+        autoPlay
+        muted
         config={{
           muteFallback: (toggleMute) => (
             <div
@@ -59,8 +68,20 @@ export const Demo = () => {
           togglePictureInPicture,
           speed,
           onChangeSpeed,
+          showHidingElement,
         }) => (
           <>
+            <Video.HidingElement
+              className={cn(
+                "absolute top-0 left-0 bg-black/50 flex items-center duration-200 justify-center",
+                showHidingElement ? "opacity-100" : "opacity-0"
+              )}
+            >
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa
+              optio nihil possimus cum, maiores debitis sed dolor porro, eum
+              soluta mollitia libero atque iure blanditiis enim vero sunt
+              accusantium ducimus.
+            </Video.HidingElement>
             <div className="w-full flex flex-col gap-2 p-4">
               <div className="flex gap-2 flex-wrap">
                 <Button onClick={togglePlay}>
@@ -120,7 +141,7 @@ function Volume() {
 
 function Timeline() {
   const { currentTime, duration, setCurrentTime } = useTimeline();
-  const { ref } = useVideo();
+  const { videoRef } = useVideo();
 
   return (
     <div>
@@ -128,9 +149,9 @@ function Timeline() {
         min={0}
         max={duration ?? 0}
         onValueChange={(value) => {
-          if (ref.current) {
+          if (videoRef.current) {
             setCurrentTime(value[0] ?? 0);
-            ref.current.currentTime = value[0] ?? 0;
+            videoRef.current.currentTime = value[0] ?? 0;
           }
         }}
         value={[currentTime]}

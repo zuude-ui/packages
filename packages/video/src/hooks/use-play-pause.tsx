@@ -5,13 +5,14 @@ export const usePlayPause = (ref: VideoRef, enabled: boolean) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
 
   const togglePlay = React.useCallback(() => {
-    if (ref.current) {
+    console.log(ref?.current);
+    if (ref?.current) {
       ref.current.paused ? ref.current.play() : ref.current.pause();
     }
-  }, [ref.current]);
+  }, [ref?.current]);
 
   React.useEffect(() => {
-    if (!enabled || !ref.current) return;
+    if (!enabled || !ref?.current) return;
 
     const handlePlay = () => {
       setIsPlaying(true);
@@ -20,9 +21,9 @@ export const usePlayPause = (ref: VideoRef, enabled: boolean) => {
       setIsPlaying(false);
     };
 
-    setIsPlaying(!ref.current.paused);
+    setIsPlaying(!ref?.current.paused);
 
-    if (ref.current) {
+    if (ref?.current) {
       ref.current.addEventListener("play", handlePlay);
       ref.current.addEventListener("pause", handlePause);
 
@@ -31,7 +32,7 @@ export const usePlayPause = (ref: VideoRef, enabled: boolean) => {
         ref.current?.removeEventListener("pause", handlePause);
       };
     }
-  }, [ref.current, enabled]);
+  }, [ref?.current, enabled]);
 
   return { togglePlay, isPlaying };
 };

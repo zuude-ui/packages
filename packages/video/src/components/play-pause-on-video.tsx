@@ -2,9 +2,9 @@ import { useVideo } from "../context";
 import { usePlayPause } from "../hooks/use-play-pause";
 
 export const PlayPauseOnVideo = () => {
-  const { ref } = useVideo();
+  const { videoRef } = useVideo();
 
-  const { togglePlay } = usePlayPause(ref, true);
+  const { togglePlay } = usePlayPause(videoRef, true);
 
   return (
     <div

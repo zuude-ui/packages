@@ -8,11 +8,17 @@ export const useSpeed = (ref: VideoRef, enabled: boolean) => {
     setSpeed(speed);
   };
 
+  // Get the speed from the video element
   React.useEffect(() => {
-    if (!enabled || !ref.current) return;
+    if (!ref?.current) return;
+    setSpeed(ref.current.playbackRate);
+  }, [ref?.current]);
+
+  React.useEffect(() => {
+    if (!enabled || !ref?.current) return;
 
     ref.current.playbackRate = speed;
-  }, [speed, enabled, ref.current]);
+  }, [speed, enabled, ref?.current]);
 
   return { speed, onChangeSpeed };
 };

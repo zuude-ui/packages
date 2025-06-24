@@ -2,7 +2,7 @@ import React from "react";
 import { useVideo } from "../context";
 
 export const usePictureInPicture = () => {
-  const { ref, isPictureInPicture, setIsPictureInPicture } = useVideo();
+  const { videoRef, isPictureInPicture, setIsPictureInPicture } = useVideo();
 
   React.useEffect(() => {
     const handlePictureInPictureChange = () => {
@@ -21,7 +21,7 @@ export const usePictureInPicture = () => {
   }, []);
 
   const togglePictureInPicture = async () => {
-    const video = ref.current;
+    const video = videoRef?.current;
     if (!video) return;
 
     try {

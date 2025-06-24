@@ -6,7 +6,7 @@ export const useGetDuration = (ref: VideoRef) => {
   const [duration, setDuration] = React.useState<number | null>(null);
 
   React.useEffect(() => {
-    if (!ref.current) return;
+    if (!ref?.current) return;
     setIsLoading(true);
 
     ref.current.addEventListener("loadedmetadata", () => {
@@ -22,7 +22,7 @@ export const useGetDuration = (ref: VideoRef) => {
       ref.current?.removeEventListener("loadedmetadata", () => {});
       ref.current?.removeEventListener("error", () => {});
     };
-  }, [ref.current]);
+  }, [ref?.current]);
 
   return { duration, isLoading };
 };

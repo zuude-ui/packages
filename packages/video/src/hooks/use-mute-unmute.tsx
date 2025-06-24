@@ -8,10 +8,10 @@ export const useMuteUnmute = (ref: VideoRef, enabled: boolean) => {
     if (ref?.current) {
       ref.current.muted = !ref.current.muted;
     }
-  }, [ref.current]);
+  }, [ref?.current]);
 
   React.useEffect(() => {
-    if (!enabled || !ref.current) return;
+    if (!enabled || !ref?.current) return;
 
     // Set the initial state
     setIsMuted(ref.current.muted);
@@ -27,7 +27,7 @@ export const useMuteUnmute = (ref: VideoRef, enabled: boolean) => {
     return () => {
       ref.current?.removeEventListener("volumechange", handleVolumeChange);
     };
-  }, [ref.current, enabled]);
+  }, [ref?.current, enabled]);
 
   return { toggleMute, isMuted };
 };
