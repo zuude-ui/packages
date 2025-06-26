@@ -4,6 +4,9 @@ import "./styles.css";
 
 export { Video } from "./video";
 
+// Types
+export type { VideoProps, VideoContextType } from "./types";
+
 // Context
 export { useVideo } from "./context";
 

@@ -26,7 +26,7 @@ const VideoComponent = React.forwardRef<
   VideoProps & { pause?: boolean }
 >(
   (
-    { children, autoPlay, className, ratio, config, controls, pause, ...props },
+    { children, autoPlay, className, config, ratio, controls, pause, ...props },
     ref
   ) => {
     const [duration, setDuration] = React.useState<number | null>(null);
@@ -99,10 +99,8 @@ const VideoComponent = React.forwardRef<
       >
         <div
           data-zuude-video-wrapper
-          style={{
-            aspectRatio: ratio,
-          }}
           className={className}
+          style={{ aspectRatio: ratio }}
         >
           <video
             data-zuude-video
@@ -119,6 +117,15 @@ const VideoComponent = React.forwardRef<
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
+            onClick={() => {
+              if (config?.clickToPlay) {
+                if (videoRef.current?.paused) {
+                  videoRef.current?.play();
+                } else {
+                  videoRef.current?.pause();
+                }
+              }
+            }}
             onLoadedMetadata={(e) => {
               console.log("loaded metadata");
               setDuration((e.target as HTMLVideoElement).duration);
@@ -142,6 +149,8 @@ const VideoComponent = React.forwardRef<
                 }
               }
             }}
+            className={className}
+            style={{ aspectRatio: ratio }}
             {...props}
           />
           {typeof children === "function" ? (

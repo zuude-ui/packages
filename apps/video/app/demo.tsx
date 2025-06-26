@@ -39,12 +39,12 @@ export const Demo = () => {
       <Video
         key={reset}
         ref={ref}
-        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        className="w-full object-cover max-w-3xl"
+        src="https://cdn.crosspost.app/crosspost-long-videos/7cca4c855e3943b59f3db96bb2059a5e.mp4"
+        className="max-h-64"
         poster="https://images.unsplash.com/photo-1484291470158-b8f8d608850d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8b2NlYW58ZW58MHx8MHx8fDA%3D"
-        ratio="16/9"
         autoPlay
         muted
+        // ratio="16/9"
         config={{
           muteFallback: (toggleMute) => (
             <div
@@ -99,7 +99,7 @@ export const Demo = () => {
                     : "Picture in Picture"}
                 </Button>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
                 {Array.from({ length: 10 }).map((_, index) => (
                   <Button
                     key={index}
@@ -119,6 +119,9 @@ export const Demo = () => {
           </>
         )}
       </Video>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Error quaerat
+      quibusdam, fugit voluptas ab facere maiores a, mollitia cumque veritatis
+      illum! Velit aspernatur ipsum mollitia assumenda rem! Vel, vitae quo?
     </div>
   );
 };

@@ -1,5 +1,29 @@
 # @zuude-ui/ios-mockups
 
+## 0.1.1
+
+### Patch Changes
+
+- Added ratio prop
+
+## 0.1.0
+
+### Patch Changes
+
+- Added clickToPlay functionality
+
+## 0.0.9
+
+### Patch Changes
+
+- Exported types
+
+## 0.0.8
+
+### Patch Changes
+
+- It was not published to npm
+
 ## 0.0.7
 
 ### Patch Changes
