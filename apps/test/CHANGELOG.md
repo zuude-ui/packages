@@ -1,5 +1,12 @@
 # test
 
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @zuude-ui/cropper@0.0.6
+
 ## 0.1.6
 
 ### Patch Changes

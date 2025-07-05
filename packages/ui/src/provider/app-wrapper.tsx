@@ -3,6 +3,7 @@ import { Navbar } from "../components/navbar";
 import { Providers } from "./next-theme";
 import { Toaster } from "../components/sonner";
 import { ReactScan } from "../components/react-scan";
+import QueryClientProviders from "./query-client";
 
 interface Props {
   children: React.ReactNode;
@@ -10,11 +11,13 @@ interface Props {
 
 export function AppWrapper({ children }: Props) {
   return (
-    <Providers>
-      <Navbar />
-      {children}
-      <Toaster />
-      <ReactScan />
-    </Providers>
+    <QueryClientProviders>
+      <Providers>
+        <Navbar />
+        {children}
+        <Toaster />
+        <ReactScan />
+      </Providers>
+    </QueryClientProviders>
   );
 }

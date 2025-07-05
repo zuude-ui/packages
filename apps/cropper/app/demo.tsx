@@ -3,22 +3,25 @@ import { type Crop, Cropper, useCropper } from "@zuude-ui/cropper/index";
 
 import { Button } from "@workspace/ui/components/button";
 import { testImage } from "@workspace/ui/lib/utils";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const Demo = () => {
   const [crop, setCrop] = useState<Crop>({ x: 0, y: 0, scale: 1 });
   const [image, setImage] = useState<string | null>(null);
 
-  const [ref, { cropIt, reset }] = useCropper({
-    quality: 3,
+  const queryClient = useQueryClient();
+
+  const [ref, { cropIt, reset, isCropping }] = useCropper({
+    quality: 10,
+    queryClient,
     onSuccess: (image) => {
+      console.log("onSuccess", image);
       setImage(image);
     },
     onError: (error) => {
       window.alert(error.message);
     },
   });
-
-  console.log(crop);
 
   return (
     <>
@@ -51,7 +54,7 @@ export const Demo = () => {
           Reset
         </Button>
         <Button className="mt-4" onClick={cropIt}>
-          Export
+          {isCropping ? "Cropping..." : "Crop"}
         </Button>
       </div>
     </>

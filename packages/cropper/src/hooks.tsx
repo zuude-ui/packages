@@ -1,9 +1,11 @@
 import { useRef, useState, RefObject } from "react";
+import { type QueryClient } from "@tanstack/react-query";
 
 import { exportImage } from "./utils";
 
 export function useCropper(otherProps?: {
   quality?: number;
+  queryClient?: QueryClient;
   onSuccess?: (image: string) => void;
   onError?: (error: Error) => void;
 }): [
@@ -45,19 +47,41 @@ export function useCropper(otherProps?: {
         throw new Error("No src provided");
       }
 
-      console.log(x, y, scale);
-
       setIsCropping(true);
 
-      const image = await exportImage({
-        imageSrc: src,
-        cropWidth: ref.current.getBoundingClientRect().width,
-        cropHeight: ref.current.getBoundingClientRect().height,
-        x,
-        y,
-        scale,
-        scaleTheImage: otherProps?.quality || 1,
-      });
+      let image: string | null | undefined = null;
+
+      if (otherProps?.queryClient) {
+        image = await otherProps?.queryClient.ensureQueryData({
+          queryKey: ["crop-image", src, x, y, scale],
+          queryFn: () =>
+            exportImage({
+              imageSrc: src,
+              cropWidth: ref.current?.getBoundingClientRect().width || 0,
+              cropHeight: ref.current?.getBoundingClientRect().height || 0,
+              x,
+              y,
+              scale,
+              scaleTheImage: otherProps?.quality || 1,
+            }),
+          staleTime: Infinity,
+          gcTime: Infinity,
+        });
+      } else {
+        image = await exportImage({
+          imageSrc: src,
+          cropWidth: ref.current.getBoundingClientRect().width,
+          cropHeight: ref.current.getBoundingClientRect().height,
+          x,
+          y,
+          scale,
+          scaleTheImage: otherProps?.quality || 1,
+        });
+      }
+
+      if (!image) {
+        throw new Error("No image created");
+      }
 
       if (image) {
         setResult(image);

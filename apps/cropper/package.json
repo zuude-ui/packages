@@ -1,6 +1,6 @@
 {
   "name": "cropper",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "type": "module",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.81.5",
     "@workspace/ui": "workspace:*",
     "@zuude-ui/cropper": "workspace:*",
     "contentlayer2": "^0.5.8",

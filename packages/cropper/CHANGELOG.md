@@ -1,5 +1,11 @@
 # @zuude-ui/cropper
 
+## 0.0.6
+
+### Patch Changes
+
+- Added react-query feature
+
 ## 0.0.5
 
 ### Patch Changes

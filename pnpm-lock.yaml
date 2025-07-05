@@ -36,6 +36,9 @@ importers:
 
   apps/cropper:
     dependencies:
+      '@tanstack/react-query':
+        specifier: ^5.81.5
+        version: 5.81.5(react@19.0.0)
       '@workspace/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -56,7 +59,7 @@ importers:
         version: 15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-contentlayer2:
         specifier: ^0.5.8
-        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -120,7 +123,7 @@ importers:
         version: 15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-contentlayer2:
         specifier: ^0.5.8
-        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -255,6 +258,9 @@ importers:
 
   packages/cropper:
     dependencies:
+      '@tanstack/react-query':
+        specifier: ^5.81.5
+        version: 5.81.5(react@19.0.0)
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -367,9 +373,12 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.1.2
         version: 1.1.2(@types/react@19.0.10)(react@19.0.0)
+      '@tanstack/react-query':
+        specifier: ^5.81.5
+        version: 5.81.5(react@19.0.0)
       '@zuude-ui/video':
-        specifier: ^0.0.6
-        version: 0.0.6(postcss@8.5.4)(react@19.0.0)(tsx@4.19.4)
+        specifier: ^0.0.7
+        version: 0.0.7(postcss@8.5.4)(react@19.0.0)(tsx@4.19.4)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -387,7 +396,7 @@ importers:
         version: 15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-contentlayer2:
         specifier: ^0.5.8
-        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -2199,6 +2208,14 @@ packages:
   '@tailwindcss/postcss@4.1.10':
     resolution: {integrity: sha512-B+7r7ABZbkXJwpvt2VMnS6ujcDoR2OOcFaqrLIo1xbcdxje4Vf+VgJdBzNNbrAjBj/rLZ66/tlQ1knIGNLKOBQ==}
 
+  '@tanstack/query-core@5.81.5':
+    resolution: {integrity: sha512-ZJOgCy/z2qpZXWaj/oxvodDx07XcQa9BF92c0oINjHkoqUPsmm3uG08HpTaviviZ/N9eP1f9CM7mKSEkIo7O1Q==}
+
+  '@tanstack/react-query@5.81.5':
+    resolution: {integrity: sha512-lOf2KqRRiYWpQT86eeeftAGnjuTR35myTP8MXyvHa81VlomoAWNEd8x5vkcAfQefu0qtYCvyqLropFZqgI2EQw==}
+    peerDependencies:
+      react: ^18 || ^19
+
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
 
@@ -2350,8 +2367,8 @@ packages:
     peerDependencies:
       react: '>= 16.8.0'
 
-  '@zuude-ui/video@0.0.6':
-    resolution: {integrity: sha512-ZJ2h2cnxEj3SPzzB/0F/tUdGvDgYTwrfBKg7gli7CnXtIr5aOrXptDjkozIJRhlsdNVNuAc1QJpXziV+FAWXXA==}
+  '@zuude-ui/video@0.0.7':
+    resolution: {integrity: sha512-5+7gD3uhVcIk3tmfrWLHp18DOj0x+cMSc1JKCPWg3a0GQL3opnv6GGAgIgZHspIPqt0hjuN9XQLoi0FnpaxuNw==}
     peerDependencies:
       react: ^19.0.0
 
@@ -7104,6 +7121,13 @@ snapshots:
       postcss: 8.5.4
       tailwindcss: 4.1.10
 
+  '@tanstack/query-core@5.81.5': {}
+
+  '@tanstack/react-query@5.81.5(react@19.0.0)':
+    dependencies:
+      '@tanstack/query-core': 5.81.5
+      react: 19.0.0
+
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
   '@tsconfig/node10@1.0.11': {}
@@ -7302,7 +7326,7 @@ snapshots:
       '@use-gesture/core': 10.3.1
       react: 19.0.0
 
-  '@zuude-ui/video@0.0.6(postcss@8.5.4)(react@19.0.0)(tsx@4.19.4)':
+  '@zuude-ui/video@0.0.7(postcss@8.5.4)(react@19.0.0)(tsx@4.19.4)':
     dependencies:
       react: 19.0.0
       tsup: 8.5.0(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.8.0)
@@ -9601,7 +9625,7 @@ snapshots:
       - markdown-wasm
       - supports-color
 
-  next-contentlayer2@0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  next-contentlayer2@0.5.8(acorn@8.14.0)(contentlayer2@0.5.8(acorn@8.14.0)(esbuild@0.25.5))(esbuild@0.25.5)(next@15.2.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@contentlayer2/core': 0.5.8(acorn@8.14.0)(esbuild@0.25.5)
       '@contentlayer2/utils': 0.5.8
