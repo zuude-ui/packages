@@ -11,13 +11,9 @@ export default function Home() {
     y: 0,
     scale: 1,
   });
-  const [ref, { cropIt }] = useCropper(
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8b2NlYW58ZW58MHx8MHx8fDA%3D",
-    crop,
-    {
-      onSuccess: (image) => console.log(image),
-    }
-  );
+  const [ref, { cropIt }] = useCropper({
+    onSuccess: (image) => console.log(image),
+  });
 
   return (
     <div

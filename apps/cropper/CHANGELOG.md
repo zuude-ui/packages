@@ -1,5 +1,12 @@
 # web
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - @zuude-ui/cropper@0.0.7
+
 ## 0.0.9
 
 ### Patch Changes

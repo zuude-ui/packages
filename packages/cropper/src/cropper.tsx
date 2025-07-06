@@ -17,7 +17,12 @@ import { maybeAdjustImage } from "./maybe-adjust-image";
 
 import type { Crop } from "./types";
 
-interface CropperProps extends React.HTMLAttributes<HTMLDivElement> {
+type CropperChildren =
+  | React.ReactNode
+  | ((props: { isDragging: boolean; isPinching: boolean }) => React.ReactNode);
+
+interface CropperProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   src: string;
   crop?: Crop;
   disabled?: boolean;
@@ -31,6 +36,7 @@ interface CropperProps extends React.HTMLAttributes<HTMLDivElement> {
       className?: string;
     };
   };
+  children?: CropperChildren;
 }
 
 const Cropper = forwardRef<HTMLDivElement, CropperProps>(
@@ -44,6 +50,7 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
         showGrid: false,
         showBehindImage: undefined,
       },
+      children,
       ...props
     },
     ref
@@ -344,6 +351,10 @@ const Cropper = forwardRef<HTMLDivElement, CropperProps>(
               />
             </motion.div>
           )}
+
+          {typeof children === "function"
+            ? children({ isDragging, isPinching })
+            : children}
 
           <button
             data-reset-crop-button

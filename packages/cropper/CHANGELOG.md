@@ -1,5 +1,11 @@
 # @zuude-ui/cropper
 
+## 0.0.7
+
+### Patch Changes
+
+- added children
+
 ## 0.0.6
 
 ### Patch Changes

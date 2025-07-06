@@ -27,11 +27,17 @@ export default function DrawerExample() {
   });
 
   return (
-    <div>
-      <img src={image} alt="test" className="w-full h-full object-cover" />
+    <div className="flex relative flex-col gap-4 justify-center items-center">
+      <img
+        src={image}
+        alt="test"
+        className="w-full h-full object-cover max-w-sm"
+      />
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
-          <Button>Crop</Button>
+          <Button variant={"outline"} className="absolute bottom-4 left-4">
+            Crop
+          </Button>
         </DrawerTrigger>
         <DrawerContent className="!h-full">
           <Cropper
@@ -46,7 +52,9 @@ export default function DrawerExample() {
               showBehindImage: { position: "absolute" },
             }}
           />
-          <Button onClick={cropIt}>Crop</Button>
+          <Button onClick={cropIt} className="w-fit mx-auto mt-4">
+            Crop
+          </Button>
         </DrawerContent>
       </Drawer>
     </div>
