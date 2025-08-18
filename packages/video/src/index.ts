@@ -18,6 +18,7 @@ export { usePlayPause } from "./hooks/use-play-pause";
 export { useMuteUnmute } from "./hooks/use-mute-unmute";
 export { useStartAt } from "./hooks/use-start-at";
 export { useFullscreen } from "./hooks/use-fullscreen";
+export { useAutoplayByForce } from "./hooks/use-autoplay-by-force";
 
 // Utils
 export { formatTime } from "./utils";

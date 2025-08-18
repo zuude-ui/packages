@@ -2,7 +2,7 @@ import React from "react";
 import { VideoRef } from "../types.js";
 
 export const useAutoplayByForce = (
-  ref: VideoRef,
+  ref: VideoRef | null,
   enabled: boolean,
   setError?: (error: string | null) => void
 ) => {

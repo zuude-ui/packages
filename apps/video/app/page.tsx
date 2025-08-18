@@ -4,6 +4,7 @@ import { PageComp } from "@workspace/ui/components/page-comps";
 import { Demo } from "./demo";
 import { allDocs } from "@/.contentlayer/generated";
 import { Mdx } from "@/components/mdx";
+import { NewDemo } from "./demo copy";
 
 export default function Page() {
   const homeDocs = allDocs.find((doc) => doc.slug === "/");
@@ -16,6 +17,7 @@ export default function Page() {
           Controlling your video did not get easier than this.
         </PageComp.Paragraph>
 
+        <NewDemo />
         <Demo />
       </PageComp.Presentation>
 

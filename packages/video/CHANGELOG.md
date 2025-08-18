@@ -1,5 +1,11 @@
 # @zuude-ui/ios-mockups
 
+## 0.1.2
+
+### Patch Changes
+
+- using new way
+
 ## 0.1.1
 
 ### Patch Changes

@@ -8,6 +8,9 @@ import {
   useVideo,
   formatTime,
 } from "@zuude-ui/video/index";
+
+import { Video as NewVideo } from "@zuude-ui/video/new";
+
 import { useShowVideoPaused } from "@zuude-ui/video/plugins";
 import { Slider } from "@workspace/ui/components/slider";
 import { VolumeOff } from "lucide-react";
