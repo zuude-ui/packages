@@ -28,10 +28,34 @@ export const exportImage = async ({
   const loadImage = () => {
     return new Promise<HTMLImageElement>((resolve, reject) => {
       const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.onload = () => resolve(img);
-      img.onerror = reject;
+      img.crossOrigin = "";
       img.src = imageSrc;
+
+      img.onload = () => resolve(img);
+      img.onerror = (error) => {
+        console.error("Image loading failed:", error);
+        reject(
+          new Error(
+            `Failed to load image: ${imageSrc}. This might be due to CORS policy restrictions.`
+          )
+        );
+      };
+      // img.onerror = (error) => {
+      //   console.error("Image loading failed:", error);
+      //   // Try without crossOrigin if CORS fails
+      //   if (img.crossOrigin === "anonymous") {
+      //     console.log("Retrying without crossOrigin...");
+      //     img.crossOrigin = "";
+      //     img.src = imageSrc;
+      //   } else {
+      //     console.log("✅", error);
+      //     reject(
+      //       new Error(
+      //         `Failed to load image: ${imageSrc}. This might be due to CORS policy restrictions.`
+      //       )
+      //     );
+      //   }
+      // };
     });
   };
 
@@ -39,13 +63,15 @@ export const exportImage = async ({
     const img = await loadImage();
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      throw new Error("Failed to get canvas context");
+    }
 
     // Set canvas dimensions
     canvas.width = cropWidth * scaleTheImage;
     canvas.height = cropHeight * scaleTheImage;
 
-    // Fill the canvas with red background
+    // Fill the canvas with transparent background
     ctx.fillStyle = "transparent";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -83,11 +109,14 @@ export const exportImage = async ({
       });
     });
 
-    if (!blob) return null;
+    if (!blob) {
+      throw new Error("Failed to create image blob");
+    }
 
     const url = URL.createObjectURL(blob);
     return url;
   } catch (error) {
     console.error("Error loading or processing image:", error);
+    throw new Error("Failed to load image"); // Re-throw to allow proper error handling upstream
   }
 };

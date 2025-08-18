@@ -44,33 +44,10 @@ export const componentsConfig = {
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className="text-3xl mb-8 mt-20 first-of-type:mt-0 font-black [&>a]:text-foreground [&>a]:no-underline tracking-tighter"
+      className="text-xl mb-8 mt-20 first-of-type:mt-0 font-semibold [&>a]:text-foreground [&>a]:no-underline"
       {...props}
     >
       {children}
-      <svg
-        viewBox="0 0 16 16"
-        height="0.6em"
-        width="0.6em"
-        className="hidden group-hover:block"
-      >
-        <g strokeWidth="1.2" fill="none" stroke="currentColor">
-          <path
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeMiterlimit="10"
-            d="M8.995,7.005 L8.995,7.005c1.374,1.374,1.374,3.601,0,4.975l-1.99,1.99c-1.374,1.374-3.601,1.374-4.975,0l0,0c-1.374-1.374-1.374-3.601,0-4.975 l1.748-1.698"
-          ></path>
-          <path
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeMiterlimit="10"
-            d="M7.005,8.995 L7.005,8.995c-1.374-1.374-1.374-3.601,0-4.975l1.99-1.99c1.374-1.374,3.601-1.374,4.975,0l0,0c1.374,1.374,1.374,3.601,0,4.975 l-1.748,1.698"
-          ></path>
-        </g>
-      </svg>
     </h2>
   ),
   h3: ({
@@ -246,7 +223,7 @@ export const componentsConfig = {
         <figure
           ref={figureRef}
           className={cn(
-            "group bg-background relative max-h-[400px] w-full overflow-auto rounded-2xl border shadow-sm **:data-line:px-[20px] dark:bg-neutral-900 [&_code]:rounded-none [&_code]:border-none [&_code]:bg-transparent! [&_code]:px-0 [&_code]:py-[20px] [&_code]:text-[13px]"
+            "group bg-background relative max-h-[400px] w-full overflow-auto rounded-2xl border **:data-line:px-[20px] dark:bg-neutral-900 [&_code]:rounded-none [&_code]:border-none [&_code]:bg-transparent! [&_code]:px-0 [&_code]:py-[20px] [&_code]:text-[13px]"
           )}
           {...props}
         >

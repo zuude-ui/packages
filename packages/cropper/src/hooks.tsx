@@ -91,6 +91,8 @@ export function useCropper(otherProps?: {
       setIsCropping(false);
     } catch (error) {
       otherProps?.onError?.(error as Error);
+      console.log("❌", error);
+      setIsCropping(false);
     }
   };
 

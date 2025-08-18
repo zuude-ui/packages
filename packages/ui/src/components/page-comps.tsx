@@ -2,15 +2,11 @@ import React from "react";
 import { cn } from "../lib/utils";
 
 const PageComp = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="flex flex-col items-center justify-center text-center px-5 pb-48">
-      {children}
-    </div>
-  );
+  return <div className="">{children}</div>;
 };
 
 const Heading1 = ({ children }: { children: React.ReactNode }) => {
-  return <h1 className="text-5xl font-black tracking-tighter">{children}</h1>;
+  return <h1 className="text-4xl font-black tracking-tighter">{children}</h1>;
 };
 
 const Heading2 = ({ children }: { children: React.ReactNode }) => {
@@ -27,18 +23,14 @@ const Paragraph = ({
   className?: string;
 }) => {
   return (
-    <p className={cn("text-lg text-muted-foreground mt-6 max-w-xl", className)}>
+    <p className={cn("text-muted-foreground mt-6 max-w-xl", className)}>
       {children}
     </p>
   );
 };
 
 const Presentation = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="w-full mb-40 mx-auto min-h-dvh flex flex-col items-center pt-24 md:pt-40">
-      {children}
-    </div>
-  );
+  return <div className="w-full mt-12 mb-16">{children}</div>;
 };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {

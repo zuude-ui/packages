@@ -2,7 +2,7 @@ import { useState } from "react";
 import { type Crop, Cropper, useCropper } from "@zuude-ui/cropper/index";
 
 import { Button } from "@workspace/ui/components/button";
-import { testImage } from "@workspace/ui/lib/utils";
+import { cn, testImage } from "@workspace/ui/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const Demo = () => {
@@ -25,7 +25,12 @@ export const Demo = () => {
 
   return (
     <>
-      <div className="gap-8 flex mt-12 w-full items-center justify-center">
+      <div
+        className={cn(
+          "gap-4 flex mt-12 w-full items-center justify-center",
+          image && "grid grid-cols-2"
+        )}
+      >
         <Cropper
           ref={ref}
           src={testImage}

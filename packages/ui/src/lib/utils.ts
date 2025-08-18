@@ -6,4 +6,4 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const testImage =
-  "https://vztpjn0djt.ufs.sh/f/RAHCy45jEyblJqofivppCLoeWTwm1FMjXbhRqOVzG6KH4rxy";
+  "https://personal-work-ali.s3.us-west-2.amazonaws.com/A_meteor_hit_the_earth.webp";

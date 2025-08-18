@@ -12,13 +12,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 bg-background/90 backdrop-blur-sm px-4 right-0 z-50 h-16 border-b flex items-center justify-center",
-        pathname.startsWith("/examples") &&
-          "bg-transparent backdrop-blur-none border-b-0"
-      )}
-    >
+    <nav className={cn("right-0 z-50 h-16 flex items-center justify-center")}>
       <div
         className={cn(
           "flex max-w-7xl w-full items-center justify-between",
@@ -35,12 +29,12 @@ export function Navbar() {
           >
             Changelogs
           </Link> */}
-          <Link
+          {/* <Link
             href="/examples"
             className={buttonVariants({ variant: "ghost", className: "mr-2" })}
           >
             Examples
-          </Link>
+          </Link> */}
           <Link
             href="https://github.com/zuude-ui/packages"
             target="_blank"

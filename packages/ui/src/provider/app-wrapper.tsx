@@ -13,8 +13,10 @@ export function AppWrapper({ children }: Props) {
   return (
     <QueryClientProviders>
       <Providers>
-        <Navbar />
-        {children}
+        <div className="max-w-3xl mx-auto py-24">
+          <Navbar />
+          {children}
+        </div>
         <Toaster />
         <ReactScan />
       </Providers>
