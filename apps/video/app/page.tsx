@@ -18,7 +18,7 @@ export default function Page() {
         </PageComp.Paragraph>
 
         <NewDemo />
-        <Demo />
+        {/* <Demo /> */}
       </PageComp.Presentation>
 
       <Mdx code={homeDocs?.body.code ?? ""} />
