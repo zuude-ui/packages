@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.1.2",
+  "version": "0.1.5",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -11,6 +11,23 @@
     "dist/**"
   ],
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.cjs",
+      "require": "./dist/index.js"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.cjs",
+      "require": "./dist/hooks/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.cjs",
+      "require": "./dist/utils/index.js"
+    }
+  },
   "scripts": {
     "build": "tsup",
     "lint": "tsc"
@@ -20,12 +37,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@radix-ui/react-slot": "^1.1.2",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
-    "react": "^19.0.0"
+    "react": "^19.0.0",
+    "@radix-ui/react-slot": "^1.1.2"
   },
   "devDependencies": {
     "@types/react": "^19.0.10"

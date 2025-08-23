@@ -1,25 +1,6 @@
-import React from "react";
-import { useVideo } from "../context";
+import type { VideoRef } from "../types";
 
-export const usePictureInPicture = () => {
-  const { videoRef, isPictureInPicture, setIsPictureInPicture } = useVideo();
-
-  React.useEffect(() => {
-    const handlePictureInPictureChange = () => {
-      setIsPictureInPicture?.(!!document.pictureInPictureElement);
-    };
-
-    document.addEventListener(
-      "pictureinpicturechange",
-      handlePictureInPictureChange
-    );
-    return () =>
-      document.removeEventListener(
-        "pictureinpicturechange",
-        handlePictureInPictureChange
-      );
-  }, []);
-
+export const usePictureInPicture = (videoRef: VideoRef) => {
   const togglePictureInPicture = async () => {
     const video = videoRef?.current;
     if (!video) return;
@@ -57,8 +38,21 @@ export const usePictureInPicture = () => {
     }
   };
 
+  const requestPictureInPicture = async () => {
+    const video = videoRef?.current;
+    if (!video) return;
+    await video.requestPictureInPicture();
+  };
+
+  const exitPictureInPicture = async () => {
+    const video = videoRef?.current;
+    if (!video) return;
+    await document.exitPictureInPicture();
+  };
+
   return {
-    isPictureInPicture: isPictureInPicture ?? false,
     togglePictureInPicture,
+    requestPictureInPicture,
+    exitPictureInPicture,
   };
 };

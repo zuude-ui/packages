@@ -1,9 +1,8 @@
 import React from "react";
-import { useVideo } from "../context";
+import type { VideoRef } from "../types";
 
-export const useVolume = () => {
-  const [volume, setVolume] = React.useState(100);
-  const { videoRef } = useVideo();
+export const useVolume = (videoRef: VideoRef, initialVolume = 100) => {
+  const [volume, setVolume] = React.useState(initialVolume);
 
   const onChangeVolume = (volume: number) => {
     setVolume(volume);

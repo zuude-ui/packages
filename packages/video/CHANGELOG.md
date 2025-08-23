@@ -1,5 +1,17 @@
 # @zuude-ui/ios-mockups
 
+## 0.1.5
+
+### Patch Changes
+
+- New fresh component
+
+## 0.1.3588
+
+### Patch Changes
+
+- Working
+
 ## 0.1.2
 
 ### Patch Changes

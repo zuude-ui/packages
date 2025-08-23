@@ -1,7 +1,7 @@
 import React from "react";
 import type { VideoRef } from "../types";
 
-export const useSpeed = (ref: VideoRef, enabled: boolean) => {
+export const useSpeed = (videoRef: VideoRef) => {
   const [speed, setSpeed] = React.useState(1);
 
   const onChangeSpeed = (speed: number) => {
@@ -10,15 +10,15 @@ export const useSpeed = (ref: VideoRef, enabled: boolean) => {
 
   // Get the speed from the video element
   React.useEffect(() => {
-    if (!ref?.current) return;
-    setSpeed(ref.current.playbackRate);
-  }, [ref?.current]);
+    if (!videoRef?.current) return;
+    setSpeed(videoRef.current.playbackRate);
+  }, [videoRef?.current]);
 
   React.useEffect(() => {
-    if (!enabled || !ref?.current) return;
+    if (!videoRef?.current) return;
 
-    ref.current.playbackRate = speed;
-  }, [speed, enabled, ref?.current]);
+    videoRef.current.playbackRate = speed;
+  }, [speed, videoRef?.current]);
 
   return { speed, onChangeSpeed };
 };

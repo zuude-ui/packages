@@ -1,18 +1,31 @@
 import React from "react";
 import type { VideoRef } from "../types";
 
-export const usePlayPause = (ref: VideoRef, enabled: boolean) => {
+export const usePlayPause = (videoRef: VideoRef) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
 
   const togglePlay = React.useCallback(() => {
-    console.log(ref?.current);
-    if (ref?.current) {
-      ref.current.paused ? ref.current.play() : ref.current.pause();
+    if (videoRef?.current) {
+      videoRef.current.paused
+        ? videoRef.current.play()
+        : videoRef.current.pause();
     }
-  }, [ref?.current]);
+  }, [videoRef?.current]);
+
+  const play = React.useCallback(() => {
+    if (videoRef?.current) {
+      videoRef.current.play();
+    }
+  }, [videoRef?.current]);
+
+  const pause = React.useCallback(() => {
+    if (videoRef?.current) {
+      videoRef.current.pause();
+    }
+  }, [videoRef?.current]);
 
   React.useEffect(() => {
-    if (!enabled || !ref?.current) return;
+    if (!videoRef?.current) return;
 
     const handlePlay = () => {
       setIsPlaying(true);
@@ -21,18 +34,18 @@ export const usePlayPause = (ref: VideoRef, enabled: boolean) => {
       setIsPlaying(false);
     };
 
-    setIsPlaying(!ref?.current.paused);
+    setIsPlaying(!videoRef?.current.paused);
 
-    if (ref?.current) {
-      ref.current.addEventListener("play", handlePlay);
-      ref.current.addEventListener("pause", handlePause);
+    if (videoRef?.current) {
+      videoRef.current.addEventListener("play", handlePlay);
+      videoRef.current.addEventListener("pause", handlePause);
 
       return () => {
-        ref.current?.removeEventListener("play", handlePlay);
-        ref.current?.removeEventListener("pause", handlePause);
+        videoRef.current?.removeEventListener("play", handlePlay);
+        videoRef.current?.removeEventListener("pause", handlePause);
       };
     }
-  }, [ref?.current, enabled]);
+  }, [videoRef?.current]);
 
-  return { togglePlay, isPlaying };
+  return { togglePlay, isPlaying, play, pause };
 };

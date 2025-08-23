@@ -1,13 +1,13 @@
 import React from "react";
-import type { VideoConfig, VideoRef } from "../types";
+import type { VideoRef } from "../types";
 
-export const useStartAt = (ref: VideoRef, startAt?: VideoConfig["startAt"]) => {
+export const useStartAt = (videoRef: VideoRef, startAt: number) => {
   React.useEffect(() => {
-    if (!ref?.current || !startAt) return;
+    if (!videoRef?.current || !startAt) return;
 
-    const video = ref?.current;
+    const video = videoRef?.current;
     if (video && startAt) {
       video.currentTime = startAt;
     }
-  }, [startAt, ref?.current]);
+  }, [startAt, videoRef?.current]);
 };

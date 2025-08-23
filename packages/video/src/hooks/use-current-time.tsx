@@ -1,23 +1,14 @@
 import React from "react";
-import { useVideo } from "../context";
+import type { VideoRef } from "../types.js";
 
-export const useTimeline = () => {
+export const useCurrentTime = (videoRef: VideoRef) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [currentTime, setCurrentTime] = React.useState(0);
-  const [buffered, setBuffered] = React.useState(0);
-
-  const { videoRef, duration } = useVideo();
 
   React.useEffect(() => {
     if (videoRef?.current && isPlaying) {
       const intervalId = setInterval(() => {
         setCurrentTime(videoRef.current?.currentTime || 0);
-
-        if (videoRef.current?.buffered.length) {
-          setBuffered(
-            videoRef.current.buffered.end(videoRef.current.buffered.length - 1)
-          );
-        }
       }, 10);
 
       return () => clearInterval(intervalId);
@@ -36,10 +27,15 @@ export const useTimeline = () => {
     };
   }, []);
 
+  const onTimeUpdate = (time: number) => {
+    if (videoRef?.current) {
+      setCurrentTime(time);
+      videoRef.current.currentTime = time;
+    }
+  };
+
   return {
     currentTime,
-    duration,
-    buffered,
-    setCurrentTime,
+    onTimeUpdate,
   };
 };
