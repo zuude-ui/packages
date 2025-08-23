@@ -1,7 +1,6 @@
 "use client";
 
 import { PageComp } from "@workspace/ui/components/page-comps";
-import { Demo } from "./demo";
 import { allDocs } from "@/.contentlayer/generated";
 import { Mdx } from "@/components/mdx";
 import { NewDemo } from "./demo copy";

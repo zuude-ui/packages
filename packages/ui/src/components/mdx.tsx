@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import Image from "next/image";
 import { cn } from "../lib/utils";
+import CopyButton from "./copy-button";
+import TechIcons from "./tech-icons";
 
 export const componentsConfig = {
   h1: ({
@@ -121,7 +123,7 @@ export const componentsConfig = {
     </h4>
   ),
   p: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <p className="mb-3" {...props} />
+    <p className="mb-3 text-justify" {...props} />
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul className="scroll-m-20 pl-8 text-base leading-7" {...props} />
@@ -197,39 +199,84 @@ export const componentsConfig = {
     />
   ),
   // START - Code Syntax Highlighter
+  // START - Code Syntax Highlighter
   figure: ({
     children,
     className,
     ...props
   }: React.HTMLAttributes<HTMLPreElement> & {}) => {
-    const [showCopyButton, setShowCopyButton] = useState(false);
+    const [isLong, setIsLong] = useState(false);
+    const [spanNum, setSpanNum] = useState(0);
+    const [initialized, setInitialized] = useState(false);
+
     const figureRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-      if (!figureRef.current?.querySelector("figcaption")) {
-        setShowCopyButton(true);
+      const spans = figureRef.current?.querySelectorAll("code > span");
+
+      if (spans) {
+        setSpanNum(spans.length);
+
+        if (spans.length > 30) {
+          setIsLong(true);
+        }
       }
-    }, [figureRef.current]);
+
+      setInitialized(true);
+    }, []);
 
     return (
-      <div className="relative" data-code-block>
-        {/* {showCopyButton && (
+      <figure
+        ref={figureRef}
+        className={cn(
+          "group relative my-4 w-full overflow-auto rounded-md border [&_[data-line]]:px-[20px] [&_code]:rounded-none [&_code]:border-none [&_code]:!bg-transparent [&_code]:px-0 [&_code]:py-[20px] [&_code]:text-[13px]",
+          !initialized && "max-h-[400px] overflow-hidden",
+          isLong && "max-h-[400px]",
+          spanNum > 30 && isLong && "overflow-hidden",
+          !isLong && spanNum > 30 && "max-h-[600px]"
+        )}
+        {...props}
+      >
+        {!figureRef.current?.querySelector("figcaption") && (
           <CopyButton
             value={figureRef.current?.querySelector("pre")?.textContent || ""}
-            className="absolute top-2 right-2 left-2 z-10 mb-[-32px] ml-auto flex"
+            className="sticky left-2 right-2 top-2 mb-[-32px] ml-auto hidden group-hover:flex"
           />
-        )} */}
+        )}
 
-        <figure
-          ref={figureRef}
-          className={cn(
-            "group bg-background relative max-h-[400px] w-full overflow-auto rounded-2xl border **:data-line:px-[20px] dark:bg-neutral-900 [&_code]:rounded-none [&_code]:border-none [&_code]:bg-transparent! [&_code]:px-0 [&_code]:py-[20px] [&_code]:text-[13px]"
-          )}
-          {...props}
-        >
-          {children}
-        </figure>
-      </div>
+        {children}
+        {spanNum > 30 && (
+          <div
+            className={cn(
+              "pointer-events-none sticky bottom-0 left-0 flex h-[100px] w-full items-center justify-center bg-gradient-to-b from-transparent to-background",
+              !isLong && "h-12 from-transparent to-transparent"
+            )}
+          >
+            <button
+              className="bg-foreground text-background pointer-events-auto absolute bottom-6 rounded-lg px-3 py-2 text-sm"
+              onClick={() => {
+                setIsLong(!isLong);
+                if (figureRef.current) {
+                  figureRef.current.style.scrollBehavior = "auto";
+                  figureRef.current.scrollTop = 0;
+                  figureRef.current.scrollLeft = 0;
+                }
+              }}
+            >
+              {isLong ? (
+                <span>
+                  Expand{" "}
+                  <span className="text-xs opacity-80">
+                    ({spanNum - 30} lines)
+                  </span>
+                </span>
+              ) : (
+                "Collapse"
+              )}
+            </button>
+          </div>
+        )}
+      </figure>
     );
   },
   figcaption: ({
@@ -249,14 +296,14 @@ export const componentsConfig = {
     return (
       <figcaption
         ref={copyTextRef}
-        className="sticky top-0 left-0 z-10 flex h-[48px] items-center gap-2 border-b bg-inherit pr-3 pl-4 text-[13px]"
+        className="sticky left-0 top-0 flex h-[48px] items-center gap-2 border-b bg-muted text-muted-foreground pl-4 pr-3 text-[13px]"
         {...props}
       >
-        {/* <TechIcons
+        <TechIcons
           // @ts-ignore
           name={props["data-language"]}
           className=""
-        /> */}
+        />
         <span className="inline-block grow">
           <button
             onClick={() =>
@@ -271,11 +318,11 @@ export const componentsConfig = {
             {children}
           </button>
         </span>
-        {/* {copyTextRef.current && (
+        {copyTextRef.current && (
           <CopyButton
             value={copyTextRef.current?.nextElementSibling?.textContent || ""}
           />
-        )} */}
+        )}
       </figcaption>
     );
   },

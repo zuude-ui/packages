@@ -24,7 +24,7 @@ export const Demo = () => {
   });
 
   return (
-    <>
+    <div className="space-y-8">
       <div
         className={cn(
           "gap-4 flex mt-12 w-full items-center justify-center",
@@ -33,7 +33,7 @@ export const Demo = () => {
       >
         <Cropper
           ref={ref}
-          src={testImage}
+          src={"/A_meteor_hit_the_earth.webp"}
           crop={crop}
           onCropChange={setCrop}
           className="aspect-square w-full !max-w-96 overflow-hidden bg-muted"
@@ -49,19 +49,17 @@ export const Demo = () => {
             key={image}
             src={image}
             alt="Cropped image"
-            className="max-w-96 aspect-square w-full h-full object-cover"
+            className="max-w-96 aspect-square w-full h-full object-cover motion-opacity-in-0"
           />
         )}
       </div>
 
-      <div className="flex gap-4 mt-8">
-        <Button className="mt-4" variant={"outline"} onClick={reset}>
+      <div className="flex gap-4 justify-center">
+        <Button variant={"outline"} onClick={reset}>
           Reset
         </Button>
-        <Button className="mt-4" onClick={cropIt}>
-          {isCropping ? "Cropping..." : "Crop"}
-        </Button>
+        <Button onClick={cropIt}>{isCropping ? "Cropping..." : "Crop"}</Button>
       </div>
-    </>
+    </div>
   );
 };

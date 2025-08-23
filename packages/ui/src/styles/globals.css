@@ -9,6 +9,9 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --font-sans: var(--font-geist-sans);
+  /* --font-mono: var(--font-geist-mono); */
+
   --background: #ffffff;
   --foreground: #000000;
   --card: #fafafa;
@@ -19,8 +22,8 @@
   --primary-foreground: #ffffff;
   --secondary: #3996ff;
   --secondary-foreground: #ffffff;
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted: hsl(0 0% 98%);
+  --muted-foreground: hsl(0 0% 40%);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -32,7 +35,7 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.9rem;
+  --radius: 0.7rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -304,6 +307,52 @@ html.dark {
     color: var(--shiki-dark);
     background-color: var(--shiki-dark-bg);
   }
+}
+
+[data-rehype-pretty-code-figure] code[data-line-numbers] {
+  counter-reset: line;
+}
+
+[data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
+  @apply mr-4 md:mr-8;
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  color: #a8a8a8;
+}
+
+[data-chars-id="add"] {
+  background-color: var(--line-add);
+  border-radius: 2px;
+  padding: 1px 3px;
+}
+
+[data-highlighted-line-id="add"] {
+  background-color: var(--line-add) !important;
+}
+
+[data-highlighted-line-id="remove"] {
+  background-color: var(--line-remove) !important;
+}
+
+[data-highlighted-line-id="opacity"] {
+  opacity: var(--code-opacity);
+}
+
+[data-highlighted-line-id="remove"]::after {
+  content: "-";
+  position: absolute;
+  right: 8px;
+  color: inherit;
+}
+
+[data-highlighted-line-id="add"]::after {
+  content: "+";
+  position: absolute;
+  right: 8px;
+  color: inherit;
 }
 
 .add-plus-animation {

@@ -1,37 +1,3 @@
----
-title: "Introduction"
-description: "Introduction to the project"
-date: 2025-06-14
----
-
-## Installation
-
-```bash title="npm"
-npm install @zuude-ui/cropper
-```
-
-## Usage
-
-```tsx title="Cropper.tsx"
-<Cropper src="" />
-```
-
-<Preview name="default" />
-
-## Props
-
-| Prop              | Type                   | Default |
-| ----------------- | ---------------------- | ------- |
-| `size`            | `"sm" \| "md" \| "lg"` | `"md"`  |
-| `crop`            | `object`               | -       |
-| `onCropChange`    | `function`             | -       |
-| `className`       | `string`               | `""`    |
-| `showGrid`        | `boolean`              | `true`  |
-| `showBehindImage` | `object`               | -       |
-
-## Examples
-
-```tsx title="Cropper.tsx" showLineNumbers
 import React, { useEffect, useState } from "react";
 import { cn } from "@workspace/ui/lib/utils";
 
@@ -109,4 +75,3 @@ export default function CopyButton({ value, className }: Props) {
     </button>
   );
 }
-```
