@@ -6,8 +6,8 @@ export const useHotKeys = (
   enabled = true
 ) => {
   const handleKeyDown = (event: KeyboardEvent) => {
-    event.preventDefault();
     if (event.key === key) {
+      event.preventDefault();
       func(event);
     }
   };

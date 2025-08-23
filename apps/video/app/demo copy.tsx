@@ -12,7 +12,7 @@ import {
   ExitFullscreen,
   Loading,
   type VideoRef,
-} from "@zuude-ui/video";
+} from "@zuude-ui/video/index";
 import {
   useGetDuration,
   useCurrentTime,
@@ -31,6 +31,7 @@ import {
   type TimeFormat,
 } from "@zuude-ui/video/utils";
 import { useRef, useState, useCallback, memo } from "react";
+import { cn } from "@workspace/ui/lib/utils";
 
 // Example usage of the video time utilities
 const TimeFormattingExamples = ({
@@ -45,7 +46,7 @@ const TimeFormattingExamples = ({
   const { buffered, bufferedPercentage } = useBuffer(videoRef, duration);
 
   return (
-    <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
+    <div className="space-y-4 p-4 bg-muted rounded-lg">
       <h3 className="text-lg font-semibold">Video Time Formatting Examples</h3>
 
       <div className="grid grid-cols-2 gap-4 text-sm">
@@ -157,17 +158,34 @@ const VideoContent = memo(() => {
     <>
       <VideoProvider
         onError={(error) => console.log(error)}
-        className="relative w-full max-w-4xl mx-auto mb-8"
+        className="relative w-full max-w-4xl mx-auto mb-8 overflow-hidden"
       >
         <Video
           ref={videoRef}
           src="https://personal-work-ali.s3.us-west-2.amazonaws.com/Transform+Your+Drone+Footage+%23OsmoAction5Pro+%2B+FPV+Cinematic+Editing+%E2%9C%A8%F0%9F%9A%80.mp4"
           className="aspect-[16/9] h-full object-cover"
-          autoPlay
+          autoPlay="force"
           controls
           loop
         />
-        <Controls className="absolute bottom-0 left-0 text-white flex-wrap py-4 items-center right-0 flex justify-center gap-4">
+        <div
+          data-zuude-hide-elements
+          className={cn(
+            "absolute top-0 isolate left-0 text-white py-4 right-0 p-4 gap-4",
+            "data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:-translate-y-full duration-300"
+          )}
+        >
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/50 to-transparent -z-10"></div>
+          <h1>Hello</h1>
+          <p className="text-sm">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum itaque
+            corporis dolorum tempore minima sapiente rem dolore similique
+            suscipit, atque perferendis, dignissimos est et a. Voluptate
+            molestiae inventore minima optio.
+          </p>
+        </div>
+        <Controls className="absolute isolate bottom-0 left-0 text-white flex-wrap py-4 items-center right-0 flex justify-center gap-4 data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:translate-y-full duration-300">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 to-transparent -z-10"></div>
           <Play>Play</Play>
           <Pause>Pause</Pause>
           <Mute>Mute</Mute>

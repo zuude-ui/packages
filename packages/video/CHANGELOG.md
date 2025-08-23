@@ -1,5 +1,11 @@
 # @zuude-ui/ios-mockups
 
+## 0.1.6
+
+### Patch Changes
+
+- hiding elements
+
 ## 0.1.5
 
 ### Patch Changes

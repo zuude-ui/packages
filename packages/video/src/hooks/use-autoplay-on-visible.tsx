@@ -3,11 +3,10 @@ import type { VideoRef } from "../types";
 
 export const useAutoplayOnVisible = (
   videoRef: VideoRef,
-  threshold: number | undefined,
-  enabled: boolean | number | null | undefined
+  threshold: number | undefined
 ) => {
   React.useEffect(() => {
-    if (!enabled || !videoRef?.current) return;
+    if (!videoRef?.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -36,5 +35,5 @@ export const useAutoplayOnVisible = (
     return () => {
       observer.disconnect();
     };
-  }, [enabled, videoRef?.current]);
+  }, [videoRef?.current]);
 };

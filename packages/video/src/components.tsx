@@ -14,7 +14,11 @@ interface ControlsProps extends React.ComponentProps<"div"> {
 
 const Controls = React.memo(
   ({ children, asChild, ...props }: ControlsProps) => {
-    return <div {...props}>{children}</div>;
+    return (
+      <div data-zuude-hide-elements {...props}>
+        {children}
+      </div>
+    );
   }
 );
 

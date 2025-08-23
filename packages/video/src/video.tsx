@@ -49,6 +49,7 @@ export const Video = forwardRef<HTMLVideoElement, Props>(
       <>
         <video
           ref={ref || refVideo}
+          data-zuude-video
           src={src}
           onClick={config?.clickToPlay ? onPlay : undefined}
           autoPlay={autoPlay === "force" ? true : autoPlay}

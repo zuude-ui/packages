@@ -44,6 +44,107 @@ export const VideoProvider = React.memo(
     }, [error]);
 
     useEffect(() => {
+      const videoWrapper = videoWrapperRef.current;
+      if (videoWrapper) {
+        const controls = videoWrapper.querySelectorAll(
+          "[data-zuude-hide-elements]"
+        );
+        const video = videoWrapper.querySelector(
+          "[data-zuude-video]"
+        ) as HTMLVideoElement;
+
+        if (controls) {
+          let hideTimeout: ReturnType<typeof setTimeout> | null = null;
+          const hideDelay = 3000; // 3 seconds delay
+          let isMouseOver = false;
+
+          const resetTimer = () => {
+            // Clear any pending hide timeout
+            if (hideTimeout) {
+              clearTimeout(hideTimeout);
+              hideTimeout = null;
+            }
+
+            // Start new timer to hide controls after delay
+            hideTimeout = setTimeout(() => {
+              if (isMouseOver) {
+                // Check if video is paused - don't hide controls if paused
+                if (video && !video.paused) {
+                  controls.forEach((control) => {
+                    control.setAttribute("data-hidden", "true");
+                  });
+                }
+              }
+              hideTimeout = null;
+            }, hideDelay);
+          };
+
+          const showControls = () => {
+            isMouseOver = true;
+            controls.forEach((control) => {
+              control.removeAttribute("data-hidden");
+            });
+            resetTimer();
+          };
+
+          const hideControls = () => {
+            isMouseOver = false;
+            // Clear any pending hide timeout
+            if (hideTimeout) {
+              clearTimeout(hideTimeout);
+              hideTimeout = null;
+            }
+            // Hide controls immediately when mouse leaves
+            if (video && !video.paused) {
+              controls.forEach((control) => {
+                control.setAttribute("data-hidden", "true");
+              });
+            }
+          };
+
+          const handleMouseMove = () => {
+            if (isMouseOver) {
+              // If controls are hidden, show them
+              controls.forEach((control) => {
+                if (control.hasAttribute("data-hidden")) {
+                  control.removeAttribute("data-hidden");
+                }
+              });
+              resetTimer();
+            }
+          };
+
+          const handlePlay = () => {
+            // Hide controls when video starts playing (autoplay)
+            if (!isMouseOver) {
+              controls.forEach((control) => {
+                control.setAttribute("data-hidden", "true");
+              });
+            }
+          };
+
+          videoWrapper.addEventListener("mouseenter", showControls);
+          videoWrapper.addEventListener("mouseleave", hideControls);
+          videoWrapper.addEventListener("mousemove", handleMouseMove);
+          video.addEventListener("pause", showControls);
+          video.addEventListener("play", handlePlay);
+
+          // Cleanup function
+          return () => {
+            if (hideTimeout) {
+              clearTimeout(hideTimeout);
+            }
+            videoWrapper.removeEventListener("mouseenter", showControls);
+            videoWrapper.removeEventListener("mouseleave", hideControls);
+            videoWrapper.removeEventListener("mousemove", handleMouseMove);
+            video.removeEventListener("pause", showControls);
+            video.removeEventListener("play", handlePlay);
+          };
+        }
+      }
+    }, []);
+
+    useEffect(() => {
       if (isFocused) {
         const handleClick = (event: MouseEvent) => {
           if (!videoWrapperRef.current?.contains(event.target as Node)) {
@@ -57,8 +158,6 @@ export const VideoProvider = React.memo(
         };
       }
     }, [isFocused]);
-
-    console.log("VideoProvider");
 
     return (
       <VideoContext.Provider
