@@ -1,4 +1,4 @@
-import React, { RefObject } from "react";
+import React, { RefObject, useRef } from "react";
 
 import { Slot } from "@radix-ui/react-slot";
 import { useVideo } from "./wrapper";
@@ -6,6 +6,7 @@ import { useFullscreen } from "./hooks/use-fullscreen";
 import { useSeek } from "./hooks/use-seek";
 import { useMuteUnmute } from "./hooks/use-mute-unmute";
 import { usePlayPause } from "./hooks/use-play-pause";
+import { useCurrentTime } from "./hooks/use-current-time";
 
 interface ControlsProps extends React.ComponentProps<"div"> {
   children: React.ReactNode;
@@ -135,6 +136,89 @@ const Loading = () => {
   return <div>Loading</div>;
 };
 
+interface ShadowProps extends React.ComponentProps<"div"> {}
+
+const Shadow = ({ ...props }: ShadowProps) => {
+  const { videoRef } = useVideo();
+
+  const shadowVideoRef = useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    const video = videoRef?.current;
+    if (shadowVideoRef.current && video) {
+      let currentTime = 0;
+      let isPlaying = false;
+      let interval: ReturnType<typeof setInterval> | null = null;
+
+      const startInterval = () => {
+        if (interval) clearInterval(interval);
+        interval = setInterval(() => {
+          console.log("currentTime", video.currentTime);
+          currentTime = video.currentTime;
+          if (shadowVideoRef.current) {
+            shadowVideoRef.current.currentTime = currentTime;
+          }
+        }, 100);
+      };
+
+      const stopInterval = () => {
+        if (interval) {
+          clearInterval(interval);
+          interval = null;
+        }
+      };
+
+      const handlePlay = () => {
+        isPlaying = true;
+        startInterval();
+      };
+
+      const handlePause = () => {
+        isPlaying = false;
+        stopInterval();
+      };
+
+      video.addEventListener("play", handlePlay);
+      video.addEventListener("pause", handlePause);
+
+      return () => {
+        stopInterval();
+        video.removeEventListener("play", handlePlay);
+        video.removeEventListener("pause", handlePause);
+      };
+    }
+  }, [videoRef?.current]);
+
+  if (!videoRef?.current) return null;
+
+  return (
+    <div
+      {...props}
+      style={{
+        ...props.style,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+      }}
+    >
+      <video
+        ref={shadowVideoRef}
+        src={videoRef.current.src}
+        muted
+        playsInline
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+        }}
+      />
+    </div>
+  );
+};
+
 export {
   Controls,
   Play,
@@ -146,4 +230,5 @@ export {
   Fullscreen,
   ExitFullscreen,
   Loading,
+  Shadow,
 };

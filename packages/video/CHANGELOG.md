@@ -1,5 +1,11 @@
 # @zuude-ui/ios-mockups
 
+## 0.1.7
+
+### Patch Changes
+
+- video Shadow
+
 ## 0.1.6
 
 ### Patch Changes

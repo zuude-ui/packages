@@ -1,7 +1,7 @@
 import React from "react";
 import type { VideoRef } from "../types.js";
 
-export const useCurrentTime = (videoRef: VideoRef) => {
+export const useCurrentTime = (videoRef: VideoRef, interval = 10) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [currentTime, setCurrentTime] = React.useState(0);
 
@@ -9,7 +9,7 @@ export const useCurrentTime = (videoRef: VideoRef) => {
     if (videoRef?.current && isPlaying) {
       const intervalId = setInterval(() => {
         setCurrentTime(videoRef.current?.currentTime || 0);
-      }, 10);
+      }, interval);
 
       return () => clearInterval(intervalId);
     }
@@ -25,7 +25,7 @@ export const useCurrentTime = (videoRef: VideoRef) => {
       videoRef.current?.removeEventListener("play", () => setIsPlaying(true));
       videoRef.current?.removeEventListener("pause", () => setIsPlaying(false));
     };
-  }, []);
+  }, [videoRef?.current]);
 
   const onTimeUpdate = (time: number) => {
     if (videoRef?.current) {

@@ -12,6 +12,7 @@ import {
   ExitFullscreen,
   Loading,
   type VideoRef,
+  Shadow,
 } from "@zuude-ui/video/index";
 import {
   useGetDuration,
@@ -71,24 +72,25 @@ const TimeFormattingExamples = ({
         <div>
           <strong>Basic formatting:</strong>
           <div>
-            formatTime({currentTime}): {formatTime(currentTime)}
+            formatTime({currentTime.toFixed(2)}): {formatTime(currentTime)}
           </div>
           <div>
-            formatTime({currentTime}, "h:mm:ss"):{" "}
+            formatTime({currentTime.toFixed(2)}, "h:mm:ss"):{" "}
             {formatTime(currentTime, "h:mm:ss")}
           </div>
           <div>
-            formatTime({currentTime}, "ss"): {formatTime(currentTime, "ss")}
+            formatTime({currentTime.toFixed(2)}, "ss"):{" "}
+            {formatTime(currentTime, "ss")}
           </div>
         </div>
 
         <div>
           <strong>Human readable:</strong>
           <div>
-            humanizeTime({currentTime}): {humanizeTime(currentTime)}
+            humanizeTime({currentTime.toFixed(2)}): {humanizeTime(currentTime)}
           </div>
           <div>
-            humanizeTime({currentTime}, compact: true):{" "}
+            humanizeTime({currentTime.toFixed(2)}, compact: true):{" "}
             {humanizeTime(currentTime, { compact: true })}
           </div>
         </div>
@@ -96,13 +98,13 @@ const TimeFormattingExamples = ({
         <div>
           <strong>Compact & Detailed:</strong>
           <div>
-            compactTime({currentTime}): {compactTime(currentTime)}
+            compactTime({currentTime.toFixed(2)}): {compactTime(currentTime)}
           </div>
           <div>
-            detailedTime({currentTime}): {detailedTime(currentTime)}
+            detailedTime({currentTime.toFixed(2)}): {detailedTime(currentTime)}
           </div>
           <div>
-            detailedTime({currentTime}, showMilliseconds: true):{" "}
+            detailedTime({currentTime.toFixed(2)}, showMilliseconds: true):{" "}
             {detailedTime(currentTime, { showMilliseconds: true })}
           </div>
         </div>
@@ -110,11 +112,11 @@ const TimeFormattingExamples = ({
         <div>
           <strong>Time calculations:</strong>
           <div className="tabular-nums">
-            timeRemaining({currentTime}, {duration}):{" "}
+            timeRemaining({currentTime.toFixed(2)}, {duration}):{" "}
             {timeRemaining(currentTime, duration)}
           </div>
           <div>
-            formatTimeWithPercentage({currentTime}, {duration}):{" "}
+            formatTimeWithPercentage({currentTime.toFixed(2)}, {duration}):{" "}
             {formatTimeWithPercentage(currentTime, duration)}
           </div>
         </div>
@@ -129,7 +131,7 @@ const TimeFormattingExamples = ({
         <div>
           <strong>Accessibility:</strong>
           <div>
-            formatTimeForAccessibility({currentTime}):{" "}
+            formatTimeForAccessibility({currentTime.toFixed(2)}):{" "}
             {formatTimeForAccessibility(currentTime)}
           </div>
         </div>
@@ -158,43 +160,46 @@ const VideoContent = memo(() => {
     <>
       <VideoProvider
         onError={(error) => console.log(error)}
-        className="relative w-full max-w-4xl mx-auto mb-8 overflow-hidden"
+        className="relative w-full max-w-4xl mx-auto mb-8"
       >
         <Video
           ref={videoRef}
           src="https://personal-work-ali.s3.us-west-2.amazonaws.com/Transform+Your+Drone+Footage+%23OsmoAction5Pro+%2B+FPV+Cinematic+Editing+%E2%9C%A8%F0%9F%9A%80.mp4"
-          className="aspect-[16/9] h-full object-cover"
+          className="aspect-[16/9] h-full object-cover rounded-lg"
           autoPlay="force"
           controls
           loop
         />
-        <div
-          data-zuude-hide-elements
-          className={cn(
-            "absolute top-0 isolate left-0 text-white py-4 right-0 p-4 gap-4",
-            "data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:-translate-y-full duration-300"
-          )}
-        >
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/50 to-transparent -z-10"></div>
-          <h1>Hello</h1>
-          <p className="text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum itaque
-            corporis dolorum tempore minima sapiente rem dolore similique
-            suscipit, atque perferendis, dignissimos est et a. Voluptate
-            molestiae inventore minima optio.
-          </p>
+        <Shadow className="absolute inset-0 scale-105 -z-10 bg-black/50 blur-2xl" />
+        <div className="absolute inset-0 overflow-hidden rounded-lg pointer-events-none">
+          <div
+            data-zuude-hide-elements
+            className={cn(
+              "absolute top-0 isolate left-0 text-white py-4 right-0 p-4 gap-4",
+              "data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:-translate-y-full duration-300"
+            )}
+          >
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/50 to-transparent -z-10"></div>
+            <h1>Hello</h1>
+            <p className="text-sm">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+              itaque corporis dolorum tempore minima sapiente rem dolore
+              similique suscipit, atque perferendis, dignissimos est et a.
+              Voluptate molestiae inventore minima optio.
+            </p>
+          </div>
+          <Controls className="absolute pointer-events-auto isolate bottom-0 left-0 text-white flex-wrap py-4 items-center right-0 flex justify-center gap-4 data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:translate-y-full duration-300">
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 to-transparent -z-10"></div>
+            <Play>Play</Play>
+            <Pause>Pause</Pause>
+            <Mute>Mute</Mute>
+            <Unmute>Unmute</Unmute>
+            <SeekForward>SeekForward</SeekForward>
+            <SeekBackward>SeekBackward</SeekBackward>
+            <Fullscreen>Fullscreen</Fullscreen>
+            <ExitFullscreen>ExitFullscreen</ExitFullscreen>
+          </Controls>
         </div>
-        <Controls className="absolute isolate bottom-0 left-0 text-white flex-wrap py-4 items-center right-0 flex justify-center gap-4 data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:translate-y-full duration-300">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 to-transparent -z-10"></div>
-          <Play>Play</Play>
-          <Pause>Pause</Pause>
-          <Mute>Mute</Mute>
-          <Unmute>Unmute</Unmute>
-          <SeekForward>SeekForward</SeekForward>
-          <SeekBackward>SeekBackward</SeekBackward>
-          <Fullscreen>Fullscreen</Fullscreen>
-          <ExitFullscreen>ExitFullscreen</ExitFullscreen>
-        </Controls>
       </VideoProvider>
       <TimeFormattingExamples duration={duration ?? 0} videoRef={videoRef} />
     </>
