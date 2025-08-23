@@ -165,10 +165,11 @@ const VideoContent = memo(() => {
         <Video
           ref={videoRef}
           src="https://personal-work-ali.s3.us-west-2.amazonaws.com/Transform+Your+Drone+Footage+%23OsmoAction5Pro+%2B+FPV+Cinematic+Editing+%E2%9C%A8%F0%9F%9A%80.mp4"
-          className="aspect-[16/9] h-full object-cover rounded-lg"
+          className="!aspect-[16/9] w-full object-cover rounded-lg"
           autoPlay="force"
           controls
           loop
+          playsInline
         />
         <Shadow className="absolute inset-0 scale-105 -z-10 bg-black/50 blur-2xl" />
         <div className="absolute inset-0 overflow-hidden rounded-lg pointer-events-none">
