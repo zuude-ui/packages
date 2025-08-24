@@ -13,6 +13,8 @@ import {
   Loading,
   type VideoRef,
   Shadow,
+  PictureInPicture,
+  Download,
 } from "@zuude-ui/video/index";
 import {
   useGetDuration,
@@ -171,7 +173,7 @@ const VideoContent = memo(() => {
           loop
           playsInline
         />
-        <Shadow className="absolute inset-0 scale-105 -z-10 bg-black/50 blur-2xl" />
+        <Shadow className="absolute inset-0 scale-105 -z-10 bg-black/50 blur-2xl dark:opacity-30" />
         <div className="absolute inset-0 overflow-hidden rounded-lg pointer-events-none">
           <div
             data-zuude-hide-elements
@@ -199,6 +201,8 @@ const VideoContent = memo(() => {
             <SeekBackward>SeekBackward</SeekBackward>
             <Fullscreen>Fullscreen</Fullscreen>
             <ExitFullscreen>ExitFullscreen</ExitFullscreen>
+            <PictureInPicture>PictureInPicture</PictureInPicture>
+            <Download>Download</Download>
           </Controls>
         </div>
       </VideoProvider>
@@ -207,7 +211,7 @@ const VideoContent = memo(() => {
   );
 });
 
-export const NewDemo = () => {
+export const Demo = () => {
   const [value, setValue] = useState("");
   // const videoRef = useRef<HTMLVideoElement>(null);
 

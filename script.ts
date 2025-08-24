@@ -73,3 +73,5 @@ export const variants: Record<string, GenericComponent> = {`;
     index
   );
 };
+
+generateComponents("video");

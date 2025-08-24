@@ -7,6 +7,8 @@ import { useSeek } from "./hooks/use-seek";
 import { useMuteUnmute } from "./hooks/use-mute-unmute";
 import { usePlayPause } from "./hooks/use-play-pause";
 import { useCurrentTime } from "./hooks/use-current-time";
+import { usePictureInPicture } from "./hooks/use-picture-in-picture";
+import { useDownload } from "./hooks/use-download";
 
 interface ControlsProps extends React.ComponentProps<"div"> {
   children: React.ReactNode;
@@ -132,6 +134,34 @@ const ExitFullscreen = React.memo(({ children, asChild, ...props }: Props) => {
   );
 });
 
+const PictureInPicture = React.memo(
+  ({ children, asChild, ...props }: Props) => {
+    const Element = asChild ? Slot : "button";
+    const { videoRef } = useVideo();
+
+    const { togglePictureInPicture } = usePictureInPicture(videoRef);
+
+    return (
+      <Element {...props} onClick={togglePictureInPicture}>
+        {children}
+      </Element>
+    );
+  }
+);
+
+const Download = React.memo(({ children, asChild, ...props }: Props) => {
+  const Element = asChild ? Slot : "button";
+  const { videoRef } = useVideo();
+
+  const { downloadDirect } = useDownload(videoRef);
+
+  return (
+    <Element {...props} onClick={() => downloadDirect()}>
+      {children}
+    </Element>
+  );
+});
+
 const Loading = () => {
   return <div>Loading</div>;
 };
@@ -229,6 +259,8 @@ export {
   SeekBackward,
   Fullscreen,
   ExitFullscreen,
+  PictureInPicture,
+  Download,
   Loading,
   Shadow,
 };

@@ -14,9 +14,11 @@ export const componentsConfig = {
     children,
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h1 className="text-5xl font-black tracking-tighter" {...props}>
-      {children}
-
+    <h1
+      className="text-3xl mt-12 mb-4 first-of-type:mt-0 font-bold tracking-tight [&>a]:text-foreground [&>a]:no-underline"
+      {...props}
+    >
+      <span className="opacity-15 -ml-5.5 font-normal">#</span> {children}
       <svg
         viewBox="0 0 16 16"
         height="0.7em"
@@ -46,10 +48,13 @@ export const componentsConfig = {
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className="text-xl mb-8 mt-20 first-of-type:mt-0 font-semibold [&>a]:text-foreground [&>a]:no-underline"
+      className={cn(
+        "text-xl mb-8 mt-12 font-semibold [&>a]:text-foreground [&>a]:no-underline",
+        "[&+p]:mt-0"
+      )}
       {...props}
     >
-      {children}
+      <span className="opacity-15 -ml-6.5 font-normal">##</span> {children}
     </h2>
   ),
   h3: ({
@@ -58,10 +63,13 @@ export const componentsConfig = {
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
-      className="text-xl mb-8 mt-10 first-of-type:mt-0 font-medium [&>a]:text-foreground [&>a]:no-underline"
+      className={cn(
+        "text-xl mb-6 mt-10 font-medium [&>a]:text-foreground [&>a]:no-underline",
+        "[&+p]:mt-0"
+      )}
       {...props}
     >
-      {children}
+      <span className="opacity-15 -ml-9 font-normal">###</span> {children}
       <svg
         viewBox="0 0 16 16"
         height="0.6em"
@@ -93,40 +101,20 @@ export const componentsConfig = {
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
-      className="group hover:text-primary-hover [&_a:hover]:text-primary-hover mt-[1.6rem] mb-[0.6rem] flex scroll-m-12 items-center gap-2 font-medium [&_a]:text-inherit [&_code]:text-[21px] [&+p]:mt-0!"
+      className="hover:text-primary-hover [&>a]:text-foreground [&>a]:no-underline [&_a:hover]:text-primary-hover mt-[1.6rem] mb-[0.6rem] flex scroll-m-12 items-center gap-2 font-medium [&_a]:text-inherit [&_code]:text-[21px] [&+p]:mt-0!"
       {...props}
     >
-      {children}
-      <svg
-        viewBox="0 0 16 16"
-        height="0.6em"
-        width="0.6em"
-        className="hidden group-hover:block"
-      >
-        <g strokeWidth="1.2" fill="none" stroke="currentColor">
-          <path
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeMiterlimit="10"
-            d="M8.995,7.005 L8.995,7.005c1.374,1.374,1.374,3.601,0,4.975l-1.99,1.99c-1.374,1.374-3.601,1.374-4.975,0l0,0c-1.374-1.374-1.374-3.601,0-4.975 l1.748-1.698"
-          ></path>
-          <path
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeMiterlimit="10"
-            d="M7.005,8.995 L7.005,8.995c-1.374-1.374-1.374-3.601,0-4.975l1.99-1.99c1.374-1.374,3.601-1.374,4.975,0l0,0c1.374,1.374,1.374,3.601,0,4.975 l-1.748,1.698"
-          ></path>
-        </g>
-      </svg>
+      <span className="opacity-15 -ml-10 font-normal">####</span> {children}
     </h4>
   ),
   p: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <p className="mb-3 text-justify" {...props} />
+    <p className="my-3 text-justify text-muted-foreground" {...props} />
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className="scroll-m-20 pl-8 text-base leading-7" {...props} />
+    <ul
+      className="scroll-m-20 pl-8 text-base leading-7 text-muted-foreground"
+      {...props}
+    />
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
     <li
@@ -158,7 +146,7 @@ export const componentsConfig = {
   ),
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
     <div
-      className="mt-4 mb-2 w-full overflow-auto rounded-xl border"
+      className="mt-4 mb-2 w-full overflow-auto rounded-md border"
       data-table
     >
       <table

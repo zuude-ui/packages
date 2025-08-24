@@ -13,3 +13,4 @@ export * from "./use-current-time";
 export * from "./use-video-state";
 export * from "./use-volume";
 export * from "./use-buffer";
+export * from "./use-download";
