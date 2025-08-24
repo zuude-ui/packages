@@ -9,6 +9,8 @@ import { usePlayPause } from "./hooks/use-play-pause";
 import { useCurrentTime } from "./hooks/use-current-time";
 import { usePictureInPicture } from "./hooks/use-picture-in-picture";
 import { useDownload } from "./hooks/use-download";
+import { useSpeed } from "./hooks";
+import { useLoading } from "./hooks/use-loading";
 
 interface ControlsProps extends React.ComponentProps<"div"> {
   children: React.ReactNode;
@@ -81,6 +83,35 @@ const Unmute = React.memo(({ children, asChild, ...props }: Props) => {
     </Element>
   );
 });
+
+interface SpeedProps extends Props {
+  value: number;
+  onClick?: () => void;
+}
+
+const Speed = React.memo(
+  ({ children, asChild, value, onClick, ...props }: SpeedProps) => {
+    const Element = asChild ? Slot : "button";
+    const { videoRef } = useVideo();
+
+    const { speed, onChangeSpeed } = useSpeed(
+      videoRef as RefObject<HTMLVideoElement>
+    );
+
+    return (
+      <Element
+        {...props}
+        value={value}
+        onClick={() => {
+          onChangeSpeed(value);
+          onClick?.();
+        }}
+      >
+        {children}
+      </Element>
+    );
+  }
+);
 
 const SeekForward = React.memo(({ children, asChild, ...props }: Props) => {
   const Element = asChild ? Slot : "button";
@@ -162,9 +193,27 @@ const Download = React.memo(({ children, asChild, ...props }: Props) => {
   );
 });
 
-const Loading = () => {
-  return <div>Loading</div>;
-};
+interface LoadingProps extends React.ComponentProps<"div"> {
+  children: React.ReactNode;
+  asChild?: boolean;
+}
+
+const Loading = React.memo(({ children, asChild, ...props }: LoadingProps) => {
+  const Element = asChild ? Slot : "div";
+  const { videoRef } = useVideo();
+
+  const { isLoading } = useLoading(videoRef);
+
+  return (
+    <Element
+      {...props}
+      style={{ ...props.style, pointerEvents: "none" }}
+      data-loading={isLoading}
+    >
+      {children}
+    </Element>
+  );
+});
 
 interface ShadowProps extends React.ComponentProps<"div"> {}
 
@@ -255,6 +304,7 @@ export {
   Pause,
   Mute,
   Unmute,
+  Speed,
   SeekForward,
   SeekBackward,
   Fullscreen,

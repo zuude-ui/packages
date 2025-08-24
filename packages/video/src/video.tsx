@@ -4,15 +4,20 @@ import { VideoAutoplay } from "./types";
 import { useAutoplayByForce } from "./hooks/use-autoplay-by-force";
 import { Keyboards } from "./keyboard";
 
-interface Props extends Omit<React.ComponentProps<"video">, "autoPlay"> {
+interface Props
+  extends Omit<React.ComponentProps<"video">, "autoPlay" | "preload"> {
   src: string;
   autoPlay?: VideoAutoplay;
   controls?: boolean;
+  preload?: "none" | "metadata" | "auto";
   muteFallback?: (onMute: () => void) => React.ReactNode;
 }
 
 export const Video = forwardRef<HTMLVideoElement, Props>(
-  ({ src, autoPlay, muteFallback, controls, ...props }, ref) => {
+  (
+    { src, autoPlay, muteFallback, controls, preload = "metadata", ...props },
+    ref
+  ) => {
     const { videoRef, setVideoRef, config, setError, error, isFocused } =
       useVideo();
 
@@ -53,6 +58,7 @@ export const Video = forwardRef<HTMLVideoElement, Props>(
           src={src}
           onClick={config?.clickToPlay ? onPlay : undefined}
           autoPlay={autoPlay === "force" ? true : autoPlay}
+          preload={preload}
           {...props}
         />
 

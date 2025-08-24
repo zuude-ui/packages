@@ -242,6 +242,39 @@ For mobile **safari**, it acts differently. It will open the video in fullscreen
 | `asChild`  | `boolean`                        | Render as child      | -       |
 | `...props` | `React.ComponentProps<"button">` | Button element props | -       |
 
+### Speed
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `value`    | `number`                         | Speed value          | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+**Example:**
+
+```tsx
+<Speed value={1.5}>Speed</Speed>
+<Speed value={2}>Speed</Speed>
+<Speed value={0.5}>Speed</Speed>
+```
+
+### Loading
+
+| Prop       | Type                          | Description       | Default |
+| ---------- | ----------------------------- | ----------------- | ------- |
+| `children` | `ReactNode`                   | Button content    | -       |
+| `asChild`  | `boolean`                     | Render as child   | -       |
+| `...props` | `React.ComponentProps<"div">` | Div element props | -       |
+
+**Example:**
+
+```tsx
+<Loading className="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center opacity-0 justify-center data-[loading=true]:opacity-100">
+  Loading
+</Loading>
+```
+
 ## Shadow
 
 A shadow video component that mirrors the main video's playback state and current time.
@@ -705,6 +738,21 @@ Automatically sets the starting time when the video loads.
 
 ```tsx
 useStartAt(videoRef, 30); // Start at 30 seconds
+```
+
+### useRange
+
+Sets the range of the video to play.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+| `range`    | `[number, number]`            | Range of the video to play     |
+
+**Example:**
+
+```tsx
+useRange(videoRef, [10, 12]); // Play from 10 to 12 seconds
 ```
 
 ### useFullscreen

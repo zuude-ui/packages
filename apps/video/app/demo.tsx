@@ -15,11 +15,13 @@ import {
   Shadow,
   PictureInPicture,
   Download,
+  Speed,
 } from "@zuude-ui/video/index";
 import {
   useGetDuration,
   useCurrentTime,
   useBuffer,
+  useRange,
 } from "@zuude-ui/video/hooks";
 import {
   formatTime,
@@ -166,7 +168,8 @@ const VideoContent = memo(() => {
       >
         <Video
           ref={videoRef}
-          src="https://personal-work-ali.s3.us-west-2.amazonaws.com/Transform+Your+Drone+Footage+%23OsmoAction5Pro+%2B+FPV+Cinematic+Editing+%E2%9C%A8%F0%9F%9A%80.mp4"
+          // src="https://personal-work-ali.s3.us-west-2.amazonaws.com/Transform+Your+Drone+Footage+%23OsmoAction5Pro+%2B+FPV+Cinematic+Editing+%E2%9C%A8%F0%9F%9A%80.mp4"
+          src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
           className="!aspect-[16/9] w-full object-cover rounded-lg"
           autoPlay="force"
           controls
@@ -203,7 +206,11 @@ const VideoContent = memo(() => {
             <ExitFullscreen>ExitFullscreen</ExitFullscreen>
             <PictureInPicture>PictureInPicture</PictureInPicture>
             <Download>Download</Download>
+            <Speed value={1.5}>Speed</Speed>
           </Controls>
+          <Loading className="absolute top-0 left-0 w-full h-full duration-300 bg-black/50 flex items-center opacity-0 justify-center data-[loading=true]:opacity-100">
+            Loading
+          </Loading>
         </div>
       </VideoProvider>
       <TimeFormattingExamples duration={duration ?? 0} videoRef={videoRef} />

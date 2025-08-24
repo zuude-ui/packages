@@ -14,3 +14,4 @@ export * from "./use-video-state";
 export * from "./use-volume";
 export * from "./use-buffer";
 export * from "./use-download";
+export * from "./use-range";
