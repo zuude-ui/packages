@@ -3,6 +3,7 @@ import { useVideo } from "./wrapper";
 import { VideoAutoplay } from "./types";
 import { useAutoplayByForce } from "./hooks/use-autoplay-by-force";
 import { Keyboards } from "./keyboard";
+import { useAutoplayOnVisible } from "./hooks";
 
 interface Props
   extends Omit<React.ComponentProps<"video">, "autoPlay" | "preload"> {
@@ -11,11 +12,20 @@ interface Props
   controls?: boolean;
   preload?: "none" | "metadata" | "auto";
   muteFallback?: (onMute: () => void) => React.ReactNode;
+  autoPlayOnVisible?: boolean | number;
 }
 
 export const Video = forwardRef<HTMLVideoElement, Props>(
   (
-    { src, autoPlay, muteFallback, controls, preload = "metadata", ...props },
+    {
+      src,
+      autoPlay,
+      muteFallback,
+      controls,
+      preload = "metadata",
+      autoPlayOnVisible,
+      ...props
+    },
     ref
   ) => {
     const { videoRef, setVideoRef, config, setError, error, isFocused } =
@@ -40,6 +50,16 @@ export const Video = forwardRef<HTMLVideoElement, Props>(
       videoRef,
       autoPlay === "force" && props.muted === undefined,
       setError
+    );
+
+    useAutoplayOnVisible(
+      videoRef,
+      typeof autoPlayOnVisible === "number"
+        ? autoPlayOnVisible
+        : !autoPlayOnVisible
+          ? 0.5
+          : undefined,
+      !!autoPlayOnVisible
     );
 
     const onPlay = () => {

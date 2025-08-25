@@ -1,5 +1,11 @@
 # @zuude-ui/ios-mockups
 
+## 0.1.9
+
+### Patch Changes
+
+- Added auto play on visible on video component
+
 ## 0.1.8
 
 ### Patch Changes

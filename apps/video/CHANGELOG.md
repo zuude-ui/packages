@@ -1,5 +1,12 @@
 # web
 
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @zuude-ui/video@0.1.9
+
 ## 0.1.6
 
 ### Patch Changes
