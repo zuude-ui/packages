@@ -1,3 +1,5 @@
+import * as SliderPrimitive from "@radix-ui/react-slider";
+
 import {
   Video,
   VideoProvider,
@@ -11,227 +13,234 @@ import {
   Fullscreen,
   ExitFullscreen,
   Loading,
-  type VideoRef,
-  Shadow,
   PictureInPicture,
   Download,
-  Speed,
 } from "@zuude-ui/video/index";
 import {
   useGetDuration,
   useCurrentTime,
-  useBuffer,
-  useRange,
+  useVideoState,
+  useSpeed,
 } from "@zuude-ui/video/hooks";
-import {
-  formatTime,
-  humanizeTime,
-  compactTime,
-  detailedTime,
-  parseTime,
-  timeRemaining,
-  formatTimeWithPercentage,
-  getTimeSegments,
-  formatTimeForAccessibility,
-  type TimeFormat,
-} from "@zuude-ui/video/utils";
-import { useRef, useState, useCallback, memo } from "react";
+import { formatTime } from "@zuude-ui/video/utils";
+import { useRef, memo } from "react";
 import { cn } from "@workspace/ui/lib/utils";
+import { Button } from "@workspace/ui/components/button";
+import { Badge } from "@workspace/ui/components/badge";
+import {
+  Play as PlayIcon,
+  Pause as PauseIcon,
+  Volume2,
+  VolumeX,
+  SkipForward,
+  SkipBack,
+  Maximize,
+  Minimize,
+  PictureInPicture as PipIcon,
+  Download as DownloadIcon,
+  Clock,
+  Zap,
+  Sparkles,
+} from "lucide-react";
+import { VideoRef } from "@zuude-ui/video";
 
-// Example usage of the video time utilities
-const TimeFormattingExamples = ({
-  duration,
-  videoRef,
-}: {
-  duration: number;
-  videoRef: VideoRef;
-}) => {
-  const [timeString, setTimeString] = useState("2:30");
-  const { currentTime, onTimeUpdate } = useCurrentTime(videoRef);
-  const { buffered, bufferedPercentage } = useBuffer(videoRef, duration);
-
-  return (
-    <div className="space-y-4 p-4 bg-muted rounded-lg">
-      <h3 className="text-lg font-semibold">Video Time Formatting Examples</h3>
-
-      <div className="grid grid-cols-2 gap-4 text-sm">
-        <div>
-          <input
-            type="range"
-            min={0}
-            max={duration}
-            step={0.01}
-            value={currentTime}
-            onChange={(e) => {
-              onTimeUpdate(Number(e.target.value));
-            }}
-          />
-          <div>
-            {buffered} / {duration}
-          </div>
-          <div>
-            {bufferedPercentage} / {duration}
-          </div>
-        </div>
-        <div>
-          <strong>Basic formatting:</strong>
-          <div>
-            formatTime({currentTime.toFixed(2)}): {formatTime(currentTime)}
-          </div>
-          <div>
-            formatTime({currentTime.toFixed(2)}, "h:mm:ss"):{" "}
-            {formatTime(currentTime, "h:mm:ss")}
-          </div>
-          <div>
-            formatTime({currentTime.toFixed(2)}, "ss"):{" "}
-            {formatTime(currentTime, "ss")}
-          </div>
-        </div>
-
-        <div>
-          <strong>Human readable:</strong>
-          <div>
-            humanizeTime({currentTime.toFixed(2)}): {humanizeTime(currentTime)}
-          </div>
-          <div>
-            humanizeTime({currentTime.toFixed(2)}, compact: true):{" "}
-            {humanizeTime(currentTime, { compact: true })}
-          </div>
-        </div>
-
-        <div>
-          <strong>Compact & Detailed:</strong>
-          <div>
-            compactTime({currentTime.toFixed(2)}): {compactTime(currentTime)}
-          </div>
-          <div>
-            detailedTime({currentTime.toFixed(2)}): {detailedTime(currentTime)}
-          </div>
-          <div>
-            detailedTime({currentTime.toFixed(2)}, showMilliseconds: true):{" "}
-            {detailedTime(currentTime, { showMilliseconds: true })}
-          </div>
-        </div>
-
-        <div>
-          <strong>Time calculations:</strong>
-          <div className="tabular-nums">
-            timeRemaining({currentTime.toFixed(2)}, {duration}):{" "}
-            {timeRemaining(currentTime, duration)}
-          </div>
-          <div>
-            formatTimeWithPercentage({currentTime.toFixed(2)}, {duration}):{" "}
-            {formatTimeWithPercentage(currentTime, duration)}
-          </div>
-        </div>
-
-        <div>
-          <strong>Parsing:</strong>
-          <div>parseTime("2:30"): {parseTime(timeString)}s</div>
-          <div>parseTime("1:23:45"): {parseTime(timeString)}s</div>
-          <div>parseTime("90s"): {parseTime(timeString)}s</div>
-        </div>
-
-        <div>
-          <strong>Accessibility:</strong>
-          <div>
-            formatTimeForAccessibility({currentTime.toFixed(2)}):{" "}
-            {formatTimeForAccessibility(currentTime)}
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <strong>Time segments:</strong>
-        <div className="text-xs">
-          {getTimeSegments(duration, 5).map((time, i) => (
-            <span key={i} className="mr-2">
-              {formatTime(time, "mm:ss")}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const VideoContent = memo(() => {
+export const Demo = memo(() => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
   const { duration } = useGetDuration(videoRef);
+  const { currentTime } = useCurrentTime(videoRef);
+  const { isPlaying, isMuted, isFullscreen } = useVideoState(videoRef);
+  const { speed } = useSpeed(videoRef);
 
   return (
-    <>
-      <VideoProvider
-        onError={(error) => console.log(error)}
-        className="relative w-full max-w-4xl mx-auto mb-8"
-      >
-        <Video
-          ref={videoRef}
-          // src="https://personal-work-ali.s3.us-west-2.amazonaws.com/Transform+Your+Drone+Footage+%23OsmoAction5Pro+%2B+FPV+Cinematic+Editing+%E2%9C%A8%F0%9F%9A%80.mp4"
-          src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-          className="!aspect-[16/9] w-full object-cover rounded-lg"
-          autoPlay="force"
-          controls
-          loop
-          playsInline
-        />
-        <Shadow className="absolute inset-0 scale-105 -z-10 bg-black/50 blur-2xl dark:opacity-30" />
-        <div className="absolute inset-0 overflow-hidden rounded-lg pointer-events-none">
-          <div
-            data-zuude-hide-elements
-            className={cn(
-              "absolute top-0 isolate left-0 text-white py-4 right-0 p-4 gap-4",
-              "data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:-translate-y-full duration-300"
-            )}
-          >
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/50 to-transparent -z-10"></div>
-            <h1>Hello</h1>
-            <p className="text-sm">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-              itaque corporis dolorum tempore minima sapiente rem dolore
-              similique suscipit, atque perferendis, dignissimos est et a.
-              Voluptate molestiae inventore minima optio.
+    <div className="overflow-hidden border rounded-lg bg-card">
+      <div className="p-6 pb-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="flex items-center gap-2 text-lg font-semibold">
+              Advanced Video Player
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Experience all features in action
             </p>
           </div>
-          <Controls className="absolute pointer-events-auto isolate bottom-0 left-0 text-white flex-wrap py-4 items-center right-0 flex justify-center gap-4 data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:translate-y-full duration-300">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 to-transparent -z-10"></div>
-            <Play>Play</Play>
-            <Pause>Pause</Pause>
-            <Mute>Mute</Mute>
-            <Unmute>Unmute</Unmute>
-            <SeekForward>SeekForward</SeekForward>
-            <SeekBackward>SeekBackward</SeekBackward>
-            <Fullscreen>Fullscreen</Fullscreen>
-            <ExitFullscreen>ExitFullscreen</ExitFullscreen>
-            <PictureInPicture>PictureInPicture</PictureInPicture>
-            <Download>Download</Download>
-            <Speed value={1.5}>Speed</Speed>
-          </Controls>
-          <Loading className="absolute top-0 left-0 w-full h-full duration-300 bg-black/50 flex items-center opacity-0 justify-center data-[loading=true]:opacity-100">
-            Loading
-          </Loading>
+          <div className="flex items-center gap-2">
+            <Badge variant="secondary" className="flex items-center gap-1">
+              <Zap className="w-3 h-3" />
+              {speed}x
+            </Badge>
+            <Badge variant="outline" className="flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              {formatTime(currentTime)} / {formatTime(duration || 0)}
+            </Badge>
+          </div>
         </div>
-      </VideoProvider>
-      <TimeFormattingExamples duration={duration ?? 0} videoRef={videoRef} />
-    </>
+      </div>
+      <div className="p-0">
+        <VideoProvider
+          onError={(error) => console.log(error)}
+          className="relative w-full flex justify-center items-center"
+        >
+          <Video
+            ref={videoRef}
+            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            className="aspect-[16/9] w-full object-cover"
+            controls
+            loop
+            playsInline
+          />
+
+          {/* Overlay content */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Top overlay */}
+            <div
+              data-zuude-hide-elements
+              className={cn(
+                "absolute top-0 isolate left-0 text-white py-4 right-0 p-4 gap-4",
+                "data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:-translate-y-full duration-300"
+              )}
+            >
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/50 to-transparent -z-10"></div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold">Big Buck Bunny</h3>
+                  <p className="text-sm opacity-80">A short animated film</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge
+                    variant="secondary"
+                    className="bg-white/20 text-white border-white/20"
+                  >
+                    <Sparkles className="w-3 h-3 mr-1" />
+                    Demo
+                  </Badge>
+                </div>
+              </div>
+            </div>
+
+            {/* Controls */}
+            <Controls className="absolute pointer-events-auto px-4 isolate bottom-0 left-0 text-white flex-wrap py-4 items-center right-0 flex justify-center gap-2 data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none data-[hidden=true]:translate-y-full duration-300">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 to-transparent -z-10"></div>
+              <Timeline videoRef={videoRef} />
+
+              {/* Control buttons */}
+              <div className="flex items-center gap-1">
+                <Button variant="ghost" size="icon" asChild>
+                  <SeekBackward>
+                    <SkipBack className="w-4 h-4" />
+                  </SeekBackward>
+                </Button>
+
+                <Button variant="ghost" size="icon" asChild>
+                  {isPlaying ? (
+                    <Pause>
+                      <PauseIcon className="w-4 h-4" />
+                    </Pause>
+                  ) : (
+                    <Play>
+                      <PlayIcon className="w-4 h-4" />
+                    </Play>
+                  )}
+                </Button>
+
+                <Button variant="ghost" size="icon" asChild>
+                  <SeekForward>
+                    <SkipForward className="w-4 h-4" />
+                  </SeekForward>
+                </Button>
+              </div>
+
+              <div className="flex items-center gap-1">
+                <Button variant="ghost" size="icon" asChild>
+                  {isMuted ? (
+                    <Unmute>
+                      <VolumeX className="w-4 h-4" />
+                    </Unmute>
+                  ) : (
+                    <Mute>
+                      <Volume2 className="w-4 h-4" />
+                    </Mute>
+                  )}
+                </Button>
+
+                <Button variant="ghost" size="icon" asChild>
+                  <PictureInPicture>
+                    <PipIcon className="w-4 h-4" />
+                  </PictureInPicture>
+                </Button>
+
+                <Button variant="ghost" size="icon" asChild>
+                  <Download>
+                    <DownloadIcon className="w-4 h-4" />
+                  </Download>
+                </Button>
+
+                <Button variant="ghost" size="icon" asChild>
+                  {isFullscreen ? (
+                    <ExitFullscreen>
+                      <Minimize className="w-4 h-4" />
+                    </ExitFullscreen>
+                  ) : (
+                    <Fullscreen>
+                      <Maximize className="w-4 h-4" />
+                    </Fullscreen>
+                  )}
+                </Button>
+              </div>
+            </Controls>
+
+            {/* Loading state */}
+            <Loading className="absolute top-0 left-0 w-full h-full duration-300 bg-black/50 flex items-center opacity-0 justify-center data-[loading=true]:opacity-100">
+              <div className="flex items-center gap-2 text-white">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                Loading...
+              </div>
+            </Loading>
+          </div>
+        </VideoProvider>
+      </div>
+    </div>
   );
 });
 
-export const Demo = () => {
-  const [value, setValue] = useState("");
-  // const videoRef = useRef<HTMLVideoElement>(null);
+interface TimelineProps {
+  videoRef: VideoRef;
+}
 
-  // const { isPlaying, isMuted, isFullscreen } = useVideoState(videoRef);
+export const Timeline = memo(({ videoRef }: TimelineProps) => {
+  const { currentTime, onTimeUpdate } = useCurrentTime(videoRef);
+  const { duration } = useGetDuration(videoRef);
 
   return (
-    <div>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <VideoContent />
-    </div>
+    <SliderPrimitive.Root
+      data-slot="slider"
+      value={[currentTime]}
+      min={0}
+      max={duration || 0}
+      className="relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col"
+      onValueChange={(value) => {
+        onTimeUpdate(value[0] || 0);
+      }}
+    >
+      <SliderPrimitive.Track
+        data-slot="slider-track"
+        className={cn(
+          "bg-white/30 relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5"
+        )}
+      >
+        <SliderPrimitive.Range
+          data-slot="slider-range"
+          className={cn(
+            "bg-white absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
+          )}
+        />
+      </SliderPrimitive.Track>
+      {Array.from({ length: 1 }, (_, index) => (
+        <SliderPrimitive.Thumb
+          data-slot="slider-thumb"
+          key={index}
+          className="border-primary bg-background ring-ring/50 block h-4 w-1.5 shrink-0 rounded-[2px] shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+        />
+      ))}
+    </SliderPrimitive.Root>
   );
-};
+});

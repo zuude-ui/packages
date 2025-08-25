@@ -1,6 +1,6 @@
 {
   "name": "video",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "type": "module",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@radix-ui/react-slider": "^1.3.5",
     "@workspace/ui": "workspace:*",
     "@zuude-ui/video": "workspace:*",
     "contentlayer2": "^0.5.8",

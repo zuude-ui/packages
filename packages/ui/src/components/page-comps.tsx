@@ -6,7 +6,11 @@ const PageComp = ({ children }: { children: React.ReactNode }) => {
 };
 
 const Heading1 = ({ children }: { children: React.ReactNode }) => {
-  return <h1 className="text-4xl font-bold tracking-tight">{children}</h1>;
+  return (
+    <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+      {children}
+    </h1>
+  );
 };
 
 const Heading2 = ({ children }: { children: React.ReactNode }) => {
@@ -25,7 +29,7 @@ const Paragraph = ({
   return (
     <p
       className={cn(
-        "text-muted-foreground mt-6 max-w-xl text-justify",
+        "text-xl text-muted-foreground max-w-3xl mx-auto mb-8 text-justify",
         className
       )}
     >

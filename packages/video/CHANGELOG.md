@@ -1,5 +1,11 @@
 # @zuude-ui/ios-mockups
 
+## 0.1.8
+
+### Patch Changes
+
+- Speed - Download - Loading
+
 ## 0.1.7
 
 ### Patch Changes
