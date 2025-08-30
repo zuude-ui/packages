@@ -19,7 +19,7 @@ export const PackageVideoPresentation = ({
   if (!show) return null;
 
   return (
-    <Portal className="fixed z-20 bottom-4 hidden md:block right-4 left-4 md:left-auto bg-muted rounded-md p-px border">
+    <Portal className="fixed z-200 bottom-4 hidden md:block right-4 left-4 md:left-auto bg-muted rounded-md p-px border">
       <Button
         className="absolute top-2 size-7 rounded-sm right-2 z-1"
         onClick={() => setShow(false)}

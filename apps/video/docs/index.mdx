@@ -78,7 +78,7 @@ const VideoPlayer = () => {
 
 If you don't specify a `ref` prop, the video component will use its own internal ref. If you provide your own ref prop, the component will use that instead. This allows you to either let the component handle the ref internally or have direct access to the video element when needed.
 
-#### controls
+### controls
 
 If the controls prop is set to `true`, you don't get the default browser video controls. The benefit of this is that when the video is clicked (focused), you can use your keyboard to control the video with the following shortcuts:
 
@@ -89,7 +89,7 @@ If the controls prop is set to `true`, you don't get the default browser video c
 - `Right` Arrow: Seek Forward 10s
 - `P`: Toggle the picture-in-picture mode
 
-#### autoplay
+### autoplay
 
 In modern browsers, autoplay is blocked by default if you try to autoplay a video with sound. To autoplay the video, you can use the `force` option which will automatically handle muting the video if needed. This ensures the video can autoplay without sound, following browser autoplay policies.
 
@@ -112,7 +112,7 @@ The Controls component allows you to add custom video player controls. It automa
 | `children`  | `ReactNode`                   | Control buttons and elements | -       |
 | `...props`  | `React.ComponentProps<"div">` | Div element props            | -       |
 
-#### data-zuude-hide-elements
+### data-zuude-hide-elements
 
 The `data-zuude-hide-elements` attribute is used to hide the controls when the video is playing. This is useful when you want to add your own controls to the video player.
 

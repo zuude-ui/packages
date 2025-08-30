@@ -1,5 +1,12 @@
 # @zuude-ui/ios-mockups
 
+## 0.1.92
+
+### Patch Changes
+
+- Added hooks to the package
+- Added useVideo hook to the package
+
 ## 0.1.9
 
 ### Patch Changes

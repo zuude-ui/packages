@@ -29,10 +29,7 @@ export function AppWrapper({ children }: Props) {
       <body>
         <QueryClientProviders>
           <Providers>
-            <div className="max-w-3xl mx-auto px-4 py-24">
-              <Navbar />
-              {children}
-            </div>
+            {children}
             <Toaster />
             <ReactScan />
           </Providers>

@@ -1,8 +1,20 @@
 import React from "react";
 import { cn } from "../lib/utils";
 
-const PageComp = ({ children }: { children: React.ReactNode }) => {
-  return <div className="">{children}</div>;
+const PageWrapper = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="lg:flex justify-center gap-24 py-12 px-4">{children}</div>
+  );
+};
+
+const PageComp = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <div className={cn("w-full lg:max-w-3xl", className)}>{children}</div>;
 };
 
 const Heading1 = ({ children }: { children: React.ReactNode }) => {
@@ -29,7 +41,7 @@ const Paragraph = ({
   return (
     <p
       className={cn(
-        "text-xl text-muted-foreground max-w-3xl mx-auto mb-8 text-justify",
+        "text-xl text-muted-foreground mb-8 text-justify",
         className
       )}
     >
@@ -167,6 +179,7 @@ const ExampleWrapper = ({
   );
 };
 
+PageComp.PageWrapper = PageWrapper;
 PageComp.Presentation = Presentation;
 PageComp.Wrapper = Wrapper;
 PageComp.Section = Section;

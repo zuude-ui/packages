@@ -29,8 +29,10 @@ const computedFields = {
           .toLowerCase()
           .trim()
           .replace(/[\s+]/g, "-")
-          .replace(/[^\w\-]+/g, "");
+          .replace(/[^\w\-0-9]+/g, "");
       };
+
+      const usedIds = new Set();
 
       lines.forEach((line) => {
         if (line.trim().startsWith("```")) {
@@ -41,7 +43,17 @@ const computedFields = {
           const match = line.match(/^(#{1,3})\s(.+)$/);
           if (match) {
             const [_, hashes, text] = match;
-            const id = slugify(text);
+            let id = slugify(text);
+
+            // Handle duplicate IDs by adding numbers
+            let counter = 1;
+            let originalId = id;
+            while (usedIds.has(id)) {
+              id = `${originalId}-${counter}`;
+              counter++;
+            }
+            usedIds.add(id);
+
             headingMatches.push({
               level: hashes.length,
               text,

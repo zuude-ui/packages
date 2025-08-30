@@ -15,7 +15,7 @@ export const componentsConfig = {
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
-      className="text-3xl mt-12 mb-4 first-of-type:mt-0 font-bold tracking-tight [&>a]:text-foreground [&>a]:no-underline"
+      className="text-3xl mt-12 scroll-mt-10 mb-4 first-of-type:mt-0 font-bold tracking-tight [&>a]:text-foreground [&>a]:no-underline"
       {...props}
     >
       <span className="opacity-15 -ml-5.5 font-normal">#</span> {children}
@@ -49,7 +49,7 @@ export const componentsConfig = {
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "text-xl mb-8 mt-12 font-semibold [&>a]:text-foreground [&>a]:no-underline",
+        "text-xl mb-8 mt-12 scroll-mt-10 font-semibold [&>a]:text-foreground [&>a]:no-underline",
         "[&+p]:mt-0"
       )}
       {...props}
@@ -64,7 +64,7 @@ export const componentsConfig = {
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "text-xl mb-6 mt-10 font-medium [&>a]:text-foreground [&>a]:no-underline",
+        "text-xl mb-6 mt-10 scroll-mt-10 font-medium [&>a]:text-foreground [&>a]:no-underline",
         "[&+p]:mt-0"
       )}
       {...props}
@@ -101,7 +101,7 @@ export const componentsConfig = {
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
-      className="hover:text-primary-hover [&>a]:text-foreground [&>a]:no-underline [&_a:hover]:text-primary-hover mt-[1.6rem] mb-[0.6rem] flex scroll-m-12 items-center gap-2 font-medium [&_a]:text-inherit [&_code]:text-[21px] [&+p]:mt-0!"
+      className="hover:text-primary-hover scroll-mt-10 [&>a]:text-foreground [&>a]:no-underline [&_a:hover]:text-primary-hover mt-[1.6rem] mb-[0.6rem] flex scroll-m-12 items-center gap-2 font-medium [&_a]:text-inherit [&_code]:text-[21px] [&+p]:mt-0!"
       {...props}
     >
       <span className="opacity-15 -ml-10 font-normal">####</span> {children}
@@ -357,7 +357,10 @@ export function MdxUI({ code, components }: MdxProps) {
   const Component = useMDXComponent(code);
 
   return (
-    <div className="relative flex flex-col max-w-4xl text-start w-full">
+    <div
+      id="mdx-container"
+      className="relative flex flex-col text-start w-full"
+    >
       <Component components={components} />
     </div>
   );
