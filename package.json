@@ -12,7 +12,7 @@
     "release": "pnpm build && changeset publish",
     "ios-mockup:build": "cd packages/ios-mockups && pnpm build",
     "cropper:build": "cd packages/cropper && pnpm build",
-    "g": "tsx script.ts && prettier --write ./apps/video/__registry__/index.ts",
+    "g": "tsx apps/docs/script.ts && prettier --write ./apps/docs/__registry__/index.ts",
     "p:script": "tsx package-script.ts"
   },
   "devDependencies": {
