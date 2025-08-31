@@ -1,0 +1,77 @@
+---
+title: Introduction
+description: The video components are built on top of the hooks and provide a complete video player solution with built-in controls, auto-hide functionality, and keyboard shortcuts.
+icon: Album
+---
+
+## Install
+
+```package-install
+npm install @zuude-ui/video
+```
+
+## VideoProvider (Required)
+
+The main context provider that wraps your video player and provides global state management.
+
+| Prop        | Type                          | Description                 | Default |
+| ----------- | ----------------------------- | --------------------------- | ------- |
+| `children`  | `ReactNode`                   | Video player components     | -       |
+| `onError`   | `(error: string) => void`     | Error callback function     | -       |
+| `className` | `string`                      | CSS classes for the wrapper | -       |
+| `...props`  | `React.ComponentProps<"div">` | Div element props           | -       |
+
+**Example:**
+
+```tsx
+import { VideoProvider } from "@zuude-ui/video";
+
+const VideoPlayer = () => {
+  return (
+    <VideoProvider onError={(error) => console.log(error)}>
+      {/* Your video player components */}
+    </VideoProvider>
+  );
+};
+```
+
+## Video
+
+The main video component that renders the HTML video element.
+
+| Prop           | Type                                      | Description                       | Default |
+| -------------- | ----------------------------------------- | --------------------------------- | ------- |
+| `src`          | `string`                                  | Video source URL                  | -       |
+| `ref`          | `RefObject<HTMLVideoElement>`             | Video element reference           | -       |
+| `className`    | `string`                                  | CSS classes for the video element | -       |
+| `autoPlay`     | `boolean \| "force"`                      | Auto-play the video               | -       |
+| `controls`     | `boolean`                                 | Show/hide controls                | `true`  |
+| `muteFallback` | `(onMute: () => void) => React.ReactNode` | Custom UI for autoplay blocked    | -       |
+| `...props`     | `React.ComponentProps<"video">`           | Video element props               | -       |
+
+**Example:**
+
+```tsx
+import { Video } from "@zuude-ui/video";
+
+const VideoPlayer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  return (
+    <VideoProvider>
+      <Video
+        ref={videoRef}
+        src="https://example.com/video.mp4"
+        className="w-full aspect-video object-cover rounded-lg"
+        autoPlay
+        muted
+        loop
+        onClick={() => console.log("Video clicked")}
+        onLoadedMetadata={() => console.log("Metadata loaded")}
+      />
+    </VideoProvider>
+  );
+};
+```
+
+If you don't specify a `ref` prop, the video component will use its own internal ref. If you provide your own ref prop, the component will use that instead. This allows you to either let the component handle the ref internally or have direct access to the video element when needed.

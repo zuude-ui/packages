@@ -1,0 +1,453 @@
+---
+title: Hooks
+description: A comprehensive collection of React hooks for building powerful video players with advanced functionality.
+---
+
+## useVideoState
+
+Manages the basic state of a video element (playing, muted, fullscreen).
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  isPlaying: boolean;
+  isMuted: boolean;
+  isFullscreen: boolean;
+}
+```
+
+**Example:**
+
+```tsx
+const videoRef = useRef<HTMLVideoElement>(null);
+const { isPlaying, isMuted, isFullscreen } = useVideoState(videoRef);
+```
+
+## usePlayPause
+
+Handles play and pause functionality with toggle capability.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  togglePlay: () => void;
+  play: () => void;
+  pause: () => void;
+}
+```
+
+**Example:**
+
+```tsx
+const { togglePlay, play, pause } = usePlayPause(videoRef);
+```
+
+## useCurrentTime
+
+Tracks and manages the current playback time of the video.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  currentTime: number;
+  onTimeUpdate: (time: number) => void;
+}
+```
+
+**Example:**
+
+```tsx
+const { currentTime, onTimeUpdate } = useCurrentTime(videoRef);
+```
+
+## useGetDuration
+
+Retrieves and manages the total duration of the video.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  duration: number | null;
+  isLoading: boolean;
+}
+```
+
+**Example:**
+
+```tsx
+const { duration, isLoading } = useGetDuration(videoRef);
+```
+
+## useVolume
+
+Manages video volume with smooth transitions and state tracking.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  volume: number;
+  setVolume: (volume: number) => void;
+  increaseVolume: () => void;
+  decreaseVolume: () => void;
+}
+```
+
+**Example:**
+
+```tsx
+const { volume, setVolume, increaseVolume, decreaseVolume } =
+  useVolume(videoRef);
+```
+
+## useMuteUnmute
+
+Handles mute/unmute functionality with state management.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  isMuted: boolean;
+  toggleMute: () => void;
+  mute: () => void;
+  unmute: () => void;
+}
+```
+
+**Example:**
+
+```tsx
+const { isMuted, toggleMute, mute, unmute } = useMuteUnmute(videoRef);
+```
+
+## useSeek
+
+Provides seeking functionality with forward/backward controls.
+
+| Prop       | Type                          | Description                    | Default |
+| ---------- | ----------------------------- | ------------------------------ | ------- |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element | -       |
+| `value`    | `number`                      | Seek amount in seconds         | `10`    |
+
+**Returns:**
+
+```tsx
+{
+  seekForward: () => void;
+  seekBackward: () => void;
+  seekTo: (time: number) => void;
+}
+```
+
+**Example:**
+
+```tsx
+const { seekForward, seekBackward, seekTo } = useSeek(videoRef, 15);
+```
+
+## useSpeed
+
+Manages video playback speed with multiple speed options.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  speed: number;
+  onChangeSpeed: (speed: number) => void;
+  availableSpeeds: number[];
+}
+```
+
+**Example:**
+
+```tsx
+const { speed, onChangeSpeed, availableSpeeds } = useSpeed(videoRef);
+```
+
+## useStartAt
+
+Automatically sets the starting time when the video loads.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+| `startAt`  | `number`                      | Start time in seconds          |
+
+**Example:**
+
+```tsx
+useStartAt(videoRef, 30); // Start at 30 seconds
+```
+
+## useRange
+
+Sets the range of the video to play.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+| `range`    | `[number, number]`            | Range of the video to play     |
+
+**Example:**
+
+```tsx
+useRange(videoRef, [10, 12]); // Play from 10 to 12 seconds
+```
+
+## useFullscreen
+
+Manages fullscreen functionality with cross-browser support.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  isFullscreen: boolean;
+  toggleFullscreen: () => void;
+  enterFullscreen: () => void;
+  exitFullscreen: () => void;
+}
+```
+
+**Example:**
+
+```tsx
+const { isFullscreen, toggleFullscreen } = useFullscreen(videoRef);
+```
+
+**Note:** Wrap the video parent in `data-zuude-video-wrapper` to use fullscreen.
+
+## usePictureInPicture
+
+Handles picture-in-picture mode with state management.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  isPictureInPicture: boolean;
+  togglePictureInPicture: () => void;
+  enterPictureInPicture: () => void;
+  exitPictureInPicture: () => void;
+}
+```
+
+**Example:**
+
+```tsx
+const { isPictureInPicture, togglePictureInPicture } =
+  usePictureInPicture(videoRef);
+```
+
+## useDownload
+
+Provides video download functionality with progress tracking and error handling.
+
+| Prop       | Type                          | Description                    |
+| ---------- | ----------------------------- | ------------------------------ |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |
+
+**Returns:**
+
+```tsx
+{
+  downloadVideo: (filename?: string) => Promise<void>;
+  downloadDirect: (filename?: string) => void;
+  isDownloading: boolean;
+  downloadProgress: number;
+  error: string | null;
+  resetError: () => void;
+}
+```
+
+**Methods:**
+
+- **`downloadVideo(filename?)`** - Download with progress tracking
+
+  - Fetches video as a stream for large files
+  - Provides real-time progress updates
+  - Better error handling and memory management
+
+- **`downloadDirect(filename?)`** - Simple direct download
+  - Uses browser's native download behavior
+  - Faster for smaller files
+  - Works with direct video URLs
+  - No progress tracking
+
+**State:**
+
+- **`isDownloading`** - Boolean indicating download status
+- **`downloadProgress`** - Number (0-100) showing download progress
+- **`error`** - String containing error messages
+- **`resetError()`** - Function to clear error state
+
+**Example:**
+
+```tsx
+import { useDownload } from "@zuude-ui/video/hooks";
+
+const VideoPlayer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const {
+    downloadVideo,
+    downloadDirect,
+    isDownloading,
+    downloadProgress,
+    error,
+    resetError,
+  } = useDownload(videoRef);
+
+  const handleDownload = async () => {
+    try {
+      // Download with progress tracking
+      await downloadVideo("my-video.mp4");
+    } catch (err) {
+      console.error("Download failed:", err);
+    }
+  };
+
+  const handleQuickDownload = () => {
+    // Simple direct download
+    downloadDirect("quick-video.mp4");
+  };
+
+  return (
+    <div>
+      <video ref={videoRef} src="/path/to/video.mp4" />
+
+      <button onClick={handleDownload} disabled={isDownloading}>
+        {isDownloading ? `Downloading... ${downloadProgress}%` : "Download"}
+      </button>
+
+      <button onClick={handleQuickDownload}>Quick Download</button>
+
+      {error && (
+        <div>
+          <p>Error: {error}</p>
+          <button onClick={resetError}>Dismiss</button>
+        </div>
+      )}
+    </div>
+  );
+};
+```
+
+## useAutoplayByForce
+
+Forces autoplay with fallback handling for browsers that block it.
+
+| Prop       | Type                          | Description                       |         |
+| ---------- | ----------------------------- | --------------------------------- | ------- |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element    |         |
+| `enabled`  | `boolean`                     | Whether to enable forced autoplay | `false` |
+| `onError`  | `(error: string) => void`     | Error callback function           | -       |
+
+**Example:**
+
+```tsx
+useAutoplayByForce(videoRef, true, (error) => console.log(error));
+```
+
+## useAutoplayOnVisible
+
+Automatically plays video when it becomes visible in the viewport.
+
+| Prop        | Type                          | Description                    |       |
+| ----------- | ----------------------------- | ------------------------------ | ----- |
+| `videoRef`  | `RefObject<HTMLVideoElement>` | Reference to the video element |       |
+| `threshold` | `number`                      | Visibility threshold (0-1)     | `0.5` |
+
+**Example:**
+
+```tsx
+useAutoplayOnVisible(videoRef, 0.7); // Play when 70% visible
+```
+
+## useHotKeys
+
+Manages keyboard shortcuts for video controls.
+
+| Prop      | Type                             | Description                   |        |
+| --------- | -------------------------------- | ----------------------------- | ------ |
+| `key`     | `string`                         | Keyboard key to listen for    | -      |
+| `func`    | `(event: KeyboardEvent) => void` | Function to execute           | -      |
+| `enabled` | `boolean`                        | Whether the hotkey is enabled | `true` |
+
+**Example:**
+
+```tsx
+useHotKeys(" ", (e) => {
+  e.preventDefault();
+  togglePlay();
+});
+```
+
+## useBuffer
+
+Tracks video buffering progress and state.
+
+| Prop       | Type                          | Description                    |     |
+| ---------- | ----------------------------- | ------------------------------ | --- |
+| `videoRef` | `RefObject<HTMLVideoElement>` | Reference to the video element |     |
+| `duration` | `number`                      | Total video duration           | -   |
+
+**Returns:**
+
+```tsx
+{
+  buffered: number;
+  bufferedPercentage: number;
+  isBuffering: boolean;
+}
+```
+
+**Example:**
+
+```tsx
+const { buffered, bufferedPercentage, isBuffering } = useBuffer(
+  videoRef,
+  duration
+);
+```

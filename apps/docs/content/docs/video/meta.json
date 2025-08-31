@@ -1,0 +1,7 @@
+{
+  "title": "Video",
+  "description": "The video library",
+  "icon": "Cuboid",
+  "root": true,
+  "pages": ["---Guide---", "index", "control-components", "hooks"]
+}

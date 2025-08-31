@@ -1,0 +1,148 @@
+---
+title: Control Components
+description: Individual control components that can be used within the `Controls` component or as standalone components.
+---
+
+## Play
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+## Pause
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+## Mute
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+## Unmute
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+## SeekForward
+
+The default value is 10 seconds.
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+## SeekBackward
+
+The default value is 10 seconds.
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+## Fullscreen
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+For mobile **safari**, it acts differently. It will open the video in fullscreen mode. We don't have access the state of the fullscreen mode, so we can't use it to show/hide the controls.
+
+## ExitFullscreen
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+## PictureInPicture
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+## Download
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+## Speed
+
+| Prop       | Type                             | Description          | Default |
+| ---------- | -------------------------------- | -------------------- | ------- |
+| `children` | `ReactNode`                      | Button content       | -       |
+| `asChild`  | `boolean`                        | Render as child      | -       |
+| `value`    | `number`                         | Speed value          | -       |
+| `...props` | `React.ComponentProps<"button">` | Button element props | -       |
+
+**Example:**
+
+```tsx
+<Speed value={1.5}>Speed</Speed>
+<Speed value={2}>Speed</Speed>
+<Speed value={0.5}>Speed</Speed>
+```
+
+## Loading
+
+| Prop       | Type                          | Description       | Default |
+| ---------- | ----------------------------- | ----------------- | ------- |
+| `children` | `ReactNode`                   | Button content    | -       |
+| `asChild`  | `boolean`                     | Render as child   | -       |
+| `...props` | `React.ComponentProps<"div">` | Div element props | -       |
+
+**Example:**
+
+```tsx
+<Loading className="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center opacity-0 justify-center data-[loading=true]:opacity-100">
+  Loading
+</Loading>
+```
+
+## Shadow
+
+A shadow video component that mirrors the main video's playback state and current time.
+
+| Prop       | Type                          | Description       | Default |
+| ---------- | ----------------------------- | ----------------- | ------- |
+| `...props` | `React.ComponentProps<"div">` | Div element props | -       |
+
+**Example:**
+
+```tsx
+import { VideoProvider, Video, Shadow } from "@zuude-ui/video";
+
+const VideoPlayer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  return (
+    <VideoProvider>
+      <Video ref={videoRef} src="video.mp4" />
+      <Shadow className="absolute bottom-0 left-0 right-0 -z-10 object-cover rounded blur-sm" />
+    </VideoProvider>
+  );
+};
+```
