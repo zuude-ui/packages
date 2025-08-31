@@ -1,0 +1,196 @@
+---
+title: Format Time
+description: Similar to `date-fns` but specifically designed for video durations and time formatting.
+---
+
+## Basic Usage
+
+```tsx
+import { formatTime, humanizeTime, parseTime } from "@zuude-ui/video/utils";
+
+// Basic formatting
+formatTime(125.5); // "2:05"
+formatTime(125.5, "h:mm:ss"); // "0:02:05"
+formatTime(125.5, "ss"); // "125s"
+
+// Human readable
+humanizeTime(125.5); // "2 minutes 5 seconds"
+humanizeTime(125.5, { compact: true }); // "2 minutes"
+
+// Parse time strings
+parseTime("2:30"); // 150
+parseTime("1:23:45"); // 5025
+parseTime("90s"); // 90
+```
+
+## Available Functions
+
+### `formatTime(time, options)`
+
+Format time in seconds to various formats.
+
+**Parameters:**
+
+- `time` (number): Time in seconds
+- `options` (TimeFormatOptions | TimeFormat): Format options
+
+**Formats:**
+
+- `"mm:ss"` (default): "2:05"
+- `"h:mm:ss"`: "0:02:05"
+- `"ss"`: "125s"
+- `"human"`: "2 minutes 5 seconds"
+- `"compact"`: "2:05"
+- `"detailed"`: "00:02:05.000"
+
+**Options:**
+
+```tsx
+interface TimeFormatOptions {
+  format?: TimeFormat;
+  showHours?: boolean;
+  showLeadingZeros?: boolean;
+  showMilliseconds?: boolean;
+  humanize?: boolean;
+  compact?: boolean;
+}
+```
+
+### `humanizeTime(time, options)`
+
+Convert time to human-readable format.
+
+```tsx
+humanizeTime(125.5); // "2 minutes 5 seconds"
+humanizeTime(125.5, { compact: true }); // "2 minutes"
+humanizeTime(3600); // "1 hour"
+```
+
+### `compactTime(time)`
+
+Compact time format.
+
+```tsx
+compactTime(125.5); // "2:05"
+compactTime(3600); // "1:00:00"
+```
+
+### `detailedTime(time, options)`
+
+Detailed time format with optional milliseconds.
+
+```tsx
+detailedTime(125.5); // "00:02:05"
+detailedTime(125.5, { showMilliseconds: true }); // "00:02:05.000"
+```
+
+### `parseTime(timeString)`
+
+Parse time string to seconds.
+
+```tsx
+parseTime("2:30"); // 150
+parseTime("1:23:45"); // 5025
+parseTime("90s"); // 90
+parseTime("1.5m"); // 90
+parseTime("0.5h"); // 1800
+```
+
+### `timeRemaining(current, total, format)`
+
+Calculate remaining time.
+
+```tsx
+timeRemaining(125.5, 3600); // "57:54"
+timeRemaining(125.5, 3600, "human"); // "57 minutes 54 seconds"
+```
+
+### `formatTimeWithPercentage(current, total, format)`
+
+Format time with percentage.
+
+```tsx
+formatTimeWithPercentage(125.5, 3600); // "2:05 (3%)"
+```
+
+### `getTimeSegments(duration, segments)`
+
+Get time segments for timeline.
+
+```tsx
+getTimeSegments(3600, 5); // [0, 720, 1440, 2160, 2880, 3600]
+```
+
+### `formatTimeForAccessibility(time)`
+
+Format time for screen readers.
+
+```tsx
+formatTimeForAccessibility(125.5); // "2 minutes, 5 seconds"
+```
+
+## Advanced Examples
+
+<Preview name="format-duration" />
+
+### Custom Timeline Component
+
+```tsx
+import { formatTime, getTimeSegments } from "@zuude-ui/video/utils";
+
+const Timeline = ({ currentTime, duration }) => {
+  const segments = getTimeSegments(duration, 10);
+
+  return (
+    <div className="timeline">
+      {segments.map((time, i) => (
+        <div key={i} className="segment">
+          {formatTime(time, "mm:ss")}
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+### Video Progress Display
+
+```tsx
+import {
+  formatTime,
+  timeRemaining,
+  formatTimeWithPercentage,
+} from "@zuude-ui/video/utils";
+
+const VideoProgress = ({ currentTime, duration }) => {
+  return (
+    <div className="video-progress">
+      <span>{formatTime(currentTime)}</span>
+      <span>{timeRemaining(currentTime, duration)}</span>
+      <span>{formatTimeWithPercentage(currentTime, duration)}</span>
+    </div>
+  );
+};
+```
+
+### Accessibility-Friendly Time Display
+
+```tsx
+import { formatTimeForAccessibility } from "@zuude-ui/video/utils";
+
+const AccessibleTimeDisplay = ({ time }) => {
+  return (
+    <span aria-label={formatTimeForAccessibility(time)}>
+      {formatTime(time)}
+    </span>
+  );
+};
+```
+
+## TypeScript Support
+
+Full TypeScript support with comprehensive type definitions:
+
+```tsx
+import type { TimeFormat, TimeFormatOptions } from "@zuude-ui/video/utils";
+```

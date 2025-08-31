@@ -43,7 +43,7 @@ export const useDownload = (videoRef: VideoRef) => {
           throw new Error("Failed to create download stream");
         }
 
-        const chunks: Uint8Array[] = [];
+        const chunks: BlobPart[] = [];
         let receivedLength = 0;
 
         while (true) {

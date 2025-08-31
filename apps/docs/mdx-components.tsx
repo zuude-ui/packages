@@ -12,7 +12,9 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     AutoTypeTable: (props) => (
       <AutoTypeTable {...props} generator={generator} />
     ),
-    Preview: (props) => <Preview name={props.name} />,
+    Preview: (props) => (
+      <Preview name={props.name} className={props.className} />
+    ),
     ...components,
   };
 }

@@ -1,10 +1,9 @@
 ---
 title: Introduction
 description: The video components are built on top of the hooks and provide a complete video player solution with built-in controls, auto-hide functionality, and keyboard shortcuts.
-icon: Album
 ---
 
-<Preview name="showcase" />
+<Preview name="showcase" className="p-0" />
 
 ## Install
 
@@ -76,4 +75,8 @@ const VideoPlayer = () => {
 };
 ```
 
+<Callout title='Good to Know'>
+
 If you don't specify a `ref` prop, the video component will use its own internal ref. If you provide your own ref prop, the component will use that instead. This allows you to either let the component handle the ref internally or have direct access to the video element when needed.
+
+</Callout>

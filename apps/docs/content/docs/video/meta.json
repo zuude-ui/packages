@@ -1,7 +1,13 @@
 {
   "title": "Video",
-  "description": "The video library",
-  "icon": "Cuboid",
+  "description": "zuude-ui/video",
+  "icon": "Film",
   "root": true,
-  "pages": ["---Guide---", "index", "control-components", "hooks"]
+  "pages": [
+    "---Guide---",
+    "index",
+    "control-components",
+    "hooks",
+    "format-time"
+  ]
 }

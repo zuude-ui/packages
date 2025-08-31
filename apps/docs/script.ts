@@ -33,10 +33,12 @@ for (const file of files) {
   const relativePath = path.relative(REGISTRY_PATH, file);
   const folderName = relativePath.split(path.sep)[0]; // Get first-level folder name
 
-  if (!filesByFolder[folderName]) {
-    filesByFolder[folderName] = [];
+  if (folderName) {
+    if (!filesByFolder[folderName]) {
+      filesByFolder[folderName] = [];
+    }
+    filesByFolder[folderName].push(file);
   }
-  filesByFolder[folderName].push(file);
 }
 
 let index = `import dynamic from "next/dynamic";

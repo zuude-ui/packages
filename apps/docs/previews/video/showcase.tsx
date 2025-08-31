@@ -15,7 +15,7 @@ import {
   Loading,
   PictureInPicture,
   Download,
-} from "@zuude-ui/video/index";
+} from "@zuude-ui/video";
 import {
   useGetDuration,
   useCurrentTime,
@@ -44,7 +44,7 @@ import {
 } from "lucide-react";
 import { VideoRef } from "@zuude-ui/video";
 
-const Showcase = memo(() => {
+const Showcase = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const { duration } = useGetDuration(videoRef);
   const { currentTime } = useCurrentTime(videoRef);
@@ -52,17 +52,12 @@ const Showcase = memo(() => {
   const { speed } = useSpeed(videoRef);
 
   return (
-    <div className="overflow-hidden border rounded-lg bg-card">
+    <div>
       <div className="p-6 pb-4">
         <div className="flex items-center justify-between">
-          <div>
-            <h3 className="flex items-center gap-2 text-lg font-semibold">
-              Advanced Video Player
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Experience all features in action
-            </p>
-          </div>
+          <h3 className="flex items-center !mt-0 gap-2 text-lg font-semibold">
+            Video Player
+          </h3>
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className="flex items-center gap-1">
               <Zap className="w-3 h-3" />
@@ -83,7 +78,7 @@ const Showcase = memo(() => {
           <Video
             ref={videoRef}
             src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            className="aspect-[16/9] w-full object-cover"
+            className="aspect-[16/9] w-full object-cover !my-0"
             controls
             loop
             playsInline
@@ -102,7 +97,7 @@ const Showcase = memo(() => {
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/50 to-transparent -z-10"></div>
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-semibold">Big Buck Bunny</h3>
+                  <h3 className="font-semibold text-white">Big Buck Bunny</h3>
                   <p className="text-sm opacity-80">A short animated film</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -200,7 +195,7 @@ const Showcase = memo(() => {
       </div>
     </div>
   );
-});
+};
 
 interface TimelineProps {
   videoRef: VideoRef;
