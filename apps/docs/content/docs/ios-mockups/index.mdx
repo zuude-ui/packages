@@ -1,0 +1,95 @@
+---
+title: Introduction
+---
+
+<Preview
+  name="showcase"
+  className="flex flex-col items-center justify-center"
+/>
+
+## Installation
+
+```package-install
+npm install @zuude-ui/ios-mockups
+```
+
+## Usage
+
+```tsx
+import { Iphone } from "@zuude-ui/ios-mockups";
+
+export default function MyComponent() {
+  return (
+    <Iphone size="md" color="natural-titanium">
+      {/* Your content here */}
+    </Iphone>
+  );
+}
+```
+
+## Props
+
+| Prop             | Type                                                                                                                                  | Default              | Description                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------- |
+| `size`           | `"sm" \| "md" \| "lg"`                                                                                                                | `"md"`               | Controls the size of the iPhone mockup                  |
+| `color`          | `"natural-titanium" \| "blue-titanium" \| "white-titanium" \| "black-titanium" \| "blue" \| "pink" \| "yellow" \| "green" \| "black"` | `"natural-titanium"` | Sets the color scheme of the iPhone mockup              |
+| `className`      | `string`                                                                                                                              | `""`                 | Additional CSS classes to apply to the mockup container |
+| `buttonHandlers` | `IphoneButtonsAction`                                                                                                                 | -                    | Callback functions for the iPhone buttons               |
+
+## CSS Variables
+
+The component uses several CSS variables that you can customize:
+
+| Variable                 | Default          | Description                                                      | Example                                                              |
+| ------------------------ | ---------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `--screen-color`         | `transparent`    | Sets the background color of the content area                    | `[--screen-color:white]` or `[--screen-color:var(--background)]`     |
+| `--dynamic-island-color` | `black`          | Sets the color of the dynamic island and home indicator          | `[--dynamic-island-color:white]`                                     |
+| `--top-safe-area`        | _varies by size_ | Height of the top safe area (automatically set based on size)    | `46px` for small size, `60px` for medium size, `70px` for large size |
+| `--bottom-safe-area`     | _varies by size_ | Height of the bottom safe area (automatically set based on size) | `15px` for all sizes                                                 |
+
+## Examples
+
+### Different Sizes
+
+```tsx
+<Iphone size="sm">Small iPhone</Iphone>
+<Iphone size="md">Medium iPhone</Iphone>
+<Iphone size="lg">Large iPhone</Iphone>
+```
+
+### Different Colors
+
+```tsx
+<Iphone color="blue-titanium">Blue Titanium</Iphone>
+<Iphone color="pink">Pink</Iphone>
+<Iphone color="green">Green</Iphone>
+```
+
+### With Button Handlers
+
+```tsx
+<Iphone
+  buttonHandlers={{
+    action: () => console.log("Action button pressed"),
+    volumeUp: () => console.log("Volume up"),
+    volumeDown: () => console.log("Volume down"),
+    power: () => console.log("Power button pressed"),
+  }}
+>
+  Interactive iPhone
+</Iphone>
+```
+
+### Customizing CSS Variables
+
+```tsx
+// White background with white dynamic island
+<Iphone style={{ "--screen-color": "white", "--dynamic-island-color": "black" }}>
+  Content
+</Iphone>
+
+// Using Tailwind CSS variables
+<Iphone className="![--screen-color:white] ![--dynamic-island-color:black]">
+  Content
+</Iphone>
+```

@@ -1,0 +1,7 @@
+{
+  "title": "Ios Mockups",
+  "description": "@zuude-ui/ios-mockups",
+  "icon": "Smartphone",
+  "root": true,
+  "pages": ["---Guide---", "index", "examples", "changelogs"]
+}

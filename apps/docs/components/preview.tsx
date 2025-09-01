@@ -2,7 +2,7 @@
 
 import { useParams } from "fumadocs-core/framework";
 
-import { videoVariants } from "@/__registry__";
+import { iosmockupsVariants, videoVariants } from "@/__registry__";
 import { cn } from "@workspace/ui/lib/utils";
 
 interface Props {
@@ -19,6 +19,8 @@ export const Preview = ({ name, className }: Props) => {
 
   if (packageName === "video") {
     Component = videoVariants[name];
+  } else if (packageName === "ios-mockups") {
+    Component = iosmockupsVariants[name];
   }
 
   if (!Component) {
@@ -26,7 +28,12 @@ export const Preview = ({ name, className }: Props) => {
   }
 
   return (
-    <div className={cn("border p-4 rounded-lg overflow-hidden", className)}>
+    <div
+      className={cn(
+        "border p-4 rounded-lg overflow-hidden not-prose",
+        className
+      )}
+    >
       {Component.component()}
     </div>
   );

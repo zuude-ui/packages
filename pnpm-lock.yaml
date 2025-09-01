@@ -109,6 +109,9 @@ importers:
       '@workspace/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@zuude-ui/ios-mockups':
+        specifier: workspace:*
+        version: link:../../packages/ios-mockups
       '@zuude-ui/video':
         specifier: workspace:*
         version: link:../../packages/video
@@ -127,6 +130,9 @@ importers:
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@19.1.1)
+      motion:
+        specifier: ^12.15.0
+        version: 12.15.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       next:
         specifier: 15.5.2
         version: 15.5.2(@opentelemetry/api@1.9.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -10084,6 +10090,15 @@ snapshots:
       react: 19.0.0
       react-dom: 19.1.1(react@19.0.0)
 
+  framer-motion@12.15.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
+      motion-dom: 12.15.0
+      motion-utils: 12.12.1
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
   fs-extra@10.1.0:
     dependencies:
       graceful-fs: 4.2.11
@@ -11492,6 +11507,14 @@ snapshots:
     optionalDependencies:
       react: 19.0.0
       react-dom: 19.1.1(react@19.0.0)
+
+  motion@12.15.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
+      framer-motion: 12.15.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
 
   mri@1.2.0: {}
 

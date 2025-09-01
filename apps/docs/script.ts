@@ -48,7 +48,7 @@ import type { GenericComponent } from "@workspace/ui/types";
 
 // Create separate object variables for each first-level folder
 for (const [folderName, folderFiles] of Object.entries(filesByFolder)) {
-  index += `export const ${folderName}Variants: Record<string, GenericComponent> = {`;
+  index += `export const ${folderName.replace(/-/g, "")}Variants: Record<string, GenericComponent> = {`;
 
   // Previews for this folder
   for (const file of folderFiles) {
