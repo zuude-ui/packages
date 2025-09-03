@@ -40,15 +40,17 @@ const VideoPlayer = () => {
 
 The main video component that renders the HTML video element.
 
-| Prop           | Type                                      | Description                       | Default |
-| -------------- | ----------------------------------------- | --------------------------------- | ------- |
-| `src`          | `string`                                  | Video source URL                  | -       |
-| `ref`          | `RefObject<HTMLVideoElement>`             | Video element reference           | -       |
-| `className`    | `string`                                  | CSS classes for the video element | -       |
-| `autoPlay`     | `boolean \| "force"`                      | Auto-play the video               | -       |
-| `controls`     | `boolean`                                 | Show/hide controls                | `true`  |
-| `muteFallback` | `(onMute: () => void) => React.ReactNode` | Custom UI for autoplay blocked    | -       |
-| `...props`     | `React.ComponentProps<"video">`           | Video element props               | -       |
+| Prop                | Type                                      | Description                       | Default |
+| ------------------- | ----------------------------------------- | --------------------------------- | ------- |
+| `src`               | `string`                                  | Video source URL                  | -       |
+| `ref`               | `RefObject<HTMLVideoElement>`             | Video element reference           | -       |
+| `className`         | `string`                                  | CSS classes for the video element | -       |
+| `autoPlay`          | `boolean \| "force"`                      | Auto-play the video               | -       |
+| `controls`          | `boolean`                                 | Show/hide controls                | `true`  |
+| `muteFallback`      | `(onMute: () => void) => React.ReactNode` | Custom UI for autoplay blocked    | -       |
+| `autoPlayOnVisible` | `boolean \| number`                       | Auto-play the video when visible  | -       |
+| `ranges`            | `number[]`                                | Ranges for the video              | -       |
+| `...props`          | `React.ComponentProps<"video">`           | Video element props               | -       |
 
 **Example:**
 

@@ -13,6 +13,7 @@ interface Props
   preload?: "none" | "metadata" | "auto";
   muteFallback?: (onMute: () => void) => React.ReactNode;
   autoPlayOnVisible?: boolean | number;
+  ranges?: number[];
 }
 
 export const Video = forwardRef<HTMLVideoElement, Props>(
@@ -24,6 +25,7 @@ export const Video = forwardRef<HTMLVideoElement, Props>(
       controls,
       preload = "metadata",
       autoPlayOnVisible,
+      ranges,
       ...props
     },
     ref
@@ -79,6 +81,16 @@ export const Video = forwardRef<HTMLVideoElement, Props>(
           onClick={config?.clickToPlay ? onPlay : undefined}
           autoPlay={autoPlay === "force" ? true : autoPlay}
           preload={preload}
+          onTimeUpdate={(e) => {
+            if (ranges?.[0] !== undefined && ranges?.[1] !== undefined) {
+              const currentTime = e.currentTarget.currentTime;
+              if (currentTime >= ranges[1]) {
+                e.currentTarget.currentTime = ranges[0];
+              } else if (currentTime <= ranges[0]) {
+                e.currentTarget.currentTime = ranges[0];
+              }
+            }
+          }}
           {...props}
         />
 
