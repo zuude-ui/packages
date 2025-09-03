@@ -81,6 +81,7 @@ export const Video = forwardRef<HTMLVideoElement, Props>(
           onClick={config?.clickToPlay ? onPlay : undefined}
           autoPlay={autoPlay === "force" ? true : autoPlay}
           preload={preload}
+          playsInline
           onTimeUpdate={(e) => {
             if (ranges?.[0] !== undefined && ranges?.[1] !== undefined) {
               const currentTime = e.currentTarget.currentTime;

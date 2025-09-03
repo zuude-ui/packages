@@ -81,7 +81,6 @@ const Showcase = () => {
             className="aspect-[16/9] w-full object-cover !my-0"
             controls
             loop
-            playsInline
           />
 
           {/* Overlay content */}
