@@ -45,6 +45,6 @@
     "@radix-ui/react-slot": "^1.1.2"
   },
   "devDependencies": {
-    "@types/react": "^19.0.10"
+    "@types/react": "^19.1.12"
   }
 }

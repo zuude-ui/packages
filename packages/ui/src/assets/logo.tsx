@@ -1,6 +1,6 @@
 import { cn } from "../lib/utils";
 
-interface Props extends React.SVGProps<SVGSVGElement> {
+interface Props {
   className?: string;
 }
 
