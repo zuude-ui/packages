@@ -78,7 +78,7 @@ const Showcase = () => {
           <Video
             ref={videoRef}
             src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            className="aspect-[16/9] w-full object-cover !my-0"
+            className="aspect-[16/9] w-full object-cover !my-0  max-w-[800px] rounded-3xl"
             controls
             loop
           />
