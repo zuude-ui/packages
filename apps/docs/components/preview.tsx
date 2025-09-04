@@ -2,7 +2,11 @@
 
 import { useParams } from "fumadocs-core/framework";
 
-import { iosmockupsVariants, videoVariants } from "@/__registry__";
+import {
+  cropperVariants,
+  iosmockupsVariants,
+  videoVariants,
+} from "@/__registry__";
 import { cn } from "@workspace/ui/lib/utils";
 
 interface Props {
@@ -21,6 +25,8 @@ export const Preview = ({ name, className }: Props) => {
     Component = videoVariants[name];
   } else if (packageName === "ios-mockups") {
     Component = iosmockupsVariants[name];
+  } else if (packageName === "cropper") {
+    Component = cropperVariants[name];
   }
 
   if (!Component) {

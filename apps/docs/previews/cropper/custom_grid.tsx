@@ -1,0 +1,23 @@
+import { Cropper } from "@zuude-ui/cropper";
+
+const CustomGrid = () => {
+  return (
+    <Cropper
+      src="/A_meteor_hit_the_earth.webp"
+      className="max-w-sm mx-auto !shadow-none"
+    >
+      {({ isDragging, isPinching }) => (
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className={`absolute left-1/2 -translate-x-1/2 w-px h-full bg-red-500 ${isDragging || isPinching ? "opacity-100" : "opacity-0"} transition-opacity`}
+          />
+          <div
+            className={`absolute top-1/2 -translate-y-1/2 w-full h-px bg-red-500 ${isDragging || isPinching ? "opacity-100" : "opacity-0"} transition-opacity`}
+          />
+        </div>
+      )}
+    </Cropper>
+  );
+};
+
+export default CustomGrid;

@@ -1,6 +1,147 @@
 import dynamic from "next/dynamic";
 import type { GenericComponent } from "@workspace/ui/types";
 
+export const cropperVariants: Record<string, GenericComponent> = {
+  basic: {
+    name: "basic",
+    component: dynamic(() => import("../previews/cropper/basic"), {
+      ssr: false,
+    }),
+    code: `import { Cropper } from "@zuude-ui/cropper";
+
+const Basic = () => {
+  return (
+    <Cropper src="/A_meteor_hit_the_earth.webp" className="max-w-sm mx-auto" />
+  );
+};
+
+export default Basic;
+`,
+  },
+  custom_grid: {
+    name: "custom_grid",
+    component: dynamic(() => import("../previews/cropper/custom_grid"), {
+      ssr: false,
+    }),
+    code: `import { Cropper } from "@zuude-ui/cropper";
+
+const CustomGrid = () => {
+  return (
+    <Cropper
+      src="/A_meteor_hit_the_earth.webp"
+      className="max-w-sm mx-auto outline-0"
+    >
+      {({ isDragging, isPinching }) => (
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className={\`absolute left-1/2 -translate-x-1/2 w-px h-full bg-red-500 \${isDragging || isPinching ? "opacity-100" : "opacity-0"} transition-opacity\`}
+          />
+          <div
+            className={\`absolute top-1/2 -translate-y-1/2 w-full h-px bg-red-500 \${isDragging || isPinching ? "opacity-100" : "opacity-0"} transition-opacity\`}
+          />
+        </div>
+      )}
+    </Cropper>
+  );
+};
+
+export default CustomGrid;
+`,
+  },
+  showcase: {
+    name: "showcase",
+    component: dynamic(() => import("../previews/cropper/showcase"), {
+      ssr: false,
+    }),
+    code: `import { useState } from "react";
+import { type Crop, Cropper, useCropper } from "@zuude-ui/cropper";
+
+import { Button } from "@workspace/ui/components/button";
+import { cn } from "@workspace/ui/lib/utils";
+
+const Showcase = () => {
+  const [crop, setCrop] = useState<Crop>({ x: 0, y: 0, scale: 1 });
+  const [image, setImage] = useState<string | null>(null);
+
+  const [ref, { cropIt, reset, isCropping }] = useCropper({
+    quality: 10,
+    onSuccess: (image) => {
+      console.log("onSuccess", image);
+      setImage(image);
+    },
+    onError: (error) => {
+      window.alert(error.message);
+    },
+  });
+
+  return (
+    <div className="space-y-8">
+      <div
+        className={cn(
+          "gap-4 flex mt-12 w-full items-center justify-center",
+          image && "grid grid-cols-2"
+        )}
+      >
+        <Cropper
+          ref={ref}
+          src={"/A_meteor_hit_the_earth.webp"}
+          crop={crop}
+          onCropChange={setCrop}
+          className="aspect-square w-full !max-w-96 overflow-hidden bg-muted"
+          config={{
+            showGrid: true,
+            showBehindImage: {
+              position: "fixed",
+            },
+          }}
+        />
+        {image && (
+          <img
+            key={image}
+            src={image}
+            alt="Cropped image"
+            className="max-w-96 aspect-square w-full h-full object-cover motion-opacity-in-0"
+          />
+        )}
+      </div>
+
+      <div className="flex gap-4 justify-center">
+        <Button variant={"outline"} onClick={reset}>
+          Reset
+        </Button>
+        <Button onClick={cropIt} className="text-background">
+          {isCropping ? "Cropping..." : "Crop"}
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default Showcase;
+`,
+  },
+  with_grid: {
+    name: "with_grid",
+    component: dynamic(() => import("../previews/cropper/with_grid"), {
+      ssr: false,
+    }),
+    code: `import { Cropper } from "@zuude-ui/cropper";
+
+const WithGrid = () => {
+  return (
+    <Cropper
+      src="/A_meteor_hit_the_earth.webp"
+      className="max-w-sm mx-auto"
+      config={{ showGrid: true }}
+    />
+  );
+};
+
+export default WithGrid;
+`,
+  },
+};
+
 export const iosmockupsVariants: Record<string, GenericComponent> = {
   dialog: {
     name: "dialog",
@@ -18,7 +159,7 @@ export default function Dialog() {
   return (
     <Iphone className="shrink-0 ![--screen-color:var(--background)]">
       <div className="flex h-full items-center justify-center">
-        <Button onClick={() => setIsOpen(true)} variant={"destructive"}>
+        <Button onClick={() => setIsOpen(true)} className="bg-red-500">
           Delete profile
         </Button>
       </div>
@@ -47,11 +188,15 @@ export default function Dialog() {
                   cannot be undone.
                 </p>
                 <div className="mt-7 grid grid-cols-2 gap-2">
-                  <Button size={"lg"} onClick={() => setIsOpen(false)}>
+                  <Button
+                    size={"lg"}
+                    className="text-background"
+                    onClick={() => setIsOpen(false)}
+                  >
                     Cancel
                   </Button>
                   <Button
-                    variant={"destructive"}
+                    className="bg-red-500"
                     size={"lg"}
                     onClick={() => setIsOpen(false)}
                   >
@@ -705,7 +850,6 @@ const Showcase = () => {
             className="aspect-[16/9] w-full object-cover !my-0"
             controls
             loop
-            playsInline
           />
 
           {/* Overlay content */}

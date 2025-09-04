@@ -1,0 +1,7 @@
+{
+  "title": "Crop",
+  "description": "@zuude-ui/cropper",
+  "icon": "Crop",
+  "root": true,
+  "pages": ["---Guide---", "index", "examples"]
+}

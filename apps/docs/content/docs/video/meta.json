@@ -1,6 +1,6 @@
 {
   "title": "Video",
-  "description": "zuude-ui/video",
+  "description": "@zuude-ui/video",
   "icon": "Film",
   "root": true,
   "pages": [
@@ -8,6 +8,7 @@
     "index",
     "control-components",
     "hooks",
-    "format-time"
+    "format-time",
+    "changelogs"
   ]
 }

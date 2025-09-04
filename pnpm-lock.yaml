@@ -109,6 +109,9 @@ importers:
       '@workspace/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@zuude-ui/cropper':
+        specifier: workspace:*
+        version: link:../../packages/cropper
       '@zuude-ui/ios-mockups':
         specifier: workspace:*
         version: link:../../packages/ios-mockups
