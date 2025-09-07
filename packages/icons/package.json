@@ -1,33 +1,28 @@
 {
-  "name": "@zuude-ui/video",
+  "name": "@zuude-ui/icons",
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.1.27",
+  "version": "0.0.1",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist/**"
   ],
-  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.cjs",
       "require": "./dist/index.js"
     },
-    "./hooks": {
-      "types": "./dist/hooks/index.d.ts",
-      "import": "./dist/hooks/index.cjs",
-      "require": "./dist/hooks/index.js"
-    },
-    "./utils": {
-      "types": "./dist/utils/index.d.ts",
-      "import": "./dist/utils/index.cjs",
-      "require": "./dist/utils/index.js"
+    "./social-media": {
+      "types": "./dist/social-media/index.d.ts",
+      "import": "./dist/social-media/index.cjs",
+      "require": "./dist/social-media/index.js"
     }
   },
+  "type": "module",
   "scripts": {
     "build": "tsup",
     "lint": "tsc"
@@ -41,8 +36,7 @@
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "@radix-ui/react-slot": "^1.1.2"
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.1.12"

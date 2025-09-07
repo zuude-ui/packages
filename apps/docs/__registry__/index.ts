@@ -29,7 +29,7 @@ const CustomGrid = () => {
   return (
     <Cropper
       src="/A_meteor_hit_the_earth.webp"
-      className="max-w-sm mx-auto outline-0"
+      className="max-w-sm mx-auto !shadow-none"
     >
       {({ isDragging, isPinching }) => (
         <div className="absolute inset-0 pointer-events-none">
@@ -139,6 +139,16 @@ const WithGrid = () => {
 
 export default WithGrid;
 `,
+  },
+};
+
+export const iconsVariants: Record<string, GenericComponent> = {
+  showcase: {
+    name: "showcase",
+    component: dynamic(() => import("../previews/icons/showcase"), {
+      ssr: false,
+    }),
+    code: ``,
   },
 };
 
@@ -846,8 +856,8 @@ const Showcase = () => {
         >
           <Video
             ref={videoRef}
-            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            className="aspect-[16/9] w-full object-cover !my-0"
+            src="https://personal-work-ali.s3.us-west-2.amazonaws.com/Marvel%E2%80%99s+Spider-Man+%E2%80%93+Be+Greater+Extended+Trailer+++PS4.mp4"
+            className="aspect-[16/9] w-full object-cover"
             controls
             loop
           />

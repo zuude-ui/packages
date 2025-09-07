@@ -83,7 +83,11 @@ export const Video = forwardRef<HTMLVideoElement, Props>(
           preload={preload}
           playsInline
           onTimeUpdate={(e) => {
-            if (ranges?.[0] !== undefined && ranges?.[1] !== undefined) {
+            if (
+              ranges?.[0] !== undefined &&
+              ranges?.[1] !== undefined &&
+              !videoRef?.current?.paused
+            ) {
               const currentTime = e.currentTarget.currentTime;
               if (currentTime >= ranges[1]) {
                 e.currentTarget.currentTime = ranges[0];

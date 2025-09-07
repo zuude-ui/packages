@@ -1,0 +1,7 @@
+{
+  "title": "Icons",
+  "description": "@zuude-ui/icons",
+  "icon": "ImageUpscale",
+  "root": true,
+  "pages": ["---Guide---", "index", "social-media", "changelogs"]
+}

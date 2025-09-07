@@ -77,8 +77,8 @@ const Showcase = () => {
         >
           <Video
             ref={videoRef}
-            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            className="aspect-[16/9] w-full object-cover !my-0  max-w-[800px] rounded-3xl"
+            src="https://personal-work-ali.s3.us-west-2.amazonaws.com/Marvel%E2%80%99s+Spider-Man+%E2%80%93+Be+Greater+Extended+Trailer+++PS4.mp4"
+            className="aspect-[16/9] w-full object-cover"
             controls
             loop
           />

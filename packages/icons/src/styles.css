@@ -1,0 +1,33 @@
+:root {
+  --zuude-ui-icon-size: 48;
+
+  --zuude-ui-facebook: #0866ff;
+  --zuude-ui-linkedin: #0a66c2;
+
+  --zuude-ui-google-1: #4285f4;
+  --zuude-ui-google-2: #34a853;
+  --zuude-ui-google-3: #fbbc05;
+  --zuude-ui-google-4: #ea4335;
+
+  --zuude-ui-snapchat: #fffc00;
+  --zuude-ui-pinterest: #e60019;
+  --zuude-ui-whatsapp: #25d366;
+
+  --zuude-ui-figma-1: #0acf83;
+  --zuude-ui-figma-2: #a259ff;
+  --zuude-ui-figma-3: #f24e1e;
+  --zuude-ui-figma-4: #ff7262;
+  --zuude-ui-figma-5: #1abcfe;
+
+  --zuude-ui-discord: #5865f2;
+
+  --zuude-ui-tiktok-1: #ff004f;
+  --zuude-ui-tiktok-2: #000000;
+  --zuude-ui-tiktok-3: #00f2ea;
+
+  --zuude-ui-bluesky: #1185fe;
+  --zuude-ui-spotify: #1ed760;
+  --zuude-ui-twitch: #9146ff;
+
+  --zuude-ui-messenger: #0866ff;
+}

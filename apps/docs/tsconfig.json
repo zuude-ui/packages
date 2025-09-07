@@ -9,7 +9,8 @@
     "paths": {
       "@/*": ["./*"],
       "@workspace/ui/*": ["../../packages/ui/src/*"],
-      "@zuude-ui/video/*": ["../../packages/video/src/*"]
+      "@zuude-ui/video/*": ["../../packages/video/src/*"],
+      "@zuude-ui/icons/*": ["../../packages/icons/src/*"]
     },
     "plugins": [
       {
