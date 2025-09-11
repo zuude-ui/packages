@@ -52,6 +52,31 @@ export default function Showcase() {
         <Twitch variant="branded" />
         <Messenger variant="branded" />
       </div>
+      <div className="grid grid-cols-8 gap-8 p-8">
+        <Facebook variant="filled-branded" className="rounded-sm" />
+        <X variant="filled-branded" className="rounded-sm" />
+        <Instagram variant="filled-branded" className="rounded-sm" />
+        <LinkedIn variant="filled-branded" className="rounded-sm" />
+        <Google variant="filled-branded" className="rounded-sm" />
+        <YouTube variant="filled-branded" className="rounded-sm" />
+        <Apple variant="filled-branded" className="rounded-sm" />
+        <Snapchat variant="filled-branded" fill="red" className="rounded-sm" />
+        <Pinterest variant="filled-branded" className="rounded-sm" />
+        <Medium variant="filled-branded" className="rounded-sm" />
+        <Github variant="filled-branded" className="rounded-sm" />
+        <Threads variant="filled-branded" className="rounded-sm" />
+        <WhatsApp variant="filled-branded" className="rounded-sm" />
+        <Figma variant="filled-branded" className="rounded-sm" />
+        <Dribbble variant="filled-branded" className="rounded-sm" />
+        <Reddit variant="filled-branded" className="rounded-sm" />
+        <Discord variant="filled-branded" className="rounded-sm" />
+        <TikTok variant="filled-branded" className="rounded-sm" />
+        <Telegram variant="filled-branded" className="rounded-sm" />
+        <Bluesky variant="filled-branded" className="rounded-sm" />
+        <Spotify variant="filled-branded" className="rounded-sm" />
+        <Twitch variant="filled-branded" className="rounded-sm" />
+        <Messenger variant="filled-branded" className="rounded-sm" />
+      </div>
       <div className="grid grid-cols-8 gap-8 p-8 rounded-xl bg-foreground text-background">
         <Facebook />
         <X />

@@ -15,6 +15,7 @@ export const exportImage = async ({
   x,
   y,
   scale,
+  fileName,
 }: {
   imageSrc: string;
   cropWidth: number;
@@ -23,6 +24,7 @@ export const exportImage = async ({
   x: number;
   y: number;
   scale: number;
+  fileName?: string;
 }) => {
   // Create a promise to handle image loading
   const loadImage = () => {
@@ -113,8 +115,9 @@ export const exportImage = async ({
       throw new Error("Failed to create image blob");
     }
 
-    const url = URL.createObjectURL(blob);
-    return url;
+    // Create a File from the Blob with a name
+    const defaultFileName = `cropped-image-${Date.now()}.png`;
+    return new File([blob], fileName || defaultFileName, { type: blob.type });
   } catch (error) {
     console.error("Error loading or processing image:", error);
     throw new Error("Failed to load image"); // Re-throw to allow proper error handling upstream

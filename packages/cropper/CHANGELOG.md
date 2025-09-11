@@ -1,5 +1,11 @@
 # @zuude-ui/cropper
 
+## 0.0.75
+
+### Patch Changes
+
+- Return File instead of string when exporting the image
+
 ## 0.0.7
 
 ### Patch Changes

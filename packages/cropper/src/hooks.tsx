@@ -6,18 +6,18 @@ import { exportImage } from "./utils";
 export function useCropper(otherProps?: {
   quality?: number;
   queryClient?: QueryClient;
-  onSuccess?: (image: string) => void;
+  onSuccess?: (image: File) => void;
   onError?: (error: Error) => void;
 }): [
   RefObject<HTMLDivElement | null>,
   {
-    result: string | null;
+    result: File | null;
     isCropping: boolean;
     cropIt: () => Promise<void>;
     reset: () => void;
   },
 ] {
-  const [result, setResult] = useState<string | null>(null);
+  const [result, setResult] = useState<File | null>(null);
   const [isCropping, setIsCropping] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -49,7 +49,7 @@ export function useCropper(otherProps?: {
 
       setIsCropping(true);
 
-      let image: string | null | undefined = null;
+      let image: File | null | undefined = null;
 
       if (otherProps?.queryClient) {
         image = await otherProps?.queryClient.ensureQueryData({

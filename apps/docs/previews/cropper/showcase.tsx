@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { type Crop, Cropper, useCropper } from "@zuude-ui/cropper";
+import { type Crop, Cropper, useCropper } from "@zuude-ui/cropper/index";
 
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 
 const Showcase = () => {
   const [crop, setCrop] = useState<Crop>({ x: 0, y: 0, scale: 1 });
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<Blob | null>(null);
 
   const [ref, { cropIt, reset, isCropping }] = useCropper({
     quality: 10,
@@ -42,8 +42,8 @@ const Showcase = () => {
         />
         {image && (
           <img
-            key={image}
-            src={image}
+            key={image.toString()}
+            src={URL.createObjectURL(image)}
             alt="Cropped image"
             className="max-w-96 aspect-square w-full h-full object-cover motion-opacity-in-0"
           />
