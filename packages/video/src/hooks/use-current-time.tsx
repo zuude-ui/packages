@@ -18,12 +18,18 @@ export const useCurrentTime = (videoRef: VideoRef, interval = 10) => {
   React.useEffect(() => {
     if (!videoRef?.current) return;
 
-    videoRef.current.addEventListener("play", () => setIsPlaying(true));
-    videoRef.current.addEventListener("pause", () => setIsPlaying(false));
+    const video = videoRef.current;
+
+    // Store handlers in variables for proper cleanup (critical for Safari memory safety)
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("pause", handlePause);
 
     return () => {
-      videoRef.current?.removeEventListener("play", () => setIsPlaying(true));
-      videoRef.current?.removeEventListener("pause", () => setIsPlaying(false));
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("pause", handlePause);
     };
   }, [videoRef?.current]);
 

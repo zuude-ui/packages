@@ -232,7 +232,6 @@ const Shadow = ({ ...props }: ShadowProps) => {
       const startInterval = () => {
         if (interval) clearInterval(interval);
         interval = setInterval(() => {
-          console.log("currentTime", video.currentTime);
           currentTime = video.currentTime;
           if (shadowVideoRef.current) {
             shadowVideoRef.current.currentTime = currentTime;
