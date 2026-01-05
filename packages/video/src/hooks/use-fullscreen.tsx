@@ -3,35 +3,39 @@ import type { VideoRef } from "../types";
 
 const useFullscreen = (videoRef: VideoRef) => {
   const [isFullscreen, setIsFullscreen] = React.useState(false);
-  const previousStylesRef = React.useRef<{
-    objectFit: string;
-    borderRadius: string;
-    width: string;
-    height: string;
-    maxWidth: string;
-    maxHeight: string;
-    margin: string;
-  } | null>(null);
 
   React.useEffect(() => {
-    const handleFullscreenChange = () => {
-      const isCurrentlyFullscreen = !!document.fullscreenElement;
+    const video = videoRef?.current;
+    if (!video) return;
+
+    const videoContainer = video.closest(
+      "[data-zuude-video-wrapper]"
+    ) as HTMLElement | null;
+
+    // Helper to get fullscreen element with vendor prefix support
+    const getFullscreenElement = (): Element | null => {
+      return (
+        document.fullscreenElement ||
+        (document as any).webkitFullscreenElement ||
+        (document as any).mozFullScreenElement ||
+        (document as any).msFullscreenElement ||
+        null
+      );
+    };
+
+    const checkFullscreenState = () => {
+      // Check if the container element is the fullscreen element
+      const fullscreenElement = getFullscreenElement();
+      const isCurrentlyFullscreen =
+        !!fullscreenElement &&
+        (fullscreenElement === videoContainer || fullscreenElement === video);
+
       setIsFullscreen(isCurrentlyFullscreen);
 
       // Apply styles based on fullscreen state
-      const video = videoRef?.current;
       if (video) {
+        console.log({ isCurrentlyFullscreen });
         if (isCurrentlyFullscreen) {
-          // Store previous styles before entering fullscreen
-          previousStylesRef.current = {
-            objectFit: video.style.objectFit || "cover",
-            borderRadius: video.style.borderRadius || "",
-            width: video.style.width || "",
-            height: video.style.height || "",
-            maxWidth: video.style.maxWidth || "",
-            maxHeight: video.style.maxHeight || "",
-            margin: video.style.margin || "",
-          };
           // Apply fullscreen styles
           video.style.objectFit = "contain";
           video.style.borderRadius = "0";
@@ -42,23 +46,37 @@ const useFullscreen = (videoRef: VideoRef) => {
           video.style.margin = "0";
         } else {
           // Restore previous styles when exiting fullscreen
-          if (previousStylesRef.current) {
-            video.style.objectFit = previousStylesRef.current.objectFit;
-            video.style.borderRadius = previousStylesRef.current.borderRadius;
-            video.style.width = previousStylesRef.current.width;
-            video.style.height = previousStylesRef.current.height;
-            video.style.maxWidth = previousStylesRef.current.maxWidth;
-            video.style.maxHeight = previousStylesRef.current.maxHeight;
-            video.style.margin = previousStylesRef.current.margin;
-            previousStylesRef.current = null;
-          }
+          video.style.objectFit = "";
+          video.style.borderRadius = "";
+          video.style.width = "";
+          video.style.height = "";
+          video.style.maxWidth = "";
+          video.style.maxHeight = "";
+          video.style.margin = "";
         }
       }
     };
 
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-    return () =>
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    // Check initial state
+    checkFullscreenState();
+
+    // Listen for fullscreen changes
+    document.addEventListener("fullscreenchange", checkFullscreenState);
+
+    // Also listen for vendor-prefixed events for better browser support
+    document.addEventListener("webkitfullscreenchange", checkFullscreenState);
+    document.addEventListener("mozfullscreenchange", checkFullscreenState);
+    document.addEventListener("MSFullscreenChange", checkFullscreenState);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", checkFullscreenState);
+      document.removeEventListener(
+        "webkitfullscreenchange",
+        checkFullscreenState
+      );
+      document.removeEventListener("mozfullscreenchange", checkFullscreenState);
+      document.removeEventListener("MSFullscreenChange", checkFullscreenState);
+    };
   }, [videoRef]);
 
   const toggleFullscreen = () => {
@@ -81,6 +99,8 @@ const useFullscreen = (videoRef: VideoRef) => {
 
     if (videoContainer) {
       if (!isFullscreen) {
+        console.log({ objectFit: video?.style.objectFit });
+        console.log({ objectFit: video?.style });
         videoContainer.requestFullscreen();
       } else {
         document.exitFullscreen();

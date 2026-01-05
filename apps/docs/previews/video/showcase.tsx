@@ -23,7 +23,7 @@ import {
   useSpeed,
 } from "@zuude-ui/video/hooks";
 import { formatTime } from "@zuude-ui/video/utils";
-import { useRef, memo } from "react";
+import { useRef, memo, useState } from "react";
 import { cn } from "@workspace/ui/lib/utils";
 import { Button } from "@workspace/ui/components/button";
 import { Badge } from "@workspace/ui/components/badge";
@@ -45,8 +45,9 @@ import {
 import { VideoRef } from "@zuude-ui/video";
 
 const Showcase = () => {
+  const [duration, setDuration] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const { duration } = useGetDuration(videoRef);
+  // const { duration } = useGetDuration(videoRef);
   const { currentTime } = useCurrentTime(videoRef);
   const { isPlaying, isMuted, isFullscreen } = useVideoState(videoRef);
   const { speed } = useSpeed(videoRef);
@@ -73,14 +74,20 @@ const Showcase = () => {
       <div className="p-0">
         <VideoProvider
           onError={(error) => console.log(error)}
-          className="relative w-full flex justify-center items-center"
+          className="relative w-full flex justify-center aspect-square items-center"
         >
           <Video
             ref={videoRef}
             src="https://personal-work-ali.s3.us-west-2.amazonaws.com/Marvel%E2%80%99s+Spider-Man+%E2%80%93+Be+Greater+Extended+Trailer+++PS4.mp4"
-            className="aspect-[16/9] w-full object-cover"
+            className="h-full w-full object-cover"
             controls
             loop
+            onLoadedMetadata={(e) => {
+              const video = e.target as HTMLVideoElement;
+              if (video) {
+                setDuration(video.duration);
+              }
+            }}
           />
 
           {/* Overlay content */}

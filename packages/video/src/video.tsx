@@ -20,6 +20,7 @@ interface Props
   muteFallback?: (onMute: () => void) => React.ReactNode;
   autoPlayOnVisible?: boolean | number;
   ranges?: number[];
+  getDuration?: (duration: number) => void;
 }
 
 export const Video = forwardRef<HTMLVideoElement, Props>(
@@ -32,6 +33,7 @@ export const Video = forwardRef<HTMLVideoElement, Props>(
       preload = "metadata",
       autoPlayOnVisible,
       ranges,
+      getDuration,
       ...props
     },
     ref
@@ -98,6 +100,13 @@ export const Video = forwardRef<HTMLVideoElement, Props>(
         }
       };
     }, []);
+
+    // Get duration
+    useEffect(() => {
+      if (getDuration) {
+        getDuration(refVideo.current?.duration ?? 0);
+      }
+    }, [getDuration, refVideo.current?.duration]);
 
     useAutoplayByForce(
       videoRef,

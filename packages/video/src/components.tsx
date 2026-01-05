@@ -6,7 +6,6 @@ import { useFullscreen } from "./hooks/use-fullscreen";
 import { useSeek } from "./hooks/use-seek";
 import { useMuteUnmute } from "./hooks/use-mute-unmute";
 import { usePlayPause } from "./hooks/use-play-pause";
-import { useCurrentTime } from "./hooks/use-current-time";
 import { usePictureInPicture } from "./hooks/use-picture-in-picture";
 import { useDownload } from "./hooks/use-download";
 import { useSpeed } from "./hooks";
